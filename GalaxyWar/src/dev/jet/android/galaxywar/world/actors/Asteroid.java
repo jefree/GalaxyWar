@@ -26,6 +26,7 @@ public class Asteroid extends Entity {
 		if (UtilityMath.getDistance(getX(), getY(), 
 					world.getShip().getX(), world.getShip().getY()) > MAX_DISTANCE_TO_SHIP) 
 		{	
+			//System.out.println("asteroid destroy");
 			destroy();
 		}
 		
@@ -38,7 +39,7 @@ public class Asteroid extends Entity {
 		
 		for (Asteroid ast : world.getAsteroids()) {
 			
-			if (ast != this) {
+			if (ast != this & ast.isEnable()) {
 				if (ast.collide(this)){
 					ast.destroy();
 					destroy();

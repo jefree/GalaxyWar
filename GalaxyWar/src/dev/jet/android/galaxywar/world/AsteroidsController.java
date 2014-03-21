@@ -11,7 +11,7 @@ public class AsteroidsController extends GroupController<Asteroid> {
 	private static final int MAX_ASTEROIDS_ROTATTION_SPEED = 2;
 	private static final int MIN_ASTEROIDS_ROTATTION_SPEED = 1;
 	
-	private static final float ASTEROID_TIME_GENERATION = 1f;
+	private static final float ASTEROID_TIME_GENERATION = 0.5f;
 	
 	private static final float MAX_ASTEROID_SPEED = 100;
 	private static final float MIN_ASTEROID_SPEED = 70;
@@ -29,7 +29,7 @@ public class AsteroidsController extends GroupController<Asteroid> {
 		genTime = ASTEROID_TIME_GENERATION;
 		deltaTime = 0;
 		
-		MIN_GEN_RADIUS = (int)(world.getWidth()/2 + getWidth()/2);
+		MIN_GEN_RADIUS = (int)(world.getWidth()/2 + media.getPicture("asteroid").getWidth()/2);
 		MAX_GEN_RADIUS = (int)(MIN_GEN_RADIUS*1.1); 
 	}
 	
