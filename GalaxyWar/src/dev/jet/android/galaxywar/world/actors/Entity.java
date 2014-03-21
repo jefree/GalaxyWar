@@ -70,6 +70,14 @@ public class Entity extends Actor {
 		return getY() + world.getOffsetY();
 	}
 	
+	public boolean collide (Entity e) {
+		
+		Rectangle own = getRectangle();
+		Rectangle other = e.getRectangle();
+		
+		return own.overlaps(other);
+	}
+	
 	@Override
 	public void act(float delta) {
 		super.act(delta);

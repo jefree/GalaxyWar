@@ -21,13 +21,9 @@ public class Missile extends Entity {
 		
 		for (Asteroid a : asteroids) {
 			
-			boolean collision = false;
-			
 			if (a.isEnable()) {
 				
-				collision = getRectangle().overlaps(a.getRectangle());
-				
-				if (collision) {
+				if (this.collide(a)) {
 					a.destroy();
 					destroy();
 				}
