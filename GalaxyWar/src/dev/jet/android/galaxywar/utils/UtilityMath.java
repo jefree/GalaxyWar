@@ -2,6 +2,10 @@ package dev.jet.android.galaxywar.utils;
 
 public class UtilityMath {
 	
+	public static int getRandSign() {
+		return (int)Math.pow(-1, (int)(Math.random()/0.5));
+	}
+	
 	public static float getRandom(float max) {
 		return getRandom(0, max);
 	}
@@ -11,7 +15,7 @@ public class UtilityMath {
 		int sign = 1;
 		
 		if (negative){
-			sign = (int)Math.pow(-1, (int)(Math.random()/0.5));
+			sign = getRandSign();
 		}
 		
 		return sign*(min + (float)Math.random()*(max-min));
