@@ -20,7 +20,8 @@ public class Ship extends Entity {
 		setPosition(0, 0);
 		setRotation(0);
 		
-		setSpeed(80);
+		speed = 80;
+		life = 5;
 	}
 	
 	public void act(float delta) {
@@ -38,7 +39,7 @@ public class Ship extends Entity {
 		for (Asteroid ast : world.getAsteroids()){
 			
 			if (ast.isEnable() & ast.collide(this)) {
-				setLife(getLife() - 1);
+				life -= 1;
 				ast.destroy();
 			}
 		}

@@ -17,8 +17,6 @@ public class AbstractScreen implements Screen {
 	public AbstractScreen (GalaxyWar _game) {
 		game = _game;
 		media = game.getMedia();
-		
-		System.out.println("AbstractScreen");
 	}
 	
 	@Override

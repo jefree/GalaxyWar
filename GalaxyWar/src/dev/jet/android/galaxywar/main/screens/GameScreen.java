@@ -7,7 +7,6 @@ import dev.jet.android.galaxywar.world.World;
 public class GameScreen extends AbstractScreen{
 	
 	World world;
-	
 	GameUI ui;
 	
 	public GameScreen (GalaxyWar _game) {
@@ -40,8 +39,17 @@ public class GameScreen extends AbstractScreen{
 		stage.addActor(world);
 		stage.addActor(ui);
 		
-		System.out.println("GameScreen");
+	}
+	
+	@Override
+	public void render(float delta) {
 		
+		if (world.getState() == World.ENDED) {
+			
+			System.exit(0);
+		} 
+		
+		super.render(delta);
 	}
 	
 	@Override
@@ -51,7 +59,6 @@ public class GameScreen extends AbstractScreen{
 	
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
 		
 	}
 }
