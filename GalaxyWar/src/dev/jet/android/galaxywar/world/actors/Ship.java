@@ -28,7 +28,7 @@ public class Ship extends Entity {
 		if (rDelta > 0) {
 			
 			rotate(MAX_ROTATION_SPEED * rOrientation * rDelta * delta);
-			rDelta -= 5*delta;
+			rDelta = 0;
 		}
 		
 		float speed[] = UtilityMath.getSides(getSpeed()*delta, getRotation());
