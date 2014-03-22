@@ -10,7 +10,7 @@ public class Entity extends Actor {
 	
 	boolean enable;
 	int speed;
-	
+	float life;
 	protected World world;
 	
 	protected Picture picture;
@@ -62,6 +62,14 @@ public class Entity extends Actor {
 		this.speed = speed;
 	}
 	
+	public float getLife() {
+		return life;
+	}
+
+	public void setLife(float life) {
+		this.life = life;
+	}
+
 	public float getScreenX() {
 		return getX() + world.getOffsetX();
 	}

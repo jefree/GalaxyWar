@@ -38,6 +38,7 @@ public class Ship extends Entity {
 		for (Asteroid ast : world.getAsteroids()){
 			
 			if (ast.isEnable() & ast.collide(this)) {
+				setLife(getLife() - 1);
 				ast.destroy();
 			}
 		}

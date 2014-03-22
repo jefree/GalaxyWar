@@ -3,8 +3,6 @@ package dev.jet.android.galaxywar.world.actors;
 import dev.jet.android.galaxywar.utils.UtilityMath;
 
 public class Missile extends Entity {
-
-	float life;
 	
 	@Override
 	public void act(float delta) {
@@ -32,14 +30,6 @@ public class Missile extends Entity {
 		translate(speed[0], speed[1]);
 		
 		life -= delta;
-	}
-
-	public float getLife() {
-		return life;
-	}
-
-	public void setLife(float life) {
-		this.life = life;
 	}
 	
 	@Override
