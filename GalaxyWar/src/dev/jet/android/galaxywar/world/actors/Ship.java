@@ -6,7 +6,7 @@ import dev.jet.android.galaxywar.world.World;
 
 public class Ship extends Entity {
 	
-	private final float MAX_ROTATION_SPEED = (float)120.0;
+	private final float MAX_ROTATION_SPEED = (float)160.0;
 	
 	int rOrientation;
 	float rDelta;
@@ -35,6 +35,12 @@ public class Ship extends Entity {
 		
 		translate(speed[0], speed[1]);
 		
+		for (Asteroid ast : world.getAsteroids()){
+			
+			if (ast.isEnable() & ast.collide(this)) {
+				ast.destroy();
+			}
+		}
 	}
 	
 	public float getScreenX(){

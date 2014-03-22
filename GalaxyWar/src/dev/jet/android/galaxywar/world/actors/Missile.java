@@ -21,12 +21,9 @@ public class Missile extends Entity {
 		
 		for (Asteroid a : asteroids) {
 			
-			if (a.isEnable()) {
-				
-				if (this.collide(a)) {
-					a.destroy();
-					destroy();
-				}
+			if (a.isEnable() & this.collide(a)) {	
+				a.destroy();
+				destroy();
 			}
 		}
 		
