@@ -41,14 +41,13 @@ public class Asteroid extends Entity {
 		
 		for (Asteroid ast : world.getAsteroids()) {
 			
-			if (ast != this & ast.isEnable()) {
-				if (ast.collide(this)){
-					ast.destroy();
-					destroy();
-					
-					world.genAstExplosion(UtilityGeom.midPoint(ast.getRectangle().getCenter(new Vector2()), 
-							this.getRectangle().getCenter(new Vector2())));
-				}
+			if (ast != this & ast.collide(this) ) {
+				
+				ast.destroy();
+				destroy();
+				
+				world.genAstExplosion(UtilityGeom.midPoint(ast.getRectangle().getCenter(new Vector2()), 
+						this.getRectangle().getCenter(new Vector2())));
 			}
 		}
 	}

@@ -84,10 +84,15 @@ public class Entity extends Actor {
 	
 	public boolean collide (Entity e) {
 		
-		Rectangle own = getRectangle();
-		Rectangle other = e.getRectangle();
+		if (enable & e.isEnable()){
+			
+			Rectangle own = getRectangle();
+			Rectangle other = e.getRectangle();
+			
+			return own.overlaps(other);
+		}
 		
-		return own.overlaps(other);
+		return false;
 	}
 	
 	@Override
