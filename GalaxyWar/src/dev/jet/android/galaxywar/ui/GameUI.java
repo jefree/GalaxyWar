@@ -66,14 +66,13 @@ public class GameUI extends BasicUI {
 		bMissile.setPosition(media.getScreenWidth()/2 + 80, 5);
 		bSpeed.setPosition(media.getScreenWidth()/2 - bSpeed.getWidth() - 80, 5);
 		
-		mBar.setPosition(25, media.getScreenHeight() - mBar.getHeight() - 5);
+		mBar.setPosition(media.getScreenWidth() - mBar.getWidth() - 	25, media.getScreenHeight() - mBar.getHeight() - 5);
 		
 		addActor(bRight);
 		addActor(wrapper);
 		addActor(bSpeed);
 		addActor(bMissile);
 		addActor(mBar);
-
 	}
 	
 	@Override
