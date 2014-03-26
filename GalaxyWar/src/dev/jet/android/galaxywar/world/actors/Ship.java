@@ -13,6 +13,11 @@ public class Ship extends Entity {
 	
 	public void act(float delta) {
 		
+		if (life < 100) {
+			
+			life += 5*delta;
+		}
+		
 		if (rDelta > 0) {
 			
 			rotate(MAX_ROTATION_SPEED * rOrientation * rDelta * delta);
@@ -26,7 +31,7 @@ public class Ship extends Entity {
 		for (Asteroid ast : world.getAsteroids()){
 			
 			if (ast.isEnable() & ast.collide(this)) {
-				life -= 1;
+				life -= 20;
 				ast.destroy();
 			}
 		}
@@ -40,7 +45,7 @@ public class Ship extends Entity {
 		rOrientation = 0;
 		rDelta = 0;
 		
-		life = 7;
+		life = 50;
 		speed = 80;
 		missiles = 7;
 	}
