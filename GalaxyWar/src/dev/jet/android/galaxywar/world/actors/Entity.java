@@ -91,12 +91,6 @@ public class Entity extends Actor {
 	}
 	
 	@Override
-	public void act(float delta) {
-		super.act(delta);
-		picture.update();
-	}
-	
-	@Override
 	public void draw(SpriteBatch batch, float alphaParent) {
 		picture.draw(this, batch, alphaParent);
 	}

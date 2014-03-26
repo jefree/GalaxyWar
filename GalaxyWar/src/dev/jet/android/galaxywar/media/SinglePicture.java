@@ -11,8 +11,4 @@ public class SinglePicture extends Picture {
 		image = new TextureRegion(new Texture(Gdx.files.internal(fileName)));
 		
 	}
-
-	@Override
-	public void update() {
-	}
 }

@@ -14,8 +14,6 @@ public abstract class Picture {
 	protected int sHeight;
 	
 	public abstract void load(String fileName);
-
-	public abstract void update();
 	
 	public void setScreenSize(int width, int height) {
 		sWidth = width;
