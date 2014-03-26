@@ -48,6 +48,8 @@ public class GameScreen extends AbstractScreen{
 		
 		media.loadAnimPicture("explosion/asteroid/anim.atlas");
 		
+		media.loadSinglePicture("shield.png");
+		
 		world = new World(media);
 		gui = new GameUI(world, media, this);
 		eui = new EndUI(world, media, this);
