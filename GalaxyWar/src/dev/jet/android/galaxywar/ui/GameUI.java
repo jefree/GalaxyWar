@@ -1,28 +1,37 @@
 package dev.jet.android.galaxywar.ui;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
+import dev.jet.android.galaxywar.main.screens.GameScreen;
 import dev.jet.android.galaxywar.media.Media;
 import dev.jet.android.galaxywar.world.World;
 
 public class GameUI extends BasicUI {
-
+	
 	ImageButton bRight;
 	ImageButton bLeft;
+	
 	ImageButton bMissile;
 	ImageButton bSpeed;
 	
-	World world;
+	MissileBar mBar;
 	
-	public GameUI(World _world, Media _media) {
+	World world;
+	GameScreen screen;
+	
+	public GameUI(World _world, Media _media, GameScreen _screen) {
 		
 		super(_media);
 		
 		world = _world;
+		screen = _screen;
 		
 		ImageButtonStyle bDirStyle = new ImageButtonStyle();
 		bDirStyle.up = new TextureRegionDrawable(media.getPicture("bArrowUp").getImage());
@@ -38,8 +47,11 @@ public class GameUI extends BasicUI {
 		
 		bRight = new ImageButton(bDirStyle);
 		bLeft = new ImageButton(bDirStyle);
+		
 		bMissile = new ImageButton(bMissileStyle);
 		bSpeed = new ImageButton(bSpeedStyle);
+		
+		mBar = new MissileBar(_media);
 		
 		Table wrapper = new Table();
 		wrapper.add(bLeft);
@@ -54,15 +66,30 @@ public class GameUI extends BasicUI {
 		bMissile.setPosition(media.getScreenWidth()/2 + 80, 5);
 		bSpeed.setPosition(media.getScreenWidth()/2 - bSpeed.getWidth() - 80, 5);
 		
+		mBar.setPosition(25, media.getScreenHeight() - mBar.getHeight() - 5);
+		
 		addActor(bRight);
 		addActor(wrapper);
 		addActor(bSpeed);
 		addActor(bMissile);
+		addActor(mBar);
 
 	}
 	
 	@Override
 	public void act(float delta) {
+		
+		if (world.getState() == World.STOP) {
+			screen.showEnd();
+		}
+		
+		int mShip = (int) world.getShip().getMissiles();
+		
+		if (mShip <= 3) {
+			mShip *= -1;
+		}
+		
+		mBar.setScore(mShip);
 		
 		if (bRight.isPressed()) {
 			world.getShip().setRotParameter(-1);
@@ -87,5 +114,44 @@ public class GameUI extends BasicUI {
 
 	@Override
 	public void onTouchUp(float x, float y) {
+	}
+	
+	class MissileBar extends Image {
+		
+		Texture edge;
+		Texture normal;
+		Texture warning;
+		
+		int score;
+		
+		public void setScore (int _score) {
+			score = _score;
+		}
+		
+		public MissileBar (Media media) {
+			
+			edge = media.getPicture("missiles/edge").getTexture();
+			normal = media.getPicture("missiles/normal").getTexture();
+			warning = media.getPicture("missiles/warning").getTexture();
+			
+			setWidth(edge.getWidth());
+			setHeight(edge.getHeight());
+		}
+		
+		@Override
+		public void draw(SpriteBatch batch, float parentAlpha) {
+			
+			super.draw(batch, parentAlpha);
+			
+			Texture state = (score > 0) ? normal : warning;
+
+			batch.draw(edge, getX(), getY());
+			
+			for(int i=0; i < Math.abs(score); i++){
+				batch.draw(state, getX() + i*(state.getWidth()+2) + 8, getY() + 8.1f);
+			}
+			
+		}
+		
 	}
 }

@@ -35,9 +35,9 @@ public class GameScreen extends AbstractScreen{
 		
 		media.loadTapestryPicture("background", "space.jpg");
 		
-		media.loadSinglePicture("lifebar/edge", "lifebar/edge.png");
-		media.loadSinglePicture("lifebar/normal", "lifebar/normal.png");
-		media.loadSinglePicture("lifebar/warning", "lifebar/warning.png");
+		media.loadSinglePicture("missiles/edge", "missiles/edge.png");
+		media.loadSinglePicture("missiles/normal", "missiles/normal.png");
+		media.loadSinglePicture("missiles/warning", "missiles/warning.png");
 		
 		media.loadSinglePicture("end/back", "end/back.png");
 		media.loadSinglePicture("end/againUp", "end/againUp.png");
