@@ -1,13 +1,15 @@
 package dev.jet.android.galaxywar.main.screens;
 
 import dev.jet.android.galaxywar.main.GalaxyWar;
+import dev.jet.android.galaxywar.ui.EndUI;
 import dev.jet.android.galaxywar.ui.GameUI;
 import dev.jet.android.galaxywar.world.World;
 
 public class GameScreen extends AbstractScreen{
 	
 	World world;
-	GameUI ui;
+	GameUI gui;
+	EndUI eui;
 	
 	public GameScreen (GalaxyWar _game) {
 		super(_game);
@@ -31,25 +33,39 @@ public class GameScreen extends AbstractScreen{
 		media.loadSinglePicture("bSpeedUp", "bSpeedUp.png");
 		media.loadSinglePicture("bSpeedDown", "bSpeedDown.png");
 		
-		media.loadTapestryPicture("background", "background.jpg");
+		media.loadTapestryPicture("background", "space.jpg");
+		
+		media.loadSinglePicture("lifebar/edge", "lifebar/edge.png");
+		media.loadSinglePicture("lifebar/normal", "lifebar/normal.png");
+		media.loadSinglePicture("lifebar/warning", "lifebar/warning.png");
+		
+		media.loadSinglePicture("end/back", "end/back.png");
+		media.loadSinglePicture("end/againUp", "end/againUp.png");
+		media.loadSinglePicture("end/againDown", "end/againDown.png");
 		
 		world = new World(media);
-		ui = new GameUI(world, media);
+		gui = new GameUI(world, media, this);
+		eui = new EndUI(world, media, this);
 		
 		stage.addActor(world);
-		stage.addActor(ui);
+		stage.addActor(gui);
 		
 	}
 	
-	@Override
-	public void render(float delta) {
+	public void showEnd() {
+		gui.remove();
+		stage.addActor(eui);
+	}
+	
+	public void showGame() {
 		
-		if (world.getState() == World.ENDED) {
-			
-			System.exit(0);
-		} 
+		stage.clear();
 		
-		super.render(delta);
+		stage.addActor(world);
+		stage.addActor(gui);
+		
+		System.out.println("omfg");
+		
 	}
 	
 	@Override
