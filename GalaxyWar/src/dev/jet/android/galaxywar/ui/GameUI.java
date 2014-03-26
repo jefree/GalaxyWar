@@ -22,6 +22,7 @@ public class GameUI extends BasicUI {
 	ImageButton bSpeed;
 	
 	MissileBar mBar;
+	ShieldBar sBar;
 	
 	World world;
 	GameScreen screen;
@@ -51,7 +52,8 @@ public class GameUI extends BasicUI {
 		bMissile = new ImageButton(bMissileStyle);
 		bSpeed = new ImageButton(bSpeedStyle);
 		
-		mBar = new MissileBar(_media);
+		mBar = new MissileBar(media);
+		sBar = new ShieldBar(media);
 		
 		Table wrapper = new Table();
 		wrapper.add(bLeft);
@@ -66,13 +68,15 @@ public class GameUI extends BasicUI {
 		bMissile.setPosition(media.getScreenWidth()/2 + 80, 5);
 		bSpeed.setPosition(media.getScreenWidth()/2 - bSpeed.getWidth() - 80, 5);
 		
-		mBar.setPosition(media.getScreenWidth() - mBar.getWidth() - 	25, media.getScreenHeight() - mBar.getHeight() - 5);
+		mBar.setPosition(media.getScreenWidth() - mBar.getWidth() - 25, media.getScreenHeight() - mBar.getHeight() - 5);
+		sBar.setPosition(25, media.getScreenHeight() - mBar.getHeight() - 5);
 		
 		addActor(bRight);
 		addActor(wrapper);
 		addActor(bSpeed);
 		addActor(bMissile);
 		addActor(mBar);
+		addActor(sBar);
 	}
 	
 	@Override
@@ -83,12 +87,14 @@ public class GameUI extends BasicUI {
 		}
 		
 		int mShip = (int) world.getShip().getMissiles();
+		int sShip = (int) world.getShip().getLife();
 		
 		if (mShip <= 3) {
 			mShip *= -1;
 		}
 		
 		mBar.setScore(mShip);
+		sBar.setScore(sShip);
 		
 		if (bRight.isPressed()) {
 			world.getShip().setRotParameter(-1);
@@ -115,6 +121,13 @@ public class GameUI extends BasicUI {
 	public void onTouchUp(float x, float y) {
 	}
 	
+	/**
+	 * A MissileBar represents graphically the amount of missiles that 
+	 * the player had currently.
+	 * 
+	 * @author jefferson
+	 *
+	 */
 	class MissileBar extends Image {
 		
 		Texture edge;
@@ -123,18 +136,18 @@ public class GameUI extends BasicUI {
 		
 		int score;
 		
-		public void setScore (int _score) {
-			score = _score;
-		}
-		
 		public MissileBar (Media media) {
 			
-			edge = media.getPicture("missiles/edge").getTexture();
-			normal = media.getPicture("missiles/normal").getTexture();
-			warning = media.getPicture("missiles/warning").getTexture();
+			edge = media.getPicture("missilesbar/edge").getTexture();
+			normal = media.getPicture("missilesbar/normal").getTexture();
+			warning = media.getPicture("missilesbar/warning").getTexture();
 			
 			setWidth(edge.getWidth());
 			setHeight(edge.getHeight());
+		}
+		
+		public void setScore(int _score) {
+			score = _score;
 		}
 		
 		@Override
@@ -149,6 +162,43 @@ public class GameUI extends BasicUI {
 			for(int i=0; i < Math.abs(score); i++){
 				batch.draw(state, getX() + i*(state.getWidth()+2) + 8, getY() + 8.1f);
 			}
+			
+		}
+		
+	}
+	
+	/**
+	 * A ShielBar represents graphically the life of a Ship.
+	 * 
+	 * @author jefferson
+	 *
+	 */
+	class ShieldBar extends Image {
+		
+		Texture edge;
+		Texture shield;
+		
+		int score;
+		
+		public ShieldBar(Media media) {
+			
+			edge = media.getPicture("shieldbar/edge").getTexture();
+			shield = media.getPicture("shieldbar/shield").getTexture();
+			score = 100;
+			
+			setWidth(shield.getWidth());
+			setHeight(shield.getHeight());
+		}
+		
+		public void setScore(int _score) {
+			score = _score;
+		}
+		
+		public void draw(SpriteBatch batch, float parentAlpha) {
+			super.draw(batch, parentAlpha);
+			
+			batch.draw(edge, getX(), getY());
+			batch.draw(shield, getX() + 8, getY() + 7, (int)(shield.getWidth() * score/100.0), shield.getHeight());
 			
 		}
 		

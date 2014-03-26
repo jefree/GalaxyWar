@@ -35,13 +35,16 @@ public class GameScreen extends AbstractScreen{
 		
 		media.loadTapestryPicture("background", "space.jpg");
 		
-		media.loadSinglePicture("missiles/edge", "missiles/edge.png");
-		media.loadSinglePicture("missiles/normal", "missiles/normal.png");
-		media.loadSinglePicture("missiles/warning", "missiles/warning.png");
+		media.loadSinglePicture("missilesbar/edge", "missilesbar/edge.png");
+		media.loadSinglePicture("missilesbar/normal", "missilesbar/normal.png");
+		media.loadSinglePicture("missilesbar/warning", "missilesbar/warning.png");
 		
 		media.loadSinglePicture("end/back", "end/back.png");
 		media.loadSinglePicture("end/againUp", "end/againUp.png");
 		media.loadSinglePicture("end/againDown", "end/againDown.png");
+		
+		media.loadSinglePicture("shieldbar/edge", "shieldbar/edge.png");
+		media.loadSinglePicture("shieldbar/shield", "shieldbar/shield.png");
 		
 		world = new World(media);
 		gui = new GameUI(world, media, this);
