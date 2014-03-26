@@ -13,11 +13,6 @@ public class Ship extends Entity {
 	
 	public void act(float delta) {
 		
-		if (life < 100) {
-			
-			life += 5*delta;
-		}
-		
 		if (rDelta > 0) {
 			
 			rotate(MAX_ROTATION_SPEED * rOrientation * rDelta * delta);
@@ -27,14 +22,6 @@ public class Ship extends Entity {
 		float speed[] = UtilityMath.getSides(getSpeed()*delta, getRotation());
 		
 		translate(speed[0], speed[1]);
-		
-		for (Asteroid ast : world.getAsteroids()){
-			
-			if (ast.collide(this)) {
-				life -= 20;
-				ast.destroy();
-			}
-		}
 	}
 	
 	public void reboot() {
@@ -45,9 +32,11 @@ public class Ship extends Entity {
 		rOrientation = 0;
 		rDelta = 0;
 		
-		life = 50;
+		life = 1;
 		speed = 80;
 		missiles = 7;
+		
+		enable = true;
 	}
 	
 	public int getMissiles() {
@@ -57,19 +46,10 @@ public class Ship extends Entity {
 	public void deltaMissiles(int delta) {
 		this.missiles += delta;
 	}
-
-	public float getScreenX(){
-		return world.getWidth()/2;
-	}
-	
-	public float getScreenY() {
-		return world.getHeight()/2;
-	}
 	
 	public void setRotParameter(float rotParam) {
 		rOrientation = (int)Math.signum(rotParam);
 		rDelta = Math.abs(rotParam);
 	}
-
 	
 }
