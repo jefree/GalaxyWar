@@ -10,6 +10,7 @@ import dev.jet.android.galaxywar.world.actors.Asteroid;
 import dev.jet.android.galaxywar.world.actors.Entity;
 import dev.jet.android.galaxywar.world.actors.Explosion;
 import dev.jet.android.galaxywar.world.actors.Missile;
+import dev.jet.android.galaxywar.world.actors.Shield;
 import dev.jet.android.galaxywar.world.actors.Ship;
 
 public class World extends Group {
@@ -20,6 +21,7 @@ public class World extends Group {
 	public static int END = 3;
 	
 	private Ship ship;
+	private Shield shield;
 	
 	private MissileController missiles;
 	private AsteroidsController asteroids;
@@ -46,6 +48,10 @@ public class World extends Group {
 		ship = new Ship();
 		ship.create(this, media.getPicture("ship"));
 		
+		shield = new Shield();
+		shield.create(this, media.getPicture("shield"));
+		shield.setDefended(ship);
+		
 		asteroids = new AsteroidsController(this, media);
 		missiles = new MissileController(this, media);	
 		explosions = new AstExplosionController(this, media);
@@ -55,6 +61,7 @@ public class World extends Group {
 		
 		addActor(back);
 		addActor(ship);
+		addActor(shield);
 		
 		addActor(asteroids);	
 		addActor(missiles);
@@ -102,6 +109,10 @@ public class World extends Group {
 	
 	public Ship getShip() {
 		return ship;
+	}
+	
+	public Shield getShield() {
+		return shield;
 	}
 	
 	public float getOffsetX() {
