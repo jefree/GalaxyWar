@@ -2,6 +2,7 @@ package dev.jet.android.galaxywar.world;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import dev.jet.android.galaxywar.media.Media;
 import dev.jet.android.galaxywar.media.TapestryPicture;
@@ -57,15 +58,6 @@ public class World extends Group {
 		font = new BitmapFont();
 	}
 	
-	public void reboot() {
-		
-		ship.reboot();
-		asteroids.reboot();
-		missiles.reboot();
-		
-		state = RUN;
-	}
-	
 	@Override
 	public void act(float delta) {
 		
@@ -78,11 +70,20 @@ public class World extends Group {
 		offsetX = getWidth()/2 - ship.getX();
 		offsetY = getHeight()/2 - ship.getY();
 	}
-	
-	public int getState() {
-		return state;
-	}
 
+	public void reboot() {
+		
+		ship.reboot();
+		asteroids.reboot();
+		missiles.reboot();
+		
+		state = RUN;
+	}
+	
+	public void genAstExplosion(Vector2 origin) {
+		
+	}
+	
 	public void shot() {
 		
 		if (ship.getMissiles() > 0) {
@@ -109,6 +110,10 @@ public class World extends Group {
 
 	public Missile[] getMissiles() {
 		return missiles.getGroup();
+	}
+	
+	public int getState() {
+		return state;
 	}
 	
 	@Override

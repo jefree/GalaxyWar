@@ -1,6 +1,9 @@
 package dev.jet.android.galaxywar.world.actors;
 
+import com.badlogic.gdx.math.Vector2;
+
 import dev.jet.android.galaxywar.media.Picture;
+import dev.jet.android.galaxywar.utils.UtilityGeom;
 import dev.jet.android.galaxywar.utils.UtilityMath;
 import dev.jet.android.galaxywar.world.World;
 
@@ -42,6 +45,9 @@ public class Asteroid extends Entity {
 				if (ast.collide(this)){
 					ast.destroy();
 					destroy();
+					
+					world.genAstExplosion(UtilityGeom.midPoint(ast.getRectangle().getCenter(new Vector2()), 
+							this.getRectangle().getCenter(new Vector2())));
 				}
 			}
 		}
