@@ -46,6 +46,10 @@ public class Media {
 		return pic;
 	}
 	
+	public void loadAnimPicture(String fileName) {
+		loadPicture(AnimationPicture.class, fileName);
+	}
+	
 	public void loadSinglePicture(String fileName) {
 		loadPicture(SinglePicture.class, fileName);
 	}
