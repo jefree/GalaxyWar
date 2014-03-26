@@ -47,7 +47,7 @@ public class World extends Group {
 		missiles = new MissileController(this, media);	
 		
 		back = new Background();
-		back.create(this, media.getPicture("background"));
+		back.create(this, media.getPicture("space"));
 		
 		addActor(back);
 		addActor(ship);

@@ -20,9 +20,13 @@ public class Media {
 		return Gdx.graphics.getHeight();
 	}
 	
-	private Picture loadPicture(Class<?> cls, String key, String fileName) {
+	private Picture loadPicture(Class<?> cls, String fileName) {
 		
 		Picture pic = null;
+		
+		String key = getKeyByFilename(fileName);
+		
+		System.out.println("key: "+key);
 		
 		try {
 			
@@ -42,13 +46,27 @@ public class Media {
 		return pic;
 	}
 	
-	public void loadSinglePicture(String key, String fileName) {
-		loadPicture(SinglePicture.class, key, fileName);
+	public void loadSinglePicture(String fileName) {
+		loadPicture(SinglePicture.class, fileName);
 	}
 	
-	public void loadTapestryPicture(String key, String fileName) {
-		TapestryPicture pic = (TapestryPicture) loadPicture(TapestryPicture.class, key, fileName);
+	public void loadTapestryPicture(String fileName) {
+		TapestryPicture pic = (TapestryPicture) loadPicture(TapestryPicture.class, fileName);
 		pic.setScreenSize(getScreenWidth(), getScreenHeight());
+	}
+	
+	private String getKeyByFilename(String filename) {
+		
+		String[] split = filename.split("\\.");
+		String key = "";
+		
+		for (int i=0; i<split.length-1; i++) {
+			
+			key = key.concat(split[i]);
+		}
+		
+		return key;
+		
 	}
 	
 	public Picture getPicture(String key) {

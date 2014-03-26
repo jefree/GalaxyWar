@@ -20,31 +20,31 @@ public class GameScreen extends AbstractScreen{
 		
 		super.show();
 		
-		media.loadSinglePicture("ship", "ship.png");	
-		media.loadSinglePicture("missile", "missile.png");	
-		media.loadSinglePicture("asteroid", "asteroid.png");
+		media.loadSinglePicture("ship.png");	
+		media.loadSinglePicture("missile.png");	
+		media.loadSinglePicture("asteroid.png");
 		
-		media.loadSinglePicture("bArrowUp", "bArrowUp.png");
-		media.loadSinglePicture("bArrowDown", "bArrowDown.png");
+		media.loadSinglePicture("bArrowUp.png");
+		media.loadSinglePicture("bArrowDown.png");
 		
-		media.loadSinglePicture("bMissileUp", "bMissileUp.png");
-		media.loadSinglePicture("bMissileDown", "bMissileDown.png");
+		media.loadSinglePicture("bMissileUp.png");
+		media.loadSinglePicture("bMissileDown.png");
 		
-		media.loadSinglePicture("bSpeedUp", "bSpeedUp.png");
-		media.loadSinglePicture("bSpeedDown", "bSpeedDown.png");
+		media.loadSinglePicture("bSpeedUp.png");
+		media.loadSinglePicture("bSpeedDown.png");
 		
-		media.loadTapestryPicture("background", "space.jpg");
+		media.loadTapestryPicture("space.jpg");
 		
-		media.loadSinglePicture("missilesbar/edge", "missilesbar/edge.png");
-		media.loadSinglePicture("missilesbar/normal", "missilesbar/normal.png");
-		media.loadSinglePicture("missilesbar/warning", "missilesbar/warning.png");
+		media.loadSinglePicture("missilesbar/edge.png");
+		media.loadSinglePicture("missilesbar/normal.png");
+		media.loadSinglePicture("missilesbar/warning.png");
 		
-		media.loadSinglePicture("end/back", "end/back.png");
-		media.loadSinglePicture("end/againUp", "end/againUp.png");
-		media.loadSinglePicture("end/againDown", "end/againDown.png");
+		media.loadSinglePicture("end/back.png");
+		media.loadSinglePicture("end/againUp.png");
+		media.loadSinglePicture("end/againDown.png");
 		
-		media.loadSinglePicture("shieldbar/edge", "shieldbar/edge.png");
-		media.loadSinglePicture("shieldbar/shield", "shieldbar/shield.png");
+		media.loadSinglePicture("shieldbar/edge.png");
+		media.loadSinglePicture("shieldbar/shield.png");
 		
 		world = new World(media);
 		gui = new GameUI(world, media, this);
