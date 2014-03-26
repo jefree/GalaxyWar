@@ -87,7 +87,7 @@ public class GameUI extends BasicUI {
 		}
 		
 		int mShip = (int) world.getShip().getMissiles();
-		int sShip = (int) world.getShip().getLife();
+		int sShip = (int) world.getShield().getLife();
 		
 		if (mShip <= 3) {
 			mShip *= -1;
