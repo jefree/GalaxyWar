@@ -11,6 +11,7 @@ public class Asteroid extends Entity {
 	
 	float speedRotation;
 	float dirAngle;
+	float damage;
 	
 	private int MAX_DISTANCE_TO_SHIP; 
 	
@@ -56,6 +57,12 @@ public class Asteroid extends Entity {
 		super.reboot();
 		
 		remove();
+		
+		damage = 20;
+	}
+	
+	public float getDamage() {
+		return damage;
 	}
 	
 	public float getDirAngle() {
