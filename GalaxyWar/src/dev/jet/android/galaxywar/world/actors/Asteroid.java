@@ -45,7 +45,12 @@ public class Asteroid extends Entity {
 				}
 			}
 		}
+	}
+	
+	public void reboot() {
+		super.reboot();
 		
+		remove();
 	}
 	
 	public float getDirAngle() {

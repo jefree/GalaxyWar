@@ -1,8 +1,6 @@
 package dev.jet.android.galaxywar.world.actors;
 
-import dev.jet.android.galaxywar.media.Picture;
 import dev.jet.android.galaxywar.utils.UtilityMath;
-import dev.jet.android.galaxywar.world.World;
 
 public class Ship extends Entity {
 	
@@ -11,18 +9,7 @@ public class Ship extends Entity {
 	int rOrientation;
 	float rDelta;
 	
-	public void create(World _world, Picture _picture) {
-		super.create(_world, _picture);
-		
-		rOrientation = 0;
-		rDelta = 0;
-		
-		setPosition(0, 0);
-		setRotation(0);
-		
-		speed = 80;
-		life = 5;
-	}
+	int missiles;
 	
 	public void act(float delta) {
 		
@@ -45,6 +32,27 @@ public class Ship extends Entity {
 		}
 	}
 	
+	public void reboot() {
+		super.reboot();
+		
+		setPosition(0, 0);
+		
+		rOrientation = 0;
+		rDelta = 0;
+		
+		life = 7;
+		speed = 80;
+		missiles = 7;
+	}
+	
+	public int getMissiles() {
+		return missiles;
+	}
+
+	public void deltaMissiles(int delta) {
+		this.missiles += delta;
+	}
+
 	public float getScreenX(){
 		return world.getWidth()/2;
 	}

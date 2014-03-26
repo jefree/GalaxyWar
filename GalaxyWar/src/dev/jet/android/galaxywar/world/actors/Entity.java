@@ -21,14 +21,14 @@ public class Entity extends Actor {
 		world = _world;
 		picture = _picture;
 		
-		enable = false;
-		
 		setWidth(picture.getWidth());
 		setHeight(picture.getHeight());
 		
 		setOrigin(getWidth()/2, getHeight()/2);
 		
 		rectangle = new Rectangle();
+		
+		reboot();
 	}
 	
 	public Rectangle getRectangle() {
@@ -39,6 +39,10 @@ public class Entity extends Actor {
 		rectangle.setHeight(getHeight());
 		
 		return rectangle;
+	}
+	
+	public void reboot() {
+		enable = false;
 	}
 
 	public void destroy() {

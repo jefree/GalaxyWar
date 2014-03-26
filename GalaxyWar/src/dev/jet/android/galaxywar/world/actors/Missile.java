@@ -32,6 +32,17 @@ public class Missile extends Entity {
 		life -= delta;
 	}
 	
+	public void destroy() {
+		super.destroy();
+		world.getShip().deltaMissiles(+1);
+	}
+	
+	public void reboot() {
+		super.reboot();
+		
+		remove();
+	}
+	
 	@Override
 	public float getScreenX() {
 		float deltaX = getX() - world.getShip().getX();

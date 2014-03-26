@@ -73,8 +73,6 @@ public class AsteroidsController extends GroupController<Asteroid> {
 		astX += (int)delta[0];
 		astY += (int)delta[1];
 		
-		System.out.println(borderAngle + " " + astX + " " + astY );
-		
 		ast.setPosition(astX, astY);
 		ast.setDirAngle((float) UtilityMath.getAngle(astX, astY, shipX, shipY));
 		ast.setSpeed((int)UtilityMath.getRandom(MIN_ASTEROID_SPEED, MAX_ASTEROID_SPEED));

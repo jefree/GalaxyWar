@@ -34,6 +34,13 @@ public abstract class GroupController <T extends Entity> extends Group {
 		setHeight(world.getHeight());
 	}
 	
+	public void reboot() {
+		
+		for (Entity e : group) {
+			e.reboot();
+		}
+	}
+	
 	public void genNew() {
 		
 		for (T e : group) {

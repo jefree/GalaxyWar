@@ -13,8 +13,9 @@ import dev.jet.android.galaxywar.world.actors.Ship;
 public class World extends Group {
 	
 	public static int RUN = 0;
-	public static int PAUSED = 1;
-	public static int ENDED = 2;
+	public static int PAUSE = 1;
+	public static int STOP = 2;
+	public static int END = 3;
 	
 	private Ship ship;
 	private MissileController missiles;
@@ -56,14 +57,23 @@ public class World extends Group {
 		font = new BitmapFont();
 	}
 	
+	public void reboot() {
+		
+		ship.reboot();
+		asteroids.reboot();
+		missiles.reboot();
+		
+		state = RUN;
+	}
+	
 	@Override
 	public void act(float delta) {
 		
-		if (ship.getLife() <= 0) {
-			state = ENDED;
-		}
-		
 		super.act(delta);
+		
+		if (ship.getLife() <= 0) {
+			state = STOP;
+		}
 		
 		offsetX = getWidth()/2 - ship.getX();
 		offsetY = getHeight()/2 - ship.getY();
@@ -74,7 +84,11 @@ public class World extends Group {
 	}
 
 	public void shot() {
-		missiles.genNew();
+		
+		if (ship.getMissiles() > 0) {
+			missiles.genNew();
+			ship.deltaMissiles(-1);
+		}
 	}
 	
 	public Ship getShip() {
