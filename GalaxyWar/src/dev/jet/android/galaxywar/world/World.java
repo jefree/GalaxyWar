@@ -20,9 +20,10 @@ public class World extends Group {
 	public static int END = 3;
 	
 	private Ship ship;
-	private MissileController missiles;
 	
+	private MissileController missiles;
 	private AsteroidsController asteroids;
+	private AstExplosionController explosions;
 	
 	private float offsetX;
 	private float offsetY;
@@ -47,14 +48,17 @@ public class World extends Group {
 		
 		asteroids = new AsteroidsController(this, media);
 		missiles = new MissileController(this, media);	
+		explosions = new AstExplosionController(this, media);
 		
 		back = new Background();
 		back.create(this, media.getPicture("space"));
 		
 		addActor(back);
 		addActor(ship);
+		
 		addActor(asteroids);	
 		addActor(missiles);
+		addActor(explosions);
 		
 		font = new BitmapFont();
 	}
@@ -81,8 +85,11 @@ public class World extends Group {
 		state = RUN;
 	}
 	
-	public void genAstExplosion(Vector2 origin, float angle) {
+	public void genAstExplosion(Vector2 pos, float angle) {
+		Explosion e = explosions.genNew();
 		
+		e.setPosition(pos.x, pos.y);
+		e.setRotation(angle);
 	}
 	
 	public void shot() {

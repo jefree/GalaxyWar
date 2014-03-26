@@ -41,7 +41,7 @@ public abstract class GroupController <T extends Entity> extends Group {
 		}
 	}
 	
-	public void genNew() {
+	public T genNew() {
 		
 		for (T e : group) {
 			
@@ -53,9 +53,11 @@ public abstract class GroupController <T extends Entity> extends Group {
 				
 				addActor(e);
 				
-				break;
+				return e;
 			}
 		}
+		
+		return null;
 	}
 	
 	@Override
