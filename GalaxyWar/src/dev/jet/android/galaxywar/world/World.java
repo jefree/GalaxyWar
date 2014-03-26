@@ -8,6 +8,7 @@ import dev.jet.android.galaxywar.media.Media;
 import dev.jet.android.galaxywar.media.TapestryPicture;
 import dev.jet.android.galaxywar.world.actors.Asteroid;
 import dev.jet.android.galaxywar.world.actors.Entity;
+import dev.jet.android.galaxywar.world.actors.Explosion;
 import dev.jet.android.galaxywar.world.actors.Missile;
 import dev.jet.android.galaxywar.world.actors.Ship;
 
@@ -80,7 +81,7 @@ public class World extends Group {
 		state = RUN;
 	}
 	
-	public void genAstExplosion(Vector2 origin) {
+	public void genAstExplosion(Vector2 origin, float angle) {
 		
 	}
 	
