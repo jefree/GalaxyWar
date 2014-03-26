@@ -1,5 +1,6 @@
 package dev.jet.android.galaxywar.media;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -31,6 +32,10 @@ public abstract class Picture {
 	
 	public TextureRegion getImage() {
 		return image;
+	}
+	
+	public Texture getTexture() {
+		return image.getTexture();
 	}
 	
 	public void draw (Entity e, SpriteBatch batch, float alphaParent) {
