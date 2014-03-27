@@ -2,6 +2,7 @@ package dev.jet.android.galaxywar.world.actors;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import dev.jet.android.galaxywar.media.Picture;
 import dev.jet.android.galaxywar.world.World;
@@ -39,6 +40,10 @@ public class Entity extends Actor {
 		rectangle.setHeight(getHeight());
 		
 		return rectangle;
+	}
+	
+	public Vector2 getCenter() {
+		return getRectangle().getCenter(new Vector2());
 	}
 	
 	public void reboot() {
