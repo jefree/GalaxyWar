@@ -1,7 +1,8 @@
 package dev.jet.android.galaxywar.world;
 
 import dev.jet.android.galaxywar.media.Media;
-import dev.jet.android.galaxywar.utils.UtilityMath;
+import dev.jet.android.galaxywar.utils.GeomUtil;
+import dev.jet.android.galaxywar.utils.MathUtil;
 import dev.jet.android.galaxywar.world.actors.Asteroid;
 
 public class AsteroidsController extends GroupController<Asteroid> {
@@ -56,25 +57,25 @@ public class AsteroidsController extends GroupController<Asteroid> {
 		float borderAngle;
 		float disp;
 		
-		ast.setSpeedRotation(UtilityMath.getRandom(MIN_ASTEROIDS_ROTATTION_SPEED, MAX_ASTEROIDS_ROTATTION_SPEED));
+		ast.setSpeedRotation(MathUtil.getRandom(MIN_ASTEROIDS_ROTATTION_SPEED, MAX_ASTEROIDS_ROTATTION_SPEED));
 		
 		shipX = (int)world.getShip().getX();
 		shipY = (int)world.getShip().getY();
 		
-		delta = UtilityMath.getSides(GEN_RADIUS, world.getShip().getRotation());
+		delta = GeomUtil.getSides(GEN_RADIUS, world.getShip().getRotation());
 		borderAngle = world.getShip().getRotation() + 90; 
 		
 		astX = shipX + (int)delta[0];
 		astY = shipY + (int)delta[1];
 		
-		disp = UtilityMath.getRandSign() * DISP_RADIUS;
-		delta = UtilityMath.getSides(disp, borderAngle);
+		disp = MathUtil.getRandSign() * DISP_RADIUS;
+		delta = GeomUtil.getSides(disp, borderAngle);
 		
 		astX += (int)delta[0];
 		astY += (int)delta[1];
 		
 		ast.setPosition(astX, astY);
-		ast.setDirAngle((float) UtilityMath.getAngle(astX, astY, shipX, shipY));
-		ast.setSpeed((int)UtilityMath.getRandom(MIN_ASTEROID_SPEED, MAX_ASTEROID_SPEED));
+		ast.setDirAngle((float) GeomUtil.getAngle(astX, astY, shipX, shipY));
+		ast.setSpeed((int)MathUtil.getRandom(MIN_ASTEROID_SPEED, MAX_ASTEROID_SPEED));
 	}
 }

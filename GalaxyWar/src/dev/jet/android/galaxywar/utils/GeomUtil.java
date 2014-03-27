@@ -1,30 +1,11 @@
 package dev.jet.android.galaxywar.utils;
 
-public class UtilityMath {
-	
-	public static int getRandSign() {
-		return (int)Math.pow(-1, (int)(Math.random()/0.5));
-	}
-	
-	public static float getRandom(float max) {
-		return getRandom(0, max);
-	}
-	
-	public static float getRandom(float min, float max, boolean negative) {
-		
-		int sign = 1;
-		
-		if (negative){
-			sign = getRandSign();
-		}
-		
-		return sign*(min + (float)Math.random()*(max-min));
-		
-	}
-	
-	public static float getRandom(float min, float max) {
-		
-		return getRandom(min, max, false);
+import com.badlogic.gdx.math.Vector2;
+
+public class GeomUtil {
+
+	public static Vector2 midPoint (Vector2 v1, Vector2 v2) {		
+		return new Vector2((v1.x + v2.x)/2, (v1.y + v2.y)/2);
 	}
 	
 	public static float getDistance(float x1, float y1, float x2, float y2) {
@@ -50,5 +31,5 @@ public class UtilityMath {
 		
 		return sides;
 	}
-
+	
 }

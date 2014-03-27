@@ -1,10 +1,7 @@
 package dev.jet.android.galaxywar.world.actors;
 
-import com.badlogic.gdx.math.Vector2;
-
 import dev.jet.android.galaxywar.media.Picture;
-import dev.jet.android.galaxywar.utils.UtilityGeom;
-import dev.jet.android.galaxywar.utils.UtilityMath;
+import dev.jet.android.galaxywar.utils.GeomUtil;
 import dev.jet.android.galaxywar.world.World;
 
 public class Asteroid extends Entity {
@@ -27,7 +24,7 @@ public class Asteroid extends Entity {
 		
 		float speed[];
 		
-		if (UtilityMath.getDistance(getX(), getY(), 
+		if (GeomUtil.getDistance(getX(), getY(), 
 					world.getShip().getX(), world.getShip().getY()) > MAX_DISTANCE_TO_SHIP) 
 		{	
 			destroy();
@@ -35,7 +32,7 @@ public class Asteroid extends Entity {
 		
 		super.act(delta);
 		
-		speed = UtilityMath.getSides(getSpeed()*delta, dirAngle);
+		speed = GeomUtil.getSides(getSpeed()*delta, dirAngle);
 		
 		rotate(speedRotation);
 		translate(speed[0], speed[1]);

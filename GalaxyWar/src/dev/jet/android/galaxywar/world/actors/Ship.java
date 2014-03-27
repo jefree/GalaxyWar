@@ -1,6 +1,6 @@
 package dev.jet.android.galaxywar.world.actors;
 
-import dev.jet.android.galaxywar.utils.UtilityMath;
+import dev.jet.android.galaxywar.utils.GeomUtil;
 
 public class Ship extends Entity {
 	
@@ -19,7 +19,7 @@ public class Ship extends Entity {
 			rDelta = 0;
 		}
 		
-		float speed[] = UtilityMath.getSides(getSpeed()*delta, getRotation());
+		float speed[] = GeomUtil.getSides(getSpeed()*delta, getRotation());
 		
 		translate(speed[0], speed[1]);
 	}

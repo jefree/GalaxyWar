@@ -6,8 +6,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import dev.jet.android.galaxywar.media.Media;
 import dev.jet.android.galaxywar.media.TapestryPicture;
-import dev.jet.android.galaxywar.utils.UtilityGeom;
-import dev.jet.android.galaxywar.utils.UtilityMath;
+import dev.jet.android.galaxywar.utils.GeomUtil;
+import dev.jet.android.galaxywar.utils.MathUtil;
 import dev.jet.android.galaxywar.world.actors.Asteroid;
 import dev.jet.android.galaxywar.world.actors.Entity;
 import dev.jet.android.galaxywar.world.actors.Explosion;
@@ -118,7 +118,7 @@ public class World extends Group {
 	public void explosion(Entity e, Entity a) {
 		
 		Explosion ex = explosions.genNew();
-		Vector2 pos = UtilityGeom.midPoint(e.getCenter(), e.getCenter());
+		Vector2 pos = GeomUtil.midPoint(e.getCenter(), e.getCenter());
 		
 		ex.setPosition(pos.x, pos.y);
 		ex.setRotation(a.getRotation());

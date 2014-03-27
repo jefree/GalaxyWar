@@ -2,9 +2,6 @@ package dev.jet.android.galaxywar.world.actors;
 
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
-
-import dev.jet.android.galaxywar.utils.UtilityGeom;
 
 public class Shield extends Entity {
 	

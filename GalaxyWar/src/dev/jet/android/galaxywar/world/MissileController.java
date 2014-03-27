@@ -1,7 +1,7 @@
 package dev.jet.android.galaxywar.world;
 
 import dev.jet.android.galaxywar.media.Media;
-import dev.jet.android.galaxywar.utils.UtilityMath;
+import dev.jet.android.galaxywar.utils.GeomUtil;
 import dev.jet.android.galaxywar.world.actors.Missile;
 import dev.jet.android.galaxywar.world.actors.Ship;
 
@@ -26,7 +26,7 @@ public class MissileController extends GroupController<Missile> {
 	public void initEntity(Missile missile) {
 		
 		Ship ship = getWorld().getShip();
-		float delta[] = UtilityMath.getSides(ship.getHeight()/2 + missile.getHeight()/2, ship.getRotation());
+		float delta[] = GeomUtil.getSides(ship.getHeight()/2 + missile.getHeight()/2, ship.getRotation());
 		
 		missile.setRotation(ship.getRotation());
 		missile.setPosition(ship.getX() + delta[0],

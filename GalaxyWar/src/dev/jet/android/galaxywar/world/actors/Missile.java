@@ -1,9 +1,6 @@
 package dev.jet.android.galaxywar.world.actors;
 
-import com.badlogic.gdx.math.Vector2;
-
-import dev.jet.android.galaxywar.utils.UtilityGeom;
-import dev.jet.android.galaxywar.utils.UtilityMath;
+import dev.jet.android.galaxywar.utils.GeomUtil;
 
 public class Missile extends Entity {
 	
@@ -30,7 +27,7 @@ public class Missile extends Entity {
 			}
 		}
 		
-		float speed[] = UtilityMath.getSides(getSpeed()*delta, getRotation());
+		float speed[] = GeomUtil.getSides(getSpeed()*delta, getRotation());
 		
 		translate(speed[0], speed[1]);
 		
