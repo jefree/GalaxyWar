@@ -18,12 +18,12 @@ public class GalaxyWar extends Game {
 		
 		setScreen(gameScreen);
 		
-		System.out.println("GalaxyWar");
-		
 	}
 	
 	public Media getMedia() {
 		return media;
 	}
+	
+	
 
 }

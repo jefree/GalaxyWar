@@ -42,6 +42,8 @@ public class GameScreen extends AbstractScreen{
 		media.loadSinglePicture("end/back.png");
 		media.loadSinglePicture("end/againUp.png");
 		media.loadSinglePicture("end/againDown.png");
+		media.loadSinglePicture("end/exitUp.png");
+		media.loadSinglePicture("end/exitDown.png");
 		
 		media.loadSinglePicture("shieldbar/edge.png");
 		media.loadSinglePicture("shieldbar/shield.png");
@@ -49,6 +51,8 @@ public class GameScreen extends AbstractScreen{
 		media.loadAnimPicture("explosion/asteroid/anim.atlas");
 		
 		media.loadSinglePicture("shield.png");
+		
+		media.loadAnimPicture("explosion/ship/anim.atlas");
 		
 		world = new World(media);
 		gui = new GameUI(world, media, this);

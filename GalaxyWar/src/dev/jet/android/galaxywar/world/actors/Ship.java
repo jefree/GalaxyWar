@@ -51,5 +51,4 @@ public class Ship extends Entity {
 		rOrientation = (int)Math.signum(rotParam);
 		rDelta = Math.abs(rotParam);
 	}
-	
 }
