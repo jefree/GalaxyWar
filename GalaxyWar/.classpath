@@ -3,7 +3,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/gdx"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/gdx-android"/>
+	<classpathentry exported="true" kind="lib" path="libs/gdx.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/gdx-backend-android.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
