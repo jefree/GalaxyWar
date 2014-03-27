@@ -1,5 +1,8 @@
 package dev.jet.android.galaxywar.world.actors;
 
+import com.badlogic.gdx.math.Vector2;
+
+import dev.jet.android.galaxywar.utils.UtilityGeom;
 import dev.jet.android.galaxywar.utils.UtilityMath;
 
 public class Missile extends Entity {
@@ -22,6 +25,9 @@ public class Missile extends Entity {
 			if (this.collide(a)) {	
 				a.destroy();
 				destroy();
+				
+				world.genAstExplosion(UtilityGeom.midPoint(getRectangle().getCenter(new Vector2()), 
+						a.getRectangle().getCenter(new Vector2())), a.getRotation());
 			}
 		}
 		
