@@ -47,8 +47,7 @@ public class Asteroid extends Entity {
 				ast.destroy();
 				destroy();
 				
-				world.genAstExplosion(UtilityGeom.midPoint(ast.getRectangle().getCenter(new Vector2()), 
-						this.getRectangle().getCenter(new Vector2())), getRotation());
+				world.explosion(this, ast);
 			}
 		}
 	}

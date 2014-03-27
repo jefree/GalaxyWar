@@ -8,5 +8,4 @@ public class AndroidLauncher extends AndroidApplication {
 		super.onCreate(savedInstanceState);
 		initialize(new GalaxyWar(), true);
 	}
-
 }

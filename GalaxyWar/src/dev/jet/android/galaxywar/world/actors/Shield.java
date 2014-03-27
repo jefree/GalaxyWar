@@ -43,8 +43,7 @@ public class Shield extends Entity {
 				
 				receiveDamage(ast.getDamage());
 				
-				world.genAstExplosion(UtilityGeom.midPoint(getRectangle().getCenter(new Vector2()), 
-						ast.getRectangle().getCenter(new Vector2())), ast.getRotation());
+				world.explosion(this, ast);
 				
 				ast.destroy();
 			}

@@ -20,14 +20,13 @@ public class Missile extends Entity {
 		
 		Asteroid[] asteroids = world.getAsteroids(); 
 		
-		for (Asteroid a : asteroids) {
+		for (Asteroid ast : asteroids) {
 			
-			if (this.collide(a)) {	
-				a.destroy();
+			if (this.collide(ast)) {	
+				ast.destroy();
 				destroy();
 				
-				world.genAstExplosion(UtilityGeom.midPoint(getRectangle().getCenter(new Vector2()), 
-						a.getRectangle().getCenter(new Vector2())), a.getRotation());
+				world.explosion(this, ast);
 			}
 		}
 		
