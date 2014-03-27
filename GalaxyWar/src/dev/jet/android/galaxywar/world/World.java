@@ -22,6 +22,7 @@ public class World extends Group {
 	
 	private Ship ship;
 	private Shield shield;
+	private Explosion shipExplosion;
 	
 	private MissileController missiles;
 	private AsteroidsController asteroids;
@@ -52,6 +53,10 @@ public class World extends Group {
 		shield.create(this, media.getPicture("shield"));
 		shield.setDefended(ship);
 		
+		shipExplosion =  new Explosion();
+		shipExplosion.create(this, media.getPicture("explosion/ship/anim"));
+		shipExplosion.setDuration(3);
+		
 		asteroids = new AsteroidsController(this, media);
 		missiles = new MissileController(this, media);	
 		explosions = new AstExplosionController(this, media);
@@ -75,8 +80,20 @@ public class World extends Group {
 		
 		super.act(delta);
 		
-		if (ship.getLife() <= 0) {
+		if (state==RUN && ship.getLife() < 0) {
 			state = STOP;
+			addActor(shipExplosion);
+			ship.remove();
+			shield.remove();
+		}
+		
+		if(state==STOP) { 
+			
+			shipExplosion.setPosition(ship.getX(), ship.getY());
+			
+			if(shipExplosion.isFinished()) {
+				state = END;
+			}
 		}
 		
 		offsetX = getWidth()/2 - ship.getX();
@@ -88,6 +105,10 @@ public class World extends Group {
 		ship.reboot();
 		asteroids.reboot();
 		missiles.reboot();
+		shipExplosion.reboot();
+		
+		addActor(ship);
+		addActor(shield);
 		
 		state = RUN;
 	}
