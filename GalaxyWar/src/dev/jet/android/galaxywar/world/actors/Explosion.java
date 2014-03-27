@@ -20,7 +20,6 @@ public class Explosion extends Entity {
 		sequence.setFrameDuration(time / sequence.getNFrames());
 	}
 	
-	
 	@Override
 	public void reboot() {
 		super.reboot();
@@ -47,4 +46,10 @@ public class Explosion extends Entity {
 			destroy();
 		}
 	}
+	
+	public boolean isFinished() {
+		return sequence.isFinished(stateTime);
+	}
+
+	
 }
