@@ -82,7 +82,7 @@ public class GameUI extends BasicUI {
 	@Override
 	public void act(float delta) {
 		
-		if (world.getState() == World.STOP) {
+		if (world.getState() == World.END) {
 			screen.showEnd();
 		}
 		
