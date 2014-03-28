@@ -26,8 +26,6 @@ public class Media {
 		
 		String key = getKeyByFilename(fileName);
 		
-		System.out.println("key: "+key);
-		
 		try {
 			
 			pic = (Picture)cls.newInstance();
