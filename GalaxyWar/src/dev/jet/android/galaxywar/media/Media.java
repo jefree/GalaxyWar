@@ -3,13 +3,16 @@ package dev.jet.android.galaxywar.media;
 import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
 public class Media {
 
 	HashMap<String, Picture> pictures;
+	HashMap<String, BitmapFont> fonts;
 	
 	public Media() {
 		pictures = new HashMap<String, Picture>();
+		fonts = new HashMap<String, BitmapFont>();
 	}
 	
 	public int getScreenWidth() {
@@ -44,6 +47,13 @@ public class Media {
 		return pic;
 	}
 	
+	public void loadFont(String path) {
+		BitmapFont font = new BitmapFont(Gdx.files.internal(path+"/font.fnt"), 
+				Gdx.files.internal(path+"/font.png"), false);
+		
+		fonts.put(path, font);
+	}
+	
 	public void loadAnimPicture(String fileName) {
 		loadPicture(AnimationPicture.class, fileName);
 	}
@@ -69,6 +79,10 @@ public class Media {
 		
 		return key;
 		
+	}
+	
+	public BitmapFont getFont(String key) {
+		return fonts.get(key);
 	}
 	
 	public Picture getPicture(String key) {

@@ -1,13 +1,17 @@
 package dev.jet.android.galaxywar.world;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+
 import dev.jet.android.galaxywar.media.Media;
 import dev.jet.android.galaxywar.media.TapestryPicture;
 import dev.jet.android.galaxywar.utils.GeomUtil;
-import dev.jet.android.galaxywar.utils.MathUtil;
 import dev.jet.android.galaxywar.world.actors.Asteroid;
 import dev.jet.android.galaxywar.world.actors.Entity;
 import dev.jet.android.galaxywar.world.actors.Explosion;
@@ -35,7 +39,7 @@ public class World extends Group {
 	
 	private int state;
 	
-	BitmapFont font;
+	Label message;
 	
 	Entity back;
 	TapestryPicture background;
@@ -66,6 +70,11 @@ public class World extends Group {
 		back = new Background();
 		back.create(this, media.getPicture("space"));
 		
+		message = new Label("Version Beta 1.0", new LabelStyle(media.getFont("fonts/Comic Sans MS"), 
+				new Color(1,1,1,1)));
+		
+		message.setPosition(300, getHeight()-30);
+		
 		addActor(back);
 		addActor(ship);
 		addActor(shield);
@@ -74,7 +83,8 @@ public class World extends Group {
 		addActor(missiles);
 		addActor(explosions);
 		
-		font = new BitmapFont();
+		addActor(message);
+		
 	}
 	
 	@Override
@@ -158,12 +168,5 @@ public class World extends Group {
 	
 	public int getState() {
 		return state;
-	}
-	
-	@Override
-	public void draw(SpriteBatch batch, float parentAlpha){
-		super.draw(batch, parentAlpha);
-		
-		font.draw(batch, (int)ship.getX() + "    " + (int)ship.getY() , 600, 300);
 	}
 }

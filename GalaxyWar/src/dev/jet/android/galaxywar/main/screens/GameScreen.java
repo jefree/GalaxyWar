@@ -54,6 +54,8 @@ public class GameScreen extends AbstractScreen{
 		
 		media.loadAnimPicture("explosion/ship/anim.atlas");
 		
+		media.loadFont("fonts/Comic Sans MS");
+		
 		world = new World(media);
 		gui = new GameUI(world, media, this);
 		eui = new EndUI(world, media, this);
