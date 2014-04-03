@@ -52,7 +52,7 @@ public class GameScreen extends AbstractScreen{
 		
 		media.loadAnimPicture("explosion/asteroid/anim.atlas");
 		
-		media.loadSinglePicture("shield.png");
+		media.loadAlphaLifePicture("shield.png");
 		
 		media.loadAnimPicture("explosion/ship/anim.atlas");
 		

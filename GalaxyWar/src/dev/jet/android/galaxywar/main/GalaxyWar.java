@@ -20,7 +20,6 @@ public class GalaxyWar extends Game {
 		Gdx.input.setCatchBackKey(true);
 		
 		setScreen(gameScreen);
-		
 	}
 	
 	public Media getMedia() {

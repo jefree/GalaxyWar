@@ -1,8 +1,5 @@
 package dev.jet.android.galaxywar.world.actors;
 
-
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 public class Shield extends Entity {
 	
 	Entity defended;
@@ -55,15 +52,4 @@ public class Shield extends Entity {
 		life = 50;
 		enable = true;
 	}
-	
-	@Override
-	public void draw(SpriteBatch batch, float alphaParent) {
-	
-		batch.setColor(1, 1, 1, life / 100);
-		
-		super.draw(batch, alphaParent);
-		
-		batch.setColor(1, 1, 1, 1);
-	}
-
 }

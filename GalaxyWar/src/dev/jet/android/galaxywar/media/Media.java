@@ -67,6 +67,10 @@ public class Media {
 		pic.setScreenSize(getScreenWidth(), getScreenHeight());
 	}
 	
+	public void loadAlphaLifePicture(String fileName){
+		loadPicture(AlphaLifePicture.class, fileName);
+	}
+	
 	private String getKeyByFilename(String filename) {
 		
 		String[] split = filename.split("\\.");
