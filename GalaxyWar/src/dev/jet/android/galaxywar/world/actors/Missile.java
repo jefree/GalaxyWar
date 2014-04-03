@@ -36,7 +36,6 @@ public class Missile extends Entity {
 	
 	public void destroy() {
 		super.destroy();
-		world.getShip().deltaMissiles(+1);
 	}
 	
 	public void reboot() {

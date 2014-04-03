@@ -7,7 +7,7 @@ import dev.jet.android.galaxywar.world.actors.Ship;
 
 public class MissileController extends GroupController<Missile> {
 
-	private static final int MAX_MISSILES_NUMBER = 7;
+	public static final int MAX_MISSILES_NUMBER = 7;
 	
 	private static final float MISSILE_LIFE = 4; 
 	private static final int MISSILE_SPEED = 200; 

@@ -1,6 +1,7 @@
 package dev.jet.android.galaxywar.world.actors;
 
 import dev.jet.android.galaxywar.utils.GeomUtil;
+import dev.jet.android.galaxywar.world.MissileController;
 
 public class Ship extends Entity {
 	
@@ -9,9 +10,17 @@ public class Ship extends Entity {
 	int rOrientation;
 	float rDelta;
 	
-	int missiles;
+	int nMissiles;
+	float timeNewMissile;
 	
 	public void act(float delta) {
+		
+		timeNewMissile += delta;
+		
+		if (timeNewMissile > 2.0) {
+			deltaMissiles(+1);
+			timeNewMissile = 0;
+		}
 		
 		if (rDelta > 0) {
 			
@@ -34,17 +43,25 @@ public class Ship extends Entity {
 		
 		life = 1;
 		speed = 80;
-		missiles = 7;
+		nMissiles = MissileController.MAX_MISSILES_NUMBER;
 		
 		enable = true;
 	}
 	
 	public int getMissiles() {
-		return missiles;
+		return nMissiles;
 	}
 
 	public void deltaMissiles(int delta) {
-		this.missiles += delta;
+		
+		float sign = Math.signum(delta);
+		
+		if ( (sign > 0 && nMissiles < MissileController.MAX_MISSILES_NUMBER) 
+				|| (sign < 0 && nMissiles > 0))
+		{
+			this.nMissiles += delta;
+		
+		}
 	}
 	
 	public void setRotParameter(float rotParam) {
