@@ -1,6 +1,8 @@
 package dev.jet.android.galaxywar.main.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -8,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import dev.jet.android.galaxywar.main.GalaxyWar;
 import dev.jet.android.galaxywar.media.Media;
 
-public class AbstractScreen implements Screen {
+public class AbstractScreen implements Screen, InputProcessor {
 	
 	protected Stage stage;
 	protected GalaxyWar game;
@@ -36,7 +38,17 @@ public class AbstractScreen implements Screen {
 		stage.setViewport(width, height);
 		
 	}
-
+	
+	@Override
+	public void show() {
+		stage = new Stage();
+		
+		InputMultiplexer mux = new InputMultiplexer(this, stage);
+		
+		Gdx.input.setInputProcessor(mux);
+		
+	}
+	
 	@Override
 	public void resume() {
 		
@@ -53,12 +65,53 @@ public class AbstractScreen implements Screen {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public boolean keyDown(int arg0) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 	@Override
-	public void show() {
-		stage = new Stage();
-		Gdx.input.setInputProcessor(stage);
-		
+	public boolean keyTyped(char arg0) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean keyUp(int arg0) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean mouseMoved(int arg0, int arg1) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean scrolled(int arg0) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean touchDown(int arg0, int arg1, int arg2, int arg3) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean touchDragged(int arg0, int arg1, int arg2) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean touchUp(int arg0, int arg1, int arg2, int arg3) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 }

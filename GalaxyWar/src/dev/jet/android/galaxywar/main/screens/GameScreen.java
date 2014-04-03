@@ -1,5 +1,7 @@
 package dev.jet.android.galaxywar.main.screens;
 
+import com.badlogic.gdx.Input.Keys;
+
 import dev.jet.android.galaxywar.main.GalaxyWar;
 import dev.jet.android.galaxywar.ui.EndUI;
 import dev.jet.android.galaxywar.ui.GameUI;
@@ -61,8 +63,7 @@ public class GameScreen extends AbstractScreen{
 		eui = new EndUI(world, media, this);
 		
 		stage.addActor(world);
-		stage.addActor(gui);
-		
+		stage.addActor(gui);	
 	}
 	
 	public void showEnd() {
@@ -79,6 +80,19 @@ public class GameScreen extends AbstractScreen{
 		
 		System.out.println("omfg");
 		
+	}
+	
+	@Override
+	public boolean keyDown(int key) {
+		
+		if (key == Keys.BACK) {
+			
+			System.out.println("salida");
+			
+			System.exit(0);
+		}
+		
+		return true;
 	}
 	
 	@Override
