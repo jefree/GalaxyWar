@@ -5,13 +5,16 @@ import com.badlogic.gdx.Input.Keys;
 import dev.jet.android.galaxywar.main.GalaxyWar;
 import dev.jet.android.galaxywar.ui.EndUI;
 import dev.jet.android.galaxywar.ui.GameUI;
+import dev.jet.android.galaxywar.ui.PauseUI;
 import dev.jet.android.galaxywar.world.World;
 
 public class GameScreen extends AbstractScreen{
 	
 	World world;
+	
 	GameUI gui;
 	EndUI eui;
+	PauseUI pui;
 	
 	public GameScreen (GalaxyWar _game) {
 		super(_game);
@@ -47,6 +50,9 @@ public class GameScreen extends AbstractScreen{
 		media.loadSinglePicture("end/exitUp.png");
 		media.loadSinglePicture("end/exitDown.png");
 		
+		media.loadSinglePicture("pause/runUp.png");
+		media.loadSinglePicture("pause/runDown.png");
+		
 		media.loadSinglePicture("shieldbar/edge.png");
 		media.loadSinglePicture("shieldbar/shield.png");
 		
@@ -61,9 +67,14 @@ public class GameScreen extends AbstractScreen{
 		world = new World(media);
 		gui = new GameUI(world, media, this);
 		eui = new EndUI(world, media, this);
+		pui = new PauseUI(world, media, this);
 		
 		stage.addActor(world);
 		stage.addActor(gui);	
+	}
+	
+	public void showPause() {
+		stage.addActor(pui);
 	}
 	
 	public void showEnd() {
@@ -78,8 +89,6 @@ public class GameScreen extends AbstractScreen{
 		stage.addActor(world);
 		stage.addActor(gui);
 		
-		System.out.println("omfg");
-		
 	}
 	
 	@Override
@@ -87,21 +96,16 @@ public class GameScreen extends AbstractScreen{
 		
 		if (key == Keys.BACK) {
 			
-			System.out.println("salida");
+			if (world.getState() == World.RUN){
+				world.pause();
+				showPause();
 			
-			System.exit(0);
+			} else if (world.getState() == World.PAUSE) {
+				world.run();
+				showGame();
+			}
 		}
 		
 		return true;
-	}
-	
-	@Override
-	public void hide() {
-		
-	}
-	
-	@Override
-	public void dispose() {
-		
 	}
 }

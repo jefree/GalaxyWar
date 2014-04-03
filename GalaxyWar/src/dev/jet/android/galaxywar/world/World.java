@@ -1,9 +1,6 @@
 package dev.jet.android.galaxywar.world;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -70,7 +67,7 @@ public class World extends Group {
 		back = new Background();
 		back.create(this, media.getPicture("space"));
 		
-		message = new Label("Version Beta 1.0", new LabelStyle(media.getFont("fonts/Comic Sans MS"), 
+		message = new Label("Version Beta 1.0 - Eve One", new LabelStyle(media.getFont("fonts/Comic Sans MS"), 
 				new Color(1,1,1,1)));
 		
 		message.setPosition(300, getHeight()-30);
@@ -90,7 +87,9 @@ public class World extends Group {
 	@Override
 	public void act(float delta) {
 		
-		super.act(delta);
+		if (state != PAUSE) {
+			super.act(delta);
+		}
 		
 		if (state==RUN && ship.getLife() < 0) {
 			state = STOP;
@@ -112,6 +111,14 @@ public class World extends Group {
 		offsetY = getHeight()/2 - ship.getY();
 	}
 
+	public void pause() {
+		state = PAUSE;
+	}
+	
+	public void run() {
+		state = RUN;
+	}
+	
 	public void reboot() {
 		
 		ship.reboot();
@@ -122,7 +129,7 @@ public class World extends Group {
 		addActor(ship);
 		addActor(shield);
 		
-		state = RUN;
+		run();
 	}
 	
 	public void explosion(Entity e, Entity a) {

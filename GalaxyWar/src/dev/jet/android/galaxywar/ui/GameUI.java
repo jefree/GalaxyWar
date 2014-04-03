@@ -34,23 +34,11 @@ public class GameUI extends BasicUI {
 		world = _world;
 		screen = _screen;
 		
-		ImageButtonStyle bDirStyle = new ImageButtonStyle();
-		bDirStyle.up = new TextureRegionDrawable(media.getPicture("bArrowUp").getImage());
-		bDirStyle.down = new TextureRegionDrawable(media.getPicture("bArrowDown").getImage());
+		bRight = (ImageButton)BasicUI.createButton(media, "bArrow", "", "");
+		bLeft = (ImageButton)BasicUI.createButton(media, "bArrow", "", "");
 		
-		ImageButtonStyle bMissileStyle = new ImageButtonStyle();
-		bMissileStyle.up = new TextureRegionDrawable(media.getPicture("bMissileUp").getImage());
-		bMissileStyle.down = new TextureRegionDrawable(media.getPicture("bMissileDown").getImage());
-		
-		ImageButtonStyle bSpeedStyle = new ImageButtonStyle();
-		bSpeedStyle.up = new TextureRegionDrawable(media.getPicture("bSpeedUp").getImage());
-		bSpeedStyle.down = new TextureRegionDrawable(media.getPicture("bSpeedDown").getImage());
-		
-		bRight = new ImageButton(bDirStyle);
-		bLeft = new ImageButton(bDirStyle);
-		
-		bMissile = new ImageButton(bMissileStyle);
-		bSpeed = new ImageButton(bSpeedStyle);
+		bMissile = (ImageButton)BasicUI.createButton(media, "bMissile", "", "");
+		bSpeed = (ImageButton)BasicUI.createButton(media, "bSpeed", "", "");
 		
 		mBar = new MissileBar(media);
 		sBar = new ShieldBar(media);
@@ -81,6 +69,10 @@ public class GameUI extends BasicUI {
 	
 	@Override
 	public void act(float delta) {
+		
+		if (world.getState() == World.PAUSE) {
+			return;
+		}
 		
 		if (world.getState() == World.END) {
 			screen.showEnd();

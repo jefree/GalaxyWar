@@ -31,5 +31,4 @@ public class GeomUtil {
 		
 		return sides;
 	}
-	
 }

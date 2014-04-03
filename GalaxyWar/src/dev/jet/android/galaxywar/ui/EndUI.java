@@ -1,13 +1,17 @@
 package dev.jet.android.galaxywar.ui;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import dev.jet.android.galaxywar.main.screens.GameScreen;
 import dev.jet.android.galaxywar.media.Media;
+import dev.jet.android.galaxywar.utils.ScreenUtil;
 import dev.jet.android.galaxywar.world.World;
 
 public class EndUI extends BasicUI {
@@ -16,8 +20,9 @@ public class EndUI extends BasicUI {
 	GameScreen screen;
 	
 	Image back;
-	ImageButton again;
-	ImageButton exit;
+	
+	Actor again;
+	Actor exit;
 		
 	public EndUI(World _world, Media _media, GameScreen _screen) {
 		super(_media);
@@ -25,21 +30,13 @@ public class EndUI extends BasicUI {
 		world = _world;
 		screen = _screen;
 		
-		ImageButtonStyle againStyle = new ImageButtonStyle();
-		againStyle.up = new TextureRegionDrawable(media.getPicture("end/againUp").getImage());
-		againStyle.down = new TextureRegionDrawable(media.getPicture("end/againDown").getImage());
-		
-		ImageButtonStyle exitStyle = new ImageButtonStyle();
-		exitStyle.up = new TextureRegionDrawable(media.getPicture("end/exitUp").getImage());
-		exitStyle.down = new TextureRegionDrawable(media.getPicture("end/exitDown").getImage());
-		
 		back = new Image(media.getPicture("end/back").getTexture());
-		again = new ImageButton(againStyle);
-		exit = new ImageButton(exitStyle);
+		again = BasicUI.createButton(media, "end/again", "Reintentar", "fonts/Comic Sans MS");
+		exit = BasicUI.createButton(media, "end/exit", "Salir", "fonts/Comic Sans MS");
 		
-		back.setPosition(getWidth()/2 - back.getWidth()/2, getHeight()/2 - back.getHeight()/2);
-		again.setPosition(getWidth()/2 - again.getWidth()/2, getHeight()/2 - again.getHeight()/2 + 60);
-		exit.setPosition(getWidth()/2 - again.getWidth()/2, getHeight()/2 - again.getHeight()/2 - 60);
+		ScreenUtil.centered(back, this, 0, 0);
+		ScreenUtil.centered(again, this, 0, 60);
+		ScreenUtil.centered(exit, this, 0, -60);
 		
 		addActor(back);
 		addActor(again);
@@ -54,7 +51,7 @@ public class EndUI extends BasicUI {
 	@Override
 	public void onTouchUp(float x, float y) {
 		
-		Actor a = hit(x, y, false);
+		Actor a = hit(x, y, true);
 		
 		if (a == again) {
 			world.reboot();
