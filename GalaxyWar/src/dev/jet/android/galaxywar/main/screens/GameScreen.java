@@ -89,6 +89,9 @@ public class GameScreen extends AbstractScreen{
 		stage.addActor(world);
 		stage.addActor(gui);
 		
+		 if(world.getState() == World.PAUSE){
+			 world.run();
+		 }
 	}
 	
 	@Override
@@ -101,7 +104,6 @@ public class GameScreen extends AbstractScreen{
 				showPause();
 			
 			} else if (world.getState() == World.PAUSE) {
-				world.run();
 				showGame();
 			}
 		}

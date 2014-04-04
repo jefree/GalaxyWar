@@ -87,28 +87,29 @@ public class World extends Group {
 	@Override
 	public void act(float delta) {
 		
-		if (state != PAUSE) {
-			super.act(delta);
-		}
-		
-		if (state==RUN && ship.getLife() < 0) {
+		if (state == RUN && ship.getLife() < 0) {
+			
 			state = STOP;
 			addActor(shipExplosion);
 			ship.remove();
 			shield.remove();
-		}
 		
-		if(state==STOP) { 
+		} else if(state == STOP) { 
 			
 			shipExplosion.setPosition(ship.getX(), ship.getY());
 			
 			if(shipExplosion.isFinished()) {
 				state = END;
 			}
-		}
+		} 
 		
-		offsetX = getWidth()/2 - ship.getX();
-		offsetY = getHeight()/2 - ship.getY();
+		if (state != PAUSE) {
+			
+			super.act(delta);
+			
+			offsetX = getWidth()/2 - ship.getX();
+			offsetY = getHeight()/2 - ship.getY();
+		} 
 	}
 
 	public void pause() {

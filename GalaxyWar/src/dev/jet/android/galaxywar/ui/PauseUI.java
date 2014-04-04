@@ -32,8 +32,6 @@ public class PauseUI extends EndUI {
 		System.out.println(a);
 		
 		if (a == run){
-			
-			world.run();
 			screen.showGame();
 		} 
 		
