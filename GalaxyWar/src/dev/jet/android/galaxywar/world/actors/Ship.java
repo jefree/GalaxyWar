@@ -7,7 +7,7 @@ public class Ship extends Entity {
 	
 	private final float MAX_ROTATION_SPEED = (float)160.0;
 	
-	int rOrientation;
+	public int rOrientation;
 	float rDelta;
 	
 	int nMissiles;
@@ -30,6 +30,7 @@ public class Ship extends Entity {
 		
 		float speed[] = GeomUtil.getSides(getSpeed()*delta, getRotation());
 		
+		rOrientation = 0;
 		translate(speed[0], speed[1]);
 	}
 	
@@ -65,7 +66,7 @@ public class Ship extends Entity {
 	}
 	
 	public void setRotParameter(float rotParam) {
-		rOrientation = (int)Math.signum(rotParam);
+		rOrientation = (int)Math.signum(rOrientation + rotParam);
 		rDelta = Math.abs(rotParam);
 	}
 }
