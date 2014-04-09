@@ -123,6 +123,7 @@ public class World extends Group {
 	public void reboot() {
 		
 		ship.reboot();
+		shield.reboot();
 		asteroids.reboot();
 		missiles.reboot();
 		shipExplosion.reboot();
@@ -144,7 +145,7 @@ public class World extends Group {
 	
 	public void shot() {
 		
-		if (ship.getMissiles() > 0) {
+		if (ship.getLife() > 0 && ship.getMissiles() > 0) {
 			missiles.genNew();
 			ship.deltaMissiles(-1);
 		}

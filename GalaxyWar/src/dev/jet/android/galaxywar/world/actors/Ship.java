@@ -5,7 +5,7 @@ import dev.jet.android.galaxywar.world.MissileController;
 
 public class Ship extends Entity {
 	
-	private final float MAX_ROTATION_SPEED = (float)160.0;
+	private final float MAX_ROTATION_SPEED = (float)120.0;
 	
 	public int rOrientation;
 	float rDelta;
