@@ -10,17 +10,23 @@ public class Media {
 	HashMap<String, Picture> pictures;
 	HashMap<String, BitmapFont> fonts;
 	
-	public Media() {
+	int screenWidth;
+	int screenHeight;
+	
+	public Media(int w, int h) {
 		pictures = new HashMap<String, Picture>();
 		fonts = new HashMap<String, BitmapFont>();
+		
+		screenWidth = w;
+		screenHeight = h;
 	}
 	
 	public int getScreenWidth() {
-		return Gdx.graphics.getWidth();
+		return screenWidth;
 	}
 	
 	public int getScreenHeight() {
-		return Gdx.graphics.getHeight();
+		return screenHeight;
 	}
 	
 	private Picture loadPicture(Class<?> cls, String fileName) {

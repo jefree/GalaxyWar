@@ -14,7 +14,7 @@ public class GalaxyWar extends Game {
 	@Override
 	public void create() {
 		
-		media = new Media();
+		media = new Media(788, 480);
 		gameScreen = new GameScreen(this);
 		
 		Gdx.input.setCatchBackKey(true);

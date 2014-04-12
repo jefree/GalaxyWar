@@ -19,6 +19,7 @@ public class AbstractScreen implements Screen, InputProcessor {
 	public AbstractScreen (GalaxyWar _game) {
 		game = _game;
 		media = game.getMedia();
+		
 	}
 	
 	@Override
@@ -35,7 +36,7 @@ public class AbstractScreen implements Screen, InputProcessor {
 
 	@Override
 	public void resize(int width, int height) {
-		stage.setViewport(width, height);
+		stage.setViewport(media.getScreenWidth(), media.getScreenHeight());
 		
 	}
 	

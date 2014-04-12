@@ -1,5 +1,6 @@
 package dev.jet.android.galaxywar.ui;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -108,7 +109,8 @@ public class GameUI extends BasicUI {
 		mBar.setScore(mShip);
 		sBar.setScore(sShip);
 		
-		score.setText( Integer.toString(world.getScore()) );
+		//score.setText( Integer.toString(world.getScore()) );
+		score.setText(Gdx.graphics.getWidth() + " "+ Gdx.graphics.getHeight());
 		
 		if (bRight.isPressed()) {
 			world.getShip().setRotParameter(-1);
