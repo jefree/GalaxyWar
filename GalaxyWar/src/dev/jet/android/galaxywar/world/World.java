@@ -32,6 +32,7 @@ public class World extends Group {
 	private float offsetY;
 	
 	private int state;
+	private int score;
 	
 	Entity back;
 	TapestryPicture background;
@@ -99,7 +100,7 @@ public class World extends Group {
 			offsetY = getHeight()/2 - ship.getY();
 		} 
 	}
-
+	
 	public void pause() {
 		state = PAUSE;
 	}
@@ -137,6 +138,14 @@ public class World extends Group {
 			missiles.genNew();
 			ship.deltaMissiles(-1);
 		}
+	}
+	
+	public void deltaScore(int score) {
+		this.score += score;
+	}
+	
+	public int getScore() {
+		return score;
 	}
 	
 	public Ship getShip() {

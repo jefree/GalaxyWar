@@ -24,6 +24,7 @@ public class Missile extends Entity {
 				destroy();
 				
 				world.explosion(this, ast);
+				world.deltaScore(+ 10);
 			}
 		}
 		
