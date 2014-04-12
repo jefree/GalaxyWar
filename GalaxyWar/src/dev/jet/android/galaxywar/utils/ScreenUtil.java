@@ -6,7 +6,22 @@ public class ScreenUtil {
 
 	public static void centered (Actor child, Actor parent, float dx, float dy) {
 		
-		child.setPosition(parent.getX() + parent.getWidth()/2 - child.getWidth()/2 + dx, 
-				parent.getY() + parent.getHeight()/2 - child.getHeight()/2 + dy);
+		centeredX(child, parent, 0, 0);
+		centeredY(child, parent, 0, 0);
+		
+		child.translate(dx, dy);
 	}
+	
+	public static void centeredX (Actor child, Actor parent, float dx, float dy) {
+		child.setX(parent.getX() + parent.getWidth()/2 - child.getWidth()/2 + dx);
+		child.translate(dx, dy);
+	}
+	
+	public static void centeredY (Actor child, Actor parent, float dx, float dy) {
+		child.setY(parent.getY() + parent.getHeight()/2 - child.getHeight()/2);
+		child.translate(dx, dy);
+	}
+	
+	
 }
+
