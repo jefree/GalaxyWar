@@ -65,13 +65,19 @@ public class GameScreen extends AbstractScreen{
 		media.loadFont("fonts/Comic Sans MS");
 		media.loadFont("fonts/AmazDoom");
 		
+		media.loadSound("sounds/shot.mp3");
+		media.loadSound("sounds/explosionAst.mp3");
+		media.loadMusic("sounds/music.mp3");
+		
 		world = new World(media);
 		gui = new GameUI(world, media, this);
 		eui = new EndUI(world, media, this);
 		pui = new PauseUI(world, media, this);
 		
 		stage.addActor(world);
-		stage.addActor(gui);	
+		stage.addActor(gui);
+		
+		world.run();
 	}
 	
 	public void showPause() {
