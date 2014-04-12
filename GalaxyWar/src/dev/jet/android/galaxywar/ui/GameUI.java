@@ -9,9 +9,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
 import dev.jet.android.galaxywar.main.screens.GameScreen;
 import dev.jet.android.galaxywar.media.Media;
+import dev.jet.android.galaxywar.utils.ScreenUtil;
 import dev.jet.android.galaxywar.world.World;
 
 public class GameUI extends BasicUI {
@@ -25,6 +27,7 @@ public class GameUI extends BasicUI {
 	MissileBar mBar;
 	ShieldBar sBar;
 	
+	Label score;
 	Label message;
 	
 	World world;
@@ -46,12 +49,21 @@ public class GameUI extends BasicUI {
 		mBar = new MissileBar(media);
 		sBar = new ShieldBar(media);
 		
+		score = new Label("0", new LabelStyle(media.getFont("fonts/AmazDoom"),
+				new Color(1,1,1,1)));
+		
+		message = new Label("Eve One", new LabelStyle(media.getFont("fonts/Comic Sans MS"), 
+				new Color(0,0,0,1)));
+		
 		Table wrapper = new Table();
 		wrapper.add(bLeft);
 		wrapper.setTransform(true);
 		wrapper.setSize(bLeft.getWidth(), bLeft.getHeight());
 		wrapper.setOrigin(wrapper.getPrefWidth()/2, wrapper.getPrefHeight()/2);
 		wrapper.rotate(180);
+		
+		score.setFontScale(1.5f);
+		score.setAlignment(Align.center);
 		
 		wrapper.setPosition(25, 5);
 		bRight.setPosition(media.getScreenWidth() - bRight.getWidth() - 25, 5);
@@ -62,10 +74,8 @@ public class GameUI extends BasicUI {
 		mBar.setPosition(media.getScreenWidth() - mBar.getWidth() - 25, media.getScreenHeight() - mBar.getHeight() - 5);
 		sBar.setPosition(25, media.getScreenHeight() - mBar.getHeight() - 5);
 		
-		message = new Label("Eve One", new LabelStyle(media.getFont("fonts/Comic Sans MS"), 
-				new Color(0,0,0,1)));
-		
-		message.setPosition(45, getHeight()-40);
+		ScreenUtil.centerTop(score, this, 0, -60);
+		ScreenUtil.top(message, this, 45, -45);
 		
 		addActor(bRight);
 		addActor(wrapper);
@@ -74,6 +84,7 @@ public class GameUI extends BasicUI {
 		addActor(mBar);
 		addActor(sBar);
 		addActor(message);
+		addActor(score);
 	}
 	
 	@Override
@@ -96,6 +107,8 @@ public class GameUI extends BasicUI {
 		
 		mBar.setScore(mShip);
 		sBar.setScore(sShip);
+		
+		score.setText( Integer.toString(world.getScore()) );
 		
 		if (bRight.isPressed()) {
 			world.getShip().setRotParameter(-1);
