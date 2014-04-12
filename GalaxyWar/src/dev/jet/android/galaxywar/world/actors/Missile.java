@@ -4,6 +4,9 @@ import dev.jet.android.galaxywar.utils.GeomUtil;
 
 public class Missile extends Entity {
 	
+	public static float scoreBonus = 1.0f;
+	public final static int DESTROY_SCORE = 10; 
+	
 	@Override
 	public void act(float delta) {
 		
@@ -11,6 +14,8 @@ public class Missile extends Entity {
 		
 		if (life < 0) {
 			
+			scoreBonus = 1.0f;
+
 			destroy();
 			return;
 		}
@@ -23,8 +28,12 @@ public class Missile extends Entity {
 				ast.destroy();
 				destroy();
 				
+				if (scoreBonus < 3.0) {
+					scoreBonus += 0.1;
+				} 
+				
 				world.explosion(this, ast);
-				world.deltaScore(+ 10);
+				world.deltaScore( (int) (DESTROY_SCORE*scoreBonus) );
 			}
 		}
 		

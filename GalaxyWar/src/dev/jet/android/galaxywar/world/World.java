@@ -12,6 +12,7 @@ import dev.jet.android.galaxywar.world.actors.Explosion;
 import dev.jet.android.galaxywar.world.actors.Missile;
 import dev.jet.android.galaxywar.world.actors.Shield;
 import dev.jet.android.galaxywar.world.actors.Ship;
+import dev.jet.android.galaxywar.world.actors.ShipShield;
 
 public class World extends Group {
 	
@@ -48,7 +49,7 @@ public class World extends Group {
 		ship = new Ship();
 		ship.create(this, media.getPicture("ship"));
 		
-		shield = new Shield();
+		shield = new ShipShield();
 		shield.create(this, media.getPicture("shield"));
 		shield.setDefended(ship);
 		
@@ -119,6 +120,8 @@ public class World extends Group {
 		
 		addActor(ship);
 		addActor(shield);
+		
+		Missile.scoreBonus = 1.0f;
 		
 		run();
 	}

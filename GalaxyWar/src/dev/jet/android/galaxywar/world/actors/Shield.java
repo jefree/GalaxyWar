@@ -9,9 +9,10 @@ public class Shield extends Entity {
 	}
 	
 	public void receiveDamage(float damage) {
-		
+	
 		if (life > damage) {
 			life -= damage;
+			
 		} else {
 			
 			damage -= life;

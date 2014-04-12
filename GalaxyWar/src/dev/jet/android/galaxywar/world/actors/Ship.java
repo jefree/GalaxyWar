@@ -17,7 +17,7 @@ public class Ship extends Entity {
 		
 		timeNewMissile += delta;
 		
-		if (timeNewMissile > 2.0) {
+		if (timeNewMissile > 1.5) {
 			deltaMissiles(+1);
 			timeNewMissile = 0;
 		}
