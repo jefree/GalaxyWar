@@ -75,7 +75,7 @@ public class GameUI extends BasicUI {
 		sBar.setPosition(25, media.getScreenHeight() - mBar.getHeight() - 5);
 		
 		ScreenUtil.centerTop(score, this, 0, -60);
-		ScreenUtil.top(message, this, 45, -45);
+		ScreenUtil.top(message, this, 45, -40);
 		
 		addActor(bRight);
 		addActor(wrapper);
