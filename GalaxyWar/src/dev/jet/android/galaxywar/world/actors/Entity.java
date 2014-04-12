@@ -1,5 +1,6 @@
 package dev.jet.android.galaxywar.world.actors;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -15,12 +16,14 @@ public class Entity extends Actor {
 	protected World world;
 	
 	protected Picture picture;
+	protected Sound sound;
 	private Rectangle rectangle;
 	
-	public void create(World _world, Picture _picture ) {
+	public void create(World _world, Picture _picture, Sound _sound) {
 		
 		world = _world;
 		picture = _picture;
+		sound = _sound;
 		
 		setWidth(picture.getWidth());
 		setHeight(picture.getHeight());
@@ -53,6 +56,10 @@ public class Entity extends Actor {
 	public void destroy() {
 		enable = false;
 		remove();
+	}
+	
+	public void playSound() {
+		sound.play();
 	}
 	
 	public void setEnable(boolean _enable) {

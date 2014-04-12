@@ -26,7 +26,7 @@ public class AsteroidsController extends GroupController<Asteroid> {
 	
 	public AsteroidsController(World world, Media media) {
 		
-		super(Asteroid.class, world, media.getPicture("asteroid"), MAX_ASTEROIDS_NUMBER);
+		super(Asteroid.class, world, media.getPicture("asteroid"), null, MAX_ASTEROIDS_NUMBER);
 		
 		genTime = ASTEROID_TIME_GENERATION;
 		deltaTime = 0;

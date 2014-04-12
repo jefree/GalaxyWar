@@ -1,5 +1,7 @@
 package dev.jet.android.galaxywar.world.actors;
 
+import com.badlogic.gdx.audio.Sound;
+
 import dev.jet.android.galaxywar.media.Picture;
 import dev.jet.android.galaxywar.utils.GeomUtil;
 import dev.jet.android.galaxywar.world.World;
@@ -13,8 +15,8 @@ public class Asteroid extends Entity {
 	private int MAX_DISTANCE_TO_SHIP; 
 	
 	@Override
-	public void create(World _world, Picture _picture) {
-		super.create(_world, _picture);
+	public void create(World _world, Picture _picture, Sound _sound) {
+		super.create(_world, _picture, _sound);
 		
 		MAX_DISTANCE_TO_SHIP = (int)(world.getWidth()*1.5);
 	}
