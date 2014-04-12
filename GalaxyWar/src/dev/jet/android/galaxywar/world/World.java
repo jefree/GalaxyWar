@@ -1,9 +1,6 @@
 package dev.jet.android.galaxywar.world;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
 
@@ -41,24 +38,27 @@ public class World extends Group {
 	
 	Entity back;
 	TapestryPicture background;
+	Music music;
 	
 	public World (Media media) {
 		
 		setWidth(media.getScreenWidth());
 		setHeight(media.getScreenHeight());
 		
+		state = STOP;
+		
 		offsetX = getWidth()/2;
 		offsetY = getHeight()/2;
 		
 		ship = new Ship();
-		ship.create(this, media.getPicture("ship"));
+		ship.create(this, media.getPicture("ship"), null);
 		
 		shield = new ShipShield();
-		shield.create(this, media.getPicture("shield"));
+		shield.create(this, media.getPicture("shield"), null);
 		shield.setDefended(ship);
 		
 		shipExplosion =  new Explosion();
-		shipExplosion.create(this, media.getPicture("explosion/ship/anim"));
+		shipExplosion.create(this, media.getPicture("explosion/ship/anim"), null);
 		shipExplosion.setDuration(3);
 		
 		asteroids = new AsteroidsController(this, media);
@@ -66,7 +66,10 @@ public class World extends Group {
 		explosions = new AstExplosionController(this, media);
 		
 		back = new Background();
-		back.create(this, media.getPicture("space"));
+		back.create(this, media.getPicture("space"), null);
+		
+		music = media.getMusic("sounds/music");
+		music.setLooping(true);
 		
 		addActor(back);
 		addActor(ship);
@@ -108,10 +111,15 @@ public class World extends Group {
 	
 	public void pause() {
 		state = PAUSE;
+		
+		music.pause();
 	}
 	
 	public void run() {
 		state = RUN;
+		
+		music.play();
+		
 	}
 	
 	public void reboot() {
@@ -126,6 +134,8 @@ public class World extends Group {
 		addActor(shield);
 		
 		Missile.scoreBonus = 1.0f;
+		
+		music.stop();
 		
 		run();
 	}
