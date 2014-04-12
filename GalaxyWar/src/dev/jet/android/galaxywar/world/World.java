@@ -1,10 +1,7 @@
 package dev.jet.android.galaxywar.world;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 
 import dev.jet.android.galaxywar.media.Media;
 import dev.jet.android.galaxywar.media.TapestryPicture;
@@ -36,8 +33,6 @@ public class World extends Group {
 	
 	private int state;
 	
-	Label message;
-	
 	Entity back;
 	TapestryPicture background;
 	
@@ -67,11 +62,6 @@ public class World extends Group {
 		back = new Background();
 		back.create(this, media.getPicture("space"));
 		
-		message = new Label("Version Beta 1.0 - Eve One", new LabelStyle(media.getFont("fonts/Comic Sans MS"), 
-				new Color(1,1,1,1)));
-		
-		message.setPosition(300, getHeight()-30);
-		
 		addActor(back);
 		addActor(ship);
 		addActor(shield);
@@ -79,8 +69,6 @@ public class World extends Group {
 		addActor(asteroids);	
 		addActor(missiles);
 		addActor(explosions);
-		
-		addActor(message);
 		
 	}
 	

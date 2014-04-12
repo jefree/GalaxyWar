@@ -1,13 +1,14 @@
 package dev.jet.android.galaxywar.ui;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 
 import dev.jet.android.galaxywar.main.screens.GameScreen;
 import dev.jet.android.galaxywar.media.Media;
@@ -23,6 +24,8 @@ public class GameUI extends BasicUI {
 	
 	MissileBar mBar;
 	ShieldBar sBar;
+	
+	Label message;
 	
 	World world;
 	GameScreen screen;
@@ -59,12 +62,18 @@ public class GameUI extends BasicUI {
 		mBar.setPosition(media.getScreenWidth() - mBar.getWidth() - 25, media.getScreenHeight() - mBar.getHeight() - 5);
 		sBar.setPosition(25, media.getScreenHeight() - mBar.getHeight() - 5);
 		
+		message = new Label("Eve One", new LabelStyle(media.getFont("fonts/Comic Sans MS"), 
+				new Color(0,0,0,1)));
+		
+		message.setPosition(45, getHeight()-40);
+		
 		addActor(bRight);
 		addActor(wrapper);
 		addActor(bSpeed);
 		addActor(bMissile);
 		addActor(mBar);
 		addActor(sBar);
+		addActor(message);
 	}
 	
 	@Override
