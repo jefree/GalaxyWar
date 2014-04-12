@@ -3,19 +3,26 @@ package dev.jet.android.galaxywar.media;
 import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
 public class Media {
 
 	HashMap<String, Picture> pictures;
 	HashMap<String, BitmapFont> fonts;
+	HashMap<String, Sound> sounds;
+	HashMap<String, Music> musics;
 	
 	int screenWidth;
 	int screenHeight;
 	
 	public Media(int w, int h) {
+		
 		pictures = new HashMap<String, Picture>();
 		fonts = new HashMap<String, BitmapFont>();
+		sounds = new HashMap<String, Sound>();
+		musics = new HashMap<String, Music>();
 		
 		screenWidth = w;
 		screenHeight = h;
@@ -51,6 +58,20 @@ public class Media {
 		}
 		
 		return pic;
+	}
+	
+	public void loadSound(String filename) {
+		String key = getKeyByFilename(filename);
+		Sound sound = Gdx.audio.newSound(Gdx.files.internal(filename));
+		
+		sounds.put(key, sound);
+	}
+	
+	public void loadMusic(String filename) {
+		String key = getKeyByFilename(filename);
+		Music music = Gdx.audio.newMusic(Gdx.files.internal(filename));
+		
+		musics.put(key, music);
 	}
 	
 	public void loadFont(String path) {
@@ -91,11 +112,20 @@ public class Media {
 		
 	}
 	
+	public Picture getPicture(String key) {
+		return pictures.get(key);
+	}
+	
+	public Sound getSound(String key) {
+		return sounds.get(key);
+	}
+	public Music getMusic(String key) {
+		return musics.get(key);
+	}
+	
 	public BitmapFont getFont(String key) {
 		return fonts.get(key);
 	}
 	
-	public Picture getPicture(String key) {
-		return pictures.get(key);
-	}
+	
 }
