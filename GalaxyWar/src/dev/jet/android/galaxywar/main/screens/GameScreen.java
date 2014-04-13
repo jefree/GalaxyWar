@@ -44,13 +44,13 @@ public class GameScreen extends AbstractScreen{
 		media.loadSinglePicture("missilesbar/warning.png");
 		
 		media.loadSinglePicture("end/back.png");
-		media.loadSinglePicture("end/againUp.png");
-		media.loadSinglePicture("end/againDown.png");
-		media.loadSinglePicture("end/exitUp.png");
-		media.loadSinglePicture("end/exitDown.png");
 		
-		media.loadSinglePicture("pause/runUp.png");
-		media.loadSinglePicture("pause/runDown.png");
+		media.loadSinglePicture("buttons/redUp.png");
+		media.loadSinglePicture("buttons/redDown.png");
+		media.loadSinglePicture("buttons/blackUp.png");
+		media.loadSinglePicture("buttons/blackDown.png");
+		media.loadSinglePicture("buttons/blueUp.png");
+		media.loadSinglePicture("buttons/blueDown.png");
 		
 		media.loadSinglePicture("shieldbar/edge.png");
 		media.loadSinglePicture("shieldbar/shield.png");
@@ -77,6 +77,10 @@ public class GameScreen extends AbstractScreen{
 		stage.addActor(gui);
 		
 		world.run();
+	}
+	
+	public void backMainMenu() {
+		game.setScreen(new MainScreen(game));
 	}
 	
 	public void showPause() {
