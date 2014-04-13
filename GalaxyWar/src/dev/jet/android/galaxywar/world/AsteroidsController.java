@@ -17,12 +17,15 @@ public class AsteroidsController extends GroupController<Asteroid> {
 	private static final float MAX_ASTEROID_SPEED = 100;
 	private static final float MIN_ASTEROID_SPEED = 70;
 	
+	private static final float INIT_GEN_TIME_LIMIT = 3.0f;
+	
 	private int GEN_RADIUS = 0;
 	private int DISP_RADIUS = 0;	
 	
-	
 	private float genTime;
 	private float deltaTime;
+	
+	private float initGenTime;
 	
 	public AsteroidsController(World world, Media media) {
 		
@@ -37,6 +40,11 @@ public class AsteroidsController extends GroupController<Asteroid> {
 	
 	@Override
 	public boolean shouldGenerate(float delta) {
+		
+		if (initGenTime <= INIT_GEN_TIME_LIMIT){
+			initGenTime += delta;
+			return false;
+		} 
 		
 		deltaTime += delta;
 		
@@ -77,5 +85,12 @@ public class AsteroidsController extends GroupController<Asteroid> {
 		ast.setPosition(astX, astY);
 		ast.setDirAngle((float) GeomUtil.getAngle(astX, astY, shipX, shipY));
 		ast.setSpeed((int)MathUtil.getRandom(MIN_ASTEROID_SPEED, MAX_ASTEROID_SPEED));
+	}
+	
+	@Override
+	public void reboot() {
+		super.reboot();
+		
+		initGenTime = 0.0f;
 	}
 }
