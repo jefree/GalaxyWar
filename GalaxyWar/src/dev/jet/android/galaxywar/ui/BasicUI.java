@@ -14,7 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import dev.jet.android.galaxywar.media.Media;
 
 public abstract class BasicUI extends Group {
-	Media media;
+	
+	protected Media media;
 	
 	public BasicUI(Media _media) {
 		

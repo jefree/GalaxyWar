@@ -3,9 +3,9 @@ package dev.jet.android.galaxywar.main.screens;
 import com.badlogic.gdx.Input.Keys;
 
 import dev.jet.android.galaxywar.main.GalaxyWar;
-import dev.jet.android.galaxywar.ui.EndUI;
-import dev.jet.android.galaxywar.ui.GameUI;
-import dev.jet.android.galaxywar.ui.PauseUI;
+import dev.jet.android.galaxywar.ui.game.EndUI;
+import dev.jet.android.galaxywar.ui.game.GameUI;
+import dev.jet.android.galaxywar.ui.game.PauseUI;
 import dev.jet.android.galaxywar.world.World;
 
 public class GameScreen extends AbstractScreen{
