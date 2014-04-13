@@ -16,9 +16,11 @@ public class PauseUI extends EndUI {
 				
 		run = BasicUI.createButton(media, "pause/run", "Volver al Juego", "fonts/Comic Sans MS");
 		
-		ScreenUtil.centered(run, this, 0, 100);
-		ScreenUtil.centered(again, this, 0, 0);
-		ScreenUtil.centered(exit, this, 0, -100);
+		title.setText("Pausado");
+		
+		ScreenUtil.centered(run, this, 0, 40);
+		
+		score.remove();
 		
 		addActor(run);
 	}
