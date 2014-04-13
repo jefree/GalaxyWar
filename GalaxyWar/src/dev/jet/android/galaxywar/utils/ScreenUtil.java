@@ -27,6 +27,11 @@ public class ScreenUtil {
 		child.translate(dx, dy);
 	}
 	
+	public static void right(Actor child, Actor parent, float dx, float dy) {
+		child.setX(parent.getWidth());
+		child.translate(dx, dy);
+	}
+	
 	public static void centerTop(Actor child, Actor parent, float dx, float dy) {
 		centeredX(child, parent, 0, 0);
 		top(child, parent, 0 , 0);
