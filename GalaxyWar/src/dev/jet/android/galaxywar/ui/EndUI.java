@@ -3,11 +3,9 @@ package dev.jet.android.galaxywar.ui;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
 import dev.jet.android.galaxywar.main.screens.GameScreen;
 import dev.jet.android.galaxywar.media.Media;
@@ -23,7 +21,10 @@ public class EndUI extends BasicUI {
 	
 	Actor again;
 	Actor exit;
-		
+	Label title;
+	Label score;
+	
+	
 	public EndUI(World _world, Media _media, GameScreen _screen) {
 		super(_media);
 		
@@ -31,16 +32,33 @@ public class EndUI extends BasicUI {
 		screen = _screen;
 		
 		back = new Image(media.getPicture("end/back").getTexture());
+		
 		again = BasicUI.createButton(media, "end/again", "Reintentar", "fonts/Comic Sans MS");
 		exit = BasicUI.createButton(media, "end/exit", "Salir", "fonts/Comic Sans MS");
+		title = new Label("GAME OVER", new LabelStyle(media.getFont("fonts/AmazDoom"), new Color(1,1,1,1)));
+		score = new Label("", new LabelStyle(media.getFont("fonts/AmazDoom"), new Color (0,0,0,1)));
+		
+		score.setText("Score: " + world.getScore());
+		score.setAlignment(Align.center);
+		score.setFontScale(1.5f);
+		
+		title.setFontScale(2.5f);
+		title.setAlignment(Align.center);
 		
 		ScreenUtil.centered(back, this, 0, 0);
-		ScreenUtil.centered(again, this, 0, 60);
-		ScreenUtil.centered(exit, this, 0, -60);
+		
+		ScreenUtil.centerTop(title, back, 0, -80);
+		ScreenUtil.centered(score, back, 0, 50);
+		
+		ScreenUtil.centered(again, back, 0, -60);
+		ScreenUtil.centered(exit, back, 0, -160);
 		
 		addActor(back);
+		addActor(title);
+		addActor(score);
 		addActor(again);
 		addActor(exit);
+		
 	}
 
 	@Override
