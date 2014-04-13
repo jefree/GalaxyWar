@@ -41,4 +41,8 @@ public abstract class Picture {
                 e.getWidth(), e.getHeight(), e.getScaleX(), e.getScaleY(), e.getRotation());
 		
 	}
+	
+	public void dispose() {
+		image.getTexture().dispose();
+	}
 }

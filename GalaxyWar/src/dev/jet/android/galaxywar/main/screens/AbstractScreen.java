@@ -57,13 +57,13 @@ public class AbstractScreen implements Screen, InputProcessor {
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
+		media.dispose();
 		
 	}
 
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
+		dispose();
 		
 	}
 	

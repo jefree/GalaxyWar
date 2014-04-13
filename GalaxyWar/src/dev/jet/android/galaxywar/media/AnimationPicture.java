@@ -36,4 +36,8 @@ public class AnimationPicture extends Picture {
 	public boolean isFinished(float time) {
 		return anim.isAnimationFinished(time);
 	}
+	
+	public void dispose() {
+		atlas.dispose();
+	}
 }

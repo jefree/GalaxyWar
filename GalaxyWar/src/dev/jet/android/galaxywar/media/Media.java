@@ -127,5 +127,23 @@ public class Media {
 		return fonts.get(key);
 	}
 	
-	
+	public void dispose() {
+		
+		for (Picture pic : pictures.values()) {
+			pic.dispose();
+		}
+		
+		for (BitmapFont font : fonts.values()) {
+			font.dispose();
+		}
+		
+		for (Music music : musics.values()) {
+			music.dispose();
+		}
+		
+		for (Sound sound : sounds.values()) {
+			sound.dispose();
+		}
+		
+	}
 }
