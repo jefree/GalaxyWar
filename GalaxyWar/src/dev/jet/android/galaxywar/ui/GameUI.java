@@ -109,8 +109,7 @@ public class GameUI extends BasicUI {
 		mBar.setScore(mShip);
 		sBar.setScore(sShip);
 		
-		//score.setText( Integer.toString(world.getScore()) );
-		score.setText(Gdx.graphics.getWidth() + " "+ Gdx.graphics.getHeight());
+		score.setText( Integer.toString(world.getScore()) );
 		
 		if (bRight.isPressed()) {
 			world.getShip().setRotParameter(-1);
