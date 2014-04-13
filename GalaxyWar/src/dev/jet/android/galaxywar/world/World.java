@@ -58,7 +58,7 @@ public class World extends Group {
 		shield.setDefended(ship);
 		
 		shipExplosion =  new Explosion();
-		shipExplosion.create(this, media.getPicture("explosion/ship/anim"), null);
+		shipExplosion.create(this, media.getPicture("explosion/ship/anim"), media.getSound("sounds/explosionShip"));
 		shipExplosion.setDuration(3);
 		
 		asteroids = new AsteroidsController(this, media);
@@ -87,7 +87,13 @@ public class World extends Group {
 		if (state == RUN && ship.getLife() < 0) {
 			
 			state = STOP;
+			
 			addActor(shipExplosion);
+			
+			music.setVolume(0.1f);
+			
+			shipExplosion.playSound();
+			
 			ship.remove();
 			shield.remove();
 		
@@ -118,6 +124,7 @@ public class World extends Group {
 	public void run() {
 		state = RUN;
 		
+		music.setVolume(0.3f);
 		music.play();
 		
 	}
