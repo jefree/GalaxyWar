@@ -33,8 +33,8 @@ public class EndUI extends BasicUI {
 		
 		back = new Image(media.getPicture("end/back").getTexture());
 		
-		again = BasicUI.createButton(media, "end/again", "Reintentar", "fonts/Comic Sans MS");
-		exit = BasicUI.createButton(media, "end/exit", "Salir", "fonts/Comic Sans MS");
+		again = BasicUI.createButton(media, "buttons/red", "Reintentar", "fonts/Comic Sans MS");
+		exit = BasicUI.createButton(media, "buttons/black", "Salir", "fonts/Comic Sans MS");
 		title = new Label("GAME OVER", new LabelStyle(media.getFont("fonts/AmazDoom"), new Color(1,1,1,1)));
 		score = new Label("", new LabelStyle(media.getFont("fonts/AmazDoom"), new Color (0,0,0,1)));
 		
@@ -75,7 +75,7 @@ public class EndUI extends BasicUI {
 			world.reboot();
 			screen.showGame();
 		} else if (a == exit) {
-			System.exit(0);
+			screen.backMainMenu();
 		}
 	}
 
