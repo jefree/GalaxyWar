@@ -53,7 +53,7 @@ public class GameUI extends BasicUI {
 		score = new Label("0", new LabelStyle(media.getFont("fonts/AmazDoom"),
 				new Color(1,1,1,1)));
 		
-		message = new Label("Eve One", new LabelStyle(media.getFont("fonts/Comic Sans MS"), 
+		message = new Label("Eve One - Beta", new LabelStyle(media.getFont("fonts/Comic Sans MS"), 
 				new Color(0,0,0,1)));
 		
 		Table wrapper = new Table();
