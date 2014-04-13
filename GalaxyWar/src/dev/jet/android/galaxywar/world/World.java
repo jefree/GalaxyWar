@@ -141,6 +141,7 @@ public class World extends Group {
 		addActor(shield);
 		
 		Missile.scoreBonus = 1.0f;
+		score = 0;
 		
 		music.stop();
 		
