@@ -23,7 +23,7 @@ public class GameUI extends BasicUI {
 	ImageButton bLeft;
 	
 	ImageButton bMissile;
-	ImageButton bSpeed;
+	//ImageButton bSpeed;
 	
 	MissileBar mBar;
 	ShieldBar sBar;
@@ -45,7 +45,7 @@ public class GameUI extends BasicUI {
 		bLeft = (ImageButton)BasicUI.createButton(media, "bArrow", "", "");
 		
 		bMissile = (ImageButton)BasicUI.createButton(media, "bMissile", "", "");
-		bSpeed = (ImageButton)BasicUI.createButton(media, "bSpeed", "", "");
+		//bSpeed = (ImageButton)BasicUI.createButton(media, "bSpeed", "", "");
 		
 		mBar = new MissileBar(media);
 		sBar = new ShieldBar(media);
@@ -70,7 +70,7 @@ public class GameUI extends BasicUI {
 		bRight.setPosition(media.getScreenWidth() - bRight.getWidth() - 25, 5);
 		
 		bMissile.setPosition(media.getScreenWidth()/2 + 80, 5);
-		bSpeed.setPosition(media.getScreenWidth()/2 - bSpeed.getWidth() - 80, 5);
+		//bSpeed.setPosition(media.getScreenWidth()/2 - bSpeed.getWidth() - 80, 5);
 		
 		mBar.setPosition(media.getScreenWidth() - mBar.getWidth() - 25, media.getScreenHeight() - mBar.getHeight() - 5);
 		sBar.setPosition(25, media.getScreenHeight() - mBar.getHeight() - 5);
@@ -80,7 +80,7 @@ public class GameUI extends BasicUI {
 		
 		addActor(bRight);
 		addActor(wrapper);
-		addActor(bSpeed);
+		//addActor(bSpeed);
 		addActor(bMissile);
 		addActor(mBar);
 		addActor(sBar);
