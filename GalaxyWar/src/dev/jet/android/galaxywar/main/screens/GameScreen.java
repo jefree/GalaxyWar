@@ -13,7 +13,6 @@ public class GameScreen extends AbstractScreen{
 	World world;
 	
 	GameUI gui;
-	EndUI eui;
 	PauseUI pui;
 	
 	public GameScreen (GalaxyWar _game) {
@@ -72,7 +71,6 @@ public class GameScreen extends AbstractScreen{
 		
 		world = new World(media);
 		gui = new GameUI(world, media, this);
-		eui = new EndUI(world, media, this);
 		pui = new PauseUI(world, media, this);
 		
 		stage.addActor(world);
@@ -86,6 +84,9 @@ public class GameScreen extends AbstractScreen{
 	}
 	
 	public void showEnd() {
+		
+		EndUI eui = new EndUI(world, media, this);
+		
 		gui.remove();
 		stage.addActor(eui);
 	}
