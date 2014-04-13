@@ -67,6 +67,7 @@ public class GameScreen extends AbstractScreen{
 		
 		media.loadSound("sounds/shot.mp3");
 		media.loadSound("sounds/explosionAst.mp3");
+		media.loadSound("sounds/explosionShip.mp3");
 		media.loadMusic("sounds/music.mp3");
 		
 		world = new World(media);
