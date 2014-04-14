@@ -1,28 +1,21 @@
 package dev.jet.android.galaxywar.media;
 
-import java.util.HashMap;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public class Media {
-
-	HashMap<String, Picture> pictures;
-	HashMap<String, BitmapFont> fonts;
-	HashMap<String, Sound> sounds;
-	HashMap<String, Music> musics;
+	
+	public Skin resources;
 	
 	int screenWidth;
 	int screenHeight;
 	
 	public Media(int w, int h) {
 		
-		pictures = new HashMap<String, Picture>();
-		fonts = new HashMap<String, BitmapFont>();
-		sounds = new HashMap<String, Sound>();
-		musics = new HashMap<String, Music>();
+		resources = new Skin();
 		
 		screenWidth = w;
 		screenHeight = h;
@@ -47,7 +40,7 @@ public class Media {
 			pic = (Picture)cls.newInstance();
 			pic.load(fileName);
 			
-			pictures.put(key, pic);
+			resources.add(key, pic, Picture.class);
 			
 		} catch (InstantiationException e) {
 			// TODO Auto-generated catch block
@@ -64,21 +57,21 @@ public class Media {
 		String key = getKeyByFilename(filename);
 		Sound sound = Gdx.audio.newSound(Gdx.files.internal(filename));
 		
-		sounds.put(key, sound);
+		resources.add(key, sound, Sound.class);
 	}
 	
 	public void loadMusic(String filename) {
 		String key = getKeyByFilename(filename);
 		Music music = Gdx.audio.newMusic(Gdx.files.internal(filename));
 		
-		musics.put(key, music);
+		resources.add(key, music, Music.class);
 	}
 	
 	public void loadFont(String path) {
 		BitmapFont font = new BitmapFont(Gdx.files.internal(path+"/font.fnt"), 
 				Gdx.files.internal(path+"/font.png"), false);
 		
-		fonts.put(path, font);
+		resources.add(path, font);
 	}
 	
 	public void loadAnimPicture(String fileName) {
@@ -113,37 +106,21 @@ public class Media {
 	}
 	
 	public Picture getPicture(String key) {
-		return pictures.get(key);
+		return resources.get(key, Picture.class);
 	}
 	
 	public Sound getSound(String key) {
-		return sounds.get(key);
+		return resources.get(key, Sound.class);
 	}
 	public Music getMusic(String key) {
-		return musics.get(key);
+		return resources.get(key, Music.class);
 	}
 	
 	public BitmapFont getFont(String key) {
-		return fonts.get(key);
+		return resources.getFont(key);
 	}
 	
 	public void dispose() {
-		
-		for (Picture pic : pictures.values()) {
-			pic.dispose();
-		}
-		
-		for (BitmapFont font : fonts.values()) {
-			font.dispose();
-		}
-		
-		for (Music music : musics.values()) {
-			music.dispose();
-		}
-		
-		for (Sound sound : sounds.values()) {
-			sound.dispose();
-		}
-		
+		resources.dispose();
 	}
 }
