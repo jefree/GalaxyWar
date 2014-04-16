@@ -56,7 +56,9 @@ public class Asteroid extends Entity {
 		
 		remove();
 		
-		damage = 20;
+	}
+	public void setDamage(float _damage) {
+		damage = _damage;
 	}
 	
 	public float getDamage() {

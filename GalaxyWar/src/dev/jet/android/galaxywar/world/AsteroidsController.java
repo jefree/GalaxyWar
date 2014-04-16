@@ -4,6 +4,7 @@ import dev.jet.android.galaxywar.media.Media;
 import dev.jet.android.galaxywar.utils.GeomUtil;
 import dev.jet.android.galaxywar.utils.MathUtil;
 import dev.jet.android.galaxywar.world.actors.Asteroid;
+import dev.jet.android.galaxywar.world.state.AsteroidState;
 
 public class AsteroidsController extends GroupController<Asteroid> {
 	
@@ -11,8 +12,6 @@ public class AsteroidsController extends GroupController<Asteroid> {
 	
 	private static final int MAX_ASTEROIDS_ROTATTION_SPEED = 2;
 	private static final int MIN_ASTEROIDS_ROTATTION_SPEED = 1;
-	
-	private static final float ASTEROID_TIME_GENERATION = 1.0f;
 	
 	private static final float MAX_ASTEROID_SPEED = 100;
 	private static final float MIN_ASTEROID_SPEED = 70;
@@ -27,15 +26,23 @@ public class AsteroidsController extends GroupController<Asteroid> {
 	
 	private float initGenTime;
 	
+	private AsteroidState state;
+	
 	public AsteroidsController(World world, Media media) {
 		
 		super(Asteroid.class, world, media.getPicture("asteroid"), null, MAX_ASTEROIDS_NUMBER);
 		
-		genTime = ASTEROID_TIME_GENERATION;
+		state = AsteroidState.initial;
+		
+		genTime = state.getGenTime();
 		deltaTime = 0;
 		
 		GEN_RADIUS = (int)(world.getWidth()/2 + media.getPicture("asteroid").getWidth()/2);
 		DISP_RADIUS = (int)(GEN_RADIUS*0.3f); 
+	}
+	
+	public void setState(AsteroidState _state) {
+		state = _state;
 	}
 	
 	@Override
@@ -81,6 +88,8 @@ public class AsteroidsController extends GroupController<Asteroid> {
 		
 		astX += (int)delta[0];
 		astY += (int)delta[1];
+		
+		ast.setDamage(state.getDamage());
 		
 		ast.setPosition(astX, astY);
 		ast.setDirAngle((float) GeomUtil.getAngle(astX, astY, shipX, shipY));

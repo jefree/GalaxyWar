@@ -3,10 +3,12 @@ package dev.jet.android.galaxywar.world;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.utils.Timer;
 
 import dev.jet.android.galaxywar.media.Media;
 import dev.jet.android.galaxywar.media.TapestryPicture;
 import dev.jet.android.galaxywar.utils.GeomUtil;
+import dev.jet.android.galaxywar.utils.MathUtil;
 import dev.jet.android.galaxywar.world.actors.Asteroid;
 import dev.jet.android.galaxywar.world.actors.Entity;
 import dev.jet.android.galaxywar.world.actors.Explosion;
@@ -14,6 +16,7 @@ import dev.jet.android.galaxywar.world.actors.Missile;
 import dev.jet.android.galaxywar.world.actors.Shield;
 import dev.jet.android.galaxywar.world.actors.Ship;
 import dev.jet.android.galaxywar.world.actors.ShipShield;
+import dev.jet.android.galaxywar.world.state.AsteroidState;
 
 public class World extends Group {
 	
@@ -35,6 +38,8 @@ public class World extends Group {
 	
 	private int state;
 	private int score;
+	
+	private int gameTime;
 	
 	Entity back;
 	TapestryPicture background;
@@ -69,7 +74,9 @@ public class World extends Group {
 		back.create(this, media.getPicture("space"), null);
 		
 		music = media.getMusic("sounds/music");
-		music.setLooping(true);
+		music.setLooping(true); 
+		
+		setTimers();
 		
 		addActor(back);
 		addActor(ship);
@@ -107,6 +114,15 @@ public class World extends Group {
 		} 
 		
 		if (state != PAUSE) {
+			
+			gameTime += delta;
+			
+			if (gameTime > MathUtil.toSeconds(1, 0)) {
+				asteroids.setState(AsteroidState.hard);
+			
+			} else if (gameTime > MathUtil.toSeconds(0, 30)){
+				asteroids.setState(AsteroidState.medium);
+			}
 			
 			super.act(delta);
 			
@@ -164,6 +180,26 @@ public class World extends Group {
 			ship.deltaMissiles(-1);
 		}
 	}
+	
+	public void setTimers () {
+		
+		Timer.Task medium = new Timer.Task() {
+			@Override
+			public void run() {
+				asteroids.setState(AsteroidState.medium);
+			}
+		};
+		
+		Timer.Task hard = new Timer.Task() {
+			@Override
+			public void run() {
+				asteroids.setState(AsteroidState.hard);
+			}
+		};
+		
+		Timer.schedule(medium, MathUtil.toSeconds(0, 45));
+		Timer.schedule(hard, MathUtil.toSeconds(1, 30));
+	} 
 	
 	public void deltaScore(int score) {
 		this.score += score;
