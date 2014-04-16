@@ -124,7 +124,7 @@ public class World extends Group {
 	public void run() {
 		state = RUN;
 		
-		music.setVolume(0.3f);
+		music.setVolume(0.5f);
 		music.play();
 		
 	}

@@ -1,11 +1,8 @@
 package dev.jet.android.galaxywar.main.screens;
 
-import android.graphics.Picture;
-
 import com.badlogic.gdx.Input.Keys;
 
 import dev.jet.android.galaxywar.main.GalaxyWar;
-import dev.jet.android.galaxywar.media.SinglePicture;
 import dev.jet.android.galaxywar.ui.MainMenuUI;
 
 public class MainScreen extends AbstractScreen {
@@ -32,7 +29,7 @@ public class MainScreen extends AbstractScreen {
 		media.loadFont("fonts/Complex");
 		media.loadFont("fonts/AmazDoom");
 		
-		System.out.println(media.resources.has("main/back", SinglePicture.class));
+		media.loadMusic("sounds/main.mp3");
 		
 		menu = new MainMenuUI(media, this);
 		

@@ -21,7 +21,9 @@ public class AstExplosionController extends GroupController<Explosion>{
 	public void initEntity(Explosion entity) {
 		entity.reboot();	
 		entity.setDuration(0.5f);
-		entity.playSound();
+		
+		long idSound = entity.playSound();
+		entity.getSound().setVolume(idSound, 0.3f);
 	}
 
 }

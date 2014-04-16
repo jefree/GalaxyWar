@@ -1,5 +1,6 @@
 package dev.jet.android.galaxywar.ui;
 
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -19,6 +20,8 @@ public class MainMenuUI extends BasicUI {
 	Actor single;
 	Actor multi;
 	Actor options;
+	
+	Music music;
 	
 	MainScreen main;
 	
@@ -41,6 +44,12 @@ public class MainMenuUI extends BasicUI {
 		ScreenUtil.right(single, back, -single.getWidth() - 25, 180);
 		ScreenUtil.right(multi, back, -multi.getWidth() - 25, 90);
 		ScreenUtil.right(options, back, -options.getWidth() - 25, 0);
+		
+		music = media.getMusic("sounds/main");
+		
+		music.setLooping(true);
+		music.play();
+		
 		
 		addActor(back);
 		addActor(single);
@@ -65,5 +74,4 @@ public class MainMenuUI extends BasicUI {
 		}
 		
 	}
-	
 }

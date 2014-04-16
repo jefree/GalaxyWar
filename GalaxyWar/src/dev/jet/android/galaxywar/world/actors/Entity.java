@@ -58,8 +58,12 @@ public class Entity extends Actor {
 		remove();
 	}
 	
-	public void playSound() {
-		sound.play();
+	public Sound getSound() {
+		return sound;
+	}
+	
+	public long playSound() {
+		return sound.play();
 	}
 	
 	public void setEnable(boolean _enable) {

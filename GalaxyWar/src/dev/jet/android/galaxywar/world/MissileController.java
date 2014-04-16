@@ -35,7 +35,8 @@ public class MissileController extends GroupController<Missile> {
 		missile.setSpeed(MISSILE_SPEED + world.getShip().getSpeed());
 		missile.setLife(MISSILE_LIFE);
 		
-		missile.playSound();
+		long idSound = missile.playSound();
+		missile.getSound().setVolume(idSound, 0.5f);
 		
 	}
 
