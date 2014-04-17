@@ -16,6 +16,7 @@ import dev.jet.android.galaxywar.media.Media;
 import dev.jet.android.galaxywar.ui.BasicUI;
 import dev.jet.android.galaxywar.utils.ScreenUtil;
 import dev.jet.android.galaxywar.world.World;
+import dev.jet.android.galaxywar.world.WorldState;
 
 public class GameUI extends BasicUI {
 	
@@ -91,11 +92,11 @@ public class GameUI extends BasicUI {
 	@Override
 	public void act(float delta) {
 		
-		if (world.getState() == World.PAUSE) {
+		if (world.getState() == WorldState.PAUSE) {
 			return;
 		}
 		
-		if (world.getState() == World.END) {
+		if (world.getState() == WorldState.END) {
 			screen.showEnd();
 		}
 		

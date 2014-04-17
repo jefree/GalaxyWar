@@ -32,9 +32,6 @@ public class AsteroidsController extends GroupController<Asteroid> {
 		
 		super(Asteroid.class, world, media.getPicture("asteroid"), null, MAX_ASTEROIDS_NUMBER);
 		
-		state = AsteroidState.initial;
-		
-		genTime = state.getGenTime();
 		deltaTime = 0;
 		
 		GEN_RADIUS = (int)(world.getWidth()/2 + media.getPicture("asteroid").getWidth()/2);
@@ -43,6 +40,8 @@ public class AsteroidsController extends GroupController<Asteroid> {
 	
 	public void setState(AsteroidState _state) {
 		state = _state;
+		
+		genTime = state.getGenTime();
 	}
 	
 	@Override

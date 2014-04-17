@@ -3,14 +3,19 @@ package dev.jet.android.galaxywar.world.actors;
 public class Shield extends Entity {
 	
 	Entity defended;
+	float regeneration;
 	
 	public void setDefended(Entity e) {
 		defended = e;
 	}
 	
+	public void setRegeneration(float reg) {
+		regeneration = reg;
+	}
+	
 	public void receiveDamage(float damage) {
 	
-		if (life > damage) {
+		/*if (life > damage) {
 			life -= damage;
 			
 		} else {
@@ -19,7 +24,7 @@ public class Shield extends Entity {
 			life = 0;
 			
 			defended.life -= damage;
-		}
+		}*/
 	}
 	
 	@Override
@@ -29,7 +34,7 @@ public class Shield extends Entity {
 		rotate(45*delta);
 		
 		if (life < 100) {	
-			life += 5*delta;
+			life += regeneration*delta;
 		}
 		
 		for (Asteroid ast : world.getAsteroids()){

@@ -6,7 +6,6 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.utils.Timer;
 
 import dev.jet.android.galaxywar.media.Media;
-import dev.jet.android.galaxywar.media.TapestryPicture;
 import dev.jet.android.galaxywar.utils.GeomUtil;
 import dev.jet.android.galaxywar.utils.MathUtil;
 import dev.jet.android.galaxywar.world.actors.Asteroid;
@@ -16,49 +15,45 @@ import dev.jet.android.galaxywar.world.actors.Missile;
 import dev.jet.android.galaxywar.world.actors.Shield;
 import dev.jet.android.galaxywar.world.actors.Ship;
 import dev.jet.android.galaxywar.world.actors.ShipShield;
-import dev.jet.android.galaxywar.world.state.AsteroidState;
+
 
 public class World extends Group {
 	
-	public static int RUN = 0;
-	public static int PAUSE = 1;
-	public static int STOP = 2;
-	public static int END = 3;
-	
 	private Ship ship;
-	private Shield shield;
+	private ShipShield shield;
 	private Explosion shipExplosion;
 	
 	private MissileController missiles;
 	private AsteroidsController asteroids;
 	private AstExplosionController explosions;
 	
+	private WorldState status;
+	
+	private Entity back;
+	private Music music;
+	
 	private float offsetX;
 	private float offsetY;
 	
-	private int state;
 	private int score;
 	
-	private int gameTime;
-	
-	Entity back;
-	TapestryPicture background;
-	Music music;
 	
 	public World (Media media) {
 		
 		setWidth(media.getScreenWidth());
 		setHeight(media.getScreenHeight());
 		
-		state = STOP;
-		
 		offsetX = getWidth()/2;
 		offsetY = getHeight()/2;
+		
+		status = new WorldState(this);
+		status.state = WorldState.STOP;
 		
 		ship = new Ship();
 		ship.create(this, media.getPicture("ship"), null);
 		
 		shield = new ShipShield();
+		shield.setState(status.shieldInitial);
 		shield.create(this, media.getPicture("shield"), null);
 		shield.setDefended(ship);
 		
@@ -67,6 +62,8 @@ public class World extends Group {
 		shipExplosion.setDuration(3);
 		
 		asteroids = new AsteroidsController(this, media);
+		asteroids.setState(status.astInitial);
+		
 		missiles = new MissileController(this, media);	
 		explosions = new AstExplosionController(this, media);
 		
@@ -91,9 +88,9 @@ public class World extends Group {
 	@Override
 	public void act(float delta) {
 		
-		if (state == RUN && ship.getLife() < 0) {
+		if (status.state == WorldState.RUN && ship.getLife() < 0) {
 			
-			state = STOP;
+			status.state = WorldState.STOP;
 			
 			addActor(shipExplosion);
 			
@@ -104,25 +101,16 @@ public class World extends Group {
 			ship.remove();
 			shield.remove();
 		
-		} else if(state == STOP) { 
+		} else if(status.state == WorldState.STOP) { 
 			
 			shipExplosion.setPosition(ship.getX(), ship.getY());
 			
 			if(shipExplosion.isFinished()) {
-				state = END;
+				status.state = WorldState.END;
 			}
 		} 
 		
-		if (state != PAUSE) {
-			
-			gameTime += delta;
-			
-			if (gameTime > MathUtil.toSeconds(1, 0)) {
-				asteroids.setState(AsteroidState.hard);
-			
-			} else if (gameTime > MathUtil.toSeconds(0, 30)){
-				asteroids.setState(AsteroidState.medium);
-			}
+		if (status.state != WorldState.PAUSE) {
 			
 			super.act(delta);
 			
@@ -132,13 +120,13 @@ public class World extends Group {
 	}
 	
 	public void pause() {
-		state = PAUSE;
+		status.state = WorldState.PAUSE;
 		
 		music.pause();
 	}
 	
 	public void run() {
-		state = RUN;
+		status.state = WorldState.RUN;
 		
 		music.setVolume(0.5f);
 		music.play();
@@ -186,19 +174,20 @@ public class World extends Group {
 		Timer.Task medium = new Timer.Task() {
 			@Override
 			public void run() {
-				asteroids.setState(AsteroidState.medium);
+				asteroids.setState(status.astMedium);
 			}
 		};
 		
 		Timer.Task hard = new Timer.Task() {
 			@Override
 			public void run() {
-				asteroids.setState(AsteroidState.hard);
+				asteroids.setState(status.astHard);
+				shield.setState(status.shieldHard);
 			}
 		};
 		
-		Timer.schedule(medium, MathUtil.toSeconds(0, 45));
-		Timer.schedule(hard, MathUtil.toSeconds(1, 30));
+		Timer.schedule(medium, MathUtil.toSeconds(0, 15));
+		Timer.schedule(hard, MathUtil.toSeconds(0, 30));
 	} 
 	
 	public void deltaScore(int score) {
@@ -234,6 +223,6 @@ public class World extends Group {
 	}
 	
 	public int getState() {
-		return state;
+		return status.state;
 	}
 }

@@ -7,6 +7,7 @@ import dev.jet.android.galaxywar.ui.game.EndUI;
 import dev.jet.android.galaxywar.ui.game.GameUI;
 import dev.jet.android.galaxywar.ui.game.PauseUI;
 import dev.jet.android.galaxywar.world.World;
+import dev.jet.android.galaxywar.world.WorldState;
 
 public class GameScreen extends AbstractScreen{
 	
@@ -102,7 +103,7 @@ public class GameScreen extends AbstractScreen{
 		stage.addActor(world);
 		stage.addActor(gui);
 		
-		 if(world.getState() == World.PAUSE){
+		 if(world.getState() == WorldState.PAUSE){
 			 world.run();
 		 }
 	}
@@ -112,11 +113,11 @@ public class GameScreen extends AbstractScreen{
 		
 		if (key == Keys.BACK) {
 			
-			if (world.getState() == World.RUN){
+			if (world.getState() == WorldState.RUN){
 				world.pause();
 				showPause();
 			
-			} else if (world.getState() == World.PAUSE) {
+			} else if (world.getState() == WorldState.PAUSE) {
 				showGame();
 			}
 		}
