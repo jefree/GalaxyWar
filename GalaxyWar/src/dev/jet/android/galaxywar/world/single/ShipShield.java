@@ -1,6 +1,7 @@
-package dev.jet.android.galaxywar.world.actors;
+package dev.jet.android.galaxywar.world.single;
 
-import dev.jet.android.galaxywar.world.state.ShipShieldState;
+import dev.jet.android.galaxywar.world.actors.Shield;
+import dev.jet.android.galaxywar.world.single.state.ShipShieldState;
 
 public class ShipShield extends Shield {
 	
@@ -27,7 +28,7 @@ public class ShipShield extends Shield {
 	public void act(float delta) {
 		super.act(delta);
 		
-		state.getBonus().increaseBonus(delta);
+		state.getBonus().increase(delta);
 		state.getBonus().apply(delta);
 	}
 	

@@ -1,4 +1,4 @@
-package dev.jet.android.galaxywar.world.state;
+package dev.jet.android.galaxywar.world.single.state;
 
 import dev.jet.android.galaxywar.world.ScoreBonification;
 

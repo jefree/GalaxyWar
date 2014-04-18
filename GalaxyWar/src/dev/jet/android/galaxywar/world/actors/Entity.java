@@ -31,8 +31,6 @@ public class Entity extends Actor {
 		setOrigin(getWidth()/2, getHeight()/2);
 		
 		rectangle = new Rectangle();
-		
-		reboot();
 	}
 	
 	public Rectangle getRectangle() {

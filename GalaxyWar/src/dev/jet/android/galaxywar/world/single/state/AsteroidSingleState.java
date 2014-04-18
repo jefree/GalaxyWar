@@ -1,6 +1,6 @@
-package dev.jet.android.galaxywar.world.state;
+package dev.jet.android.galaxywar.world.single.state;
 
-public class AsteroidState {
+public class AsteroidSingleState {
 		
 	float damage;
 	float genTime;

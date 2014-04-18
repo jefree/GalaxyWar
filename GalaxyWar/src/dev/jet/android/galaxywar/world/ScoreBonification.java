@@ -16,8 +16,14 @@ public class ScoreBonification {
 	
 	World world;
 	
-	public ScoreBonification(World _world) {
+	public ScoreBonification(World _world, float _score, float delta, float max, float tBonus, float tIncrease ) {
 		world = _world;
+		
+		score = _score;
+		deltaBonus = delta;
+		maxScoreBonus = max;
+		timeBonusLimit = tBonus;
+		timeIncreaseLimit = tIncrease;
 	}
 	
 	public void apply(float deltaTime) {
@@ -25,13 +31,16 @@ public class ScoreBonification {
 		timeBonus += deltaTime;
 		
 		if (timeBonus >= timeBonusLimit) {
+			
+			System.out.println("gano: "+ score*scoreBonus);
+			
 			world.deltaScore( (int) (score*scoreBonus) );
 			timeBonus = 0;
 			
 		}
 	}
 	
-	public void increaseBonus(float deltaTime) {
+	public void increase(float deltaTime) {
 		
 		timeIncrease += deltaTime;
 		
@@ -50,25 +59,4 @@ public class ScoreBonification {
 		timeIncrease = 0.0f;
 		timeBonus = 0.0f;
 	}
-	
-	public void setTimeBonusLimit(float timeBonusLimit) {
-		this.timeBonusLimit = timeBonusLimit;
-	}
-	
-	public void setTimeIncreaseLimit(float timeIncreaseLimit) {
-		this.timeIncreaseLimit = timeIncreaseLimit;
-	}
-
-	public void setMaxScoreBonus(float maxScoreBonus) {
-		this.maxScoreBonus = maxScoreBonus;
-	}
-	
-	public void setDeltaBonus(float deltaBonus) {
-		this.deltaBonus = deltaBonus;
-	}
-	
-	public void setScore(float score) {
-		this.score = score;
-	}
-	
 }

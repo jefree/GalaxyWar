@@ -7,7 +7,8 @@ import dev.jet.android.galaxywar.ui.game.EndUI;
 import dev.jet.android.galaxywar.ui.game.GameUI;
 import dev.jet.android.galaxywar.ui.game.PauseUI;
 import dev.jet.android.galaxywar.world.World;
-import dev.jet.android.galaxywar.world.WorldState;
+import dev.jet.android.galaxywar.world.single.WorldSingle;
+import dev.jet.android.galaxywar.world.single.WorldStateSingle;
 
 public class GameScreen extends AbstractScreen{
 	
@@ -70,14 +71,14 @@ public class GameScreen extends AbstractScreen{
 		media.loadSound("sounds/explosionShip.mp3");
 		media.loadMusic("sounds/music.mp3");
 		
-		world = new World(media);
+		world = new WorldSingle(media);
 		gui = new GameUI(world, media, this);
 		pui = new PauseUI(world, media, this);
 		
 		stage.addActor(world);
 		stage.addActor(gui);
 		
-		world.run();
+		world.reboot();
 	}
 	
 	public void backMainMenu() {
@@ -103,7 +104,7 @@ public class GameScreen extends AbstractScreen{
 		stage.addActor(world);
 		stage.addActor(gui);
 		
-		 if(world.getState() == WorldState.PAUSE){
+		 if(world.getState() == WorldStateSingle.PAUSE){
 			 world.run();
 		 }
 	}
@@ -113,11 +114,11 @@ public class GameScreen extends AbstractScreen{
 		
 		if (key == Keys.BACK) {
 			
-			if (world.getState() == WorldState.RUN){
+			if (world.getState() == WorldStateSingle.RUN){
 				world.pause();
 				showPause();
 			
-			} else if (world.getState() == WorldState.PAUSE) {
+			} else if (world.getState() == WorldStateSingle.PAUSE) {
 				showGame();
 			}
 		}

@@ -1,6 +1,8 @@
-package dev.jet.android.galaxywar.world;
+package dev.jet.android.galaxywar.world.single;
 
 import dev.jet.android.galaxywar.media.Media;
+import dev.jet.android.galaxywar.world.GroupController;
+import dev.jet.android.galaxywar.world.World;
 import dev.jet.android.galaxywar.world.actors.Explosion;
 
 public class AstExplosionController extends GroupController<Explosion>{

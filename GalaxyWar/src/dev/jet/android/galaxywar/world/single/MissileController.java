@@ -1,11 +1,13 @@
-package dev.jet.android.galaxywar.world;
+package dev.jet.android.galaxywar.world.single;
 
 import dev.jet.android.galaxywar.media.Media;
 import dev.jet.android.galaxywar.utils.GeomUtil;
+import dev.jet.android.galaxywar.world.GroupController;
+import dev.jet.android.galaxywar.world.World;
 import dev.jet.android.galaxywar.world.actors.Missile;
 import dev.jet.android.galaxywar.world.actors.Ship;
 
-public class MissileController extends GroupController<Missile> {
+public class MissileController extends GroupController<MissileSingle> {
 
 	public static final int MAX_MISSILES_NUMBER = 7;
 	
@@ -14,7 +16,7 @@ public class MissileController extends GroupController<Missile> {
 	
 	public MissileController(World world, Media media){
 		
-		super(Missile.class, world, media.getPicture("missile"), media.getSound("sounds/shot"), MAX_MISSILES_NUMBER);
+		super(MissileSingle.class, world, media.getPicture("missile"), media.getSound("sounds/shot"), MAX_MISSILES_NUMBER);
 	}
 	
 	@Override
@@ -23,7 +25,7 @@ public class MissileController extends GroupController<Missile> {
 	}
 
 	@Override
-	public void initEntity(Missile missile) {
+	public void initEntity(MissileSingle missile) {
 		
 		Ship ship = getWorld().getShip();
 		float delta[] = GeomUtil.getSides(ship.getHeight()/2 + missile.getHeight()/2, ship.getRotation());
@@ -39,5 +41,11 @@ public class MissileController extends GroupController<Missile> {
 		missile.getSound().setVolume(idSound, 0.5f);
 		
 	}
-
+	
+	@Override
+	public void reboot() {
+		super.reboot();
+		
+		MissileSingle.bonus.reboot();
+	}
 }

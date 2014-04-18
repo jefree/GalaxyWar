@@ -14,8 +14,8 @@ public class Shield extends Entity {
 	}
 	
 	public void receiveDamage(float damage) {
-	
-		/*if (life > damage) {
+		
+		if (life > damage) {
 			life -= damage;
 			
 		} else {
@@ -24,7 +24,7 @@ public class Shield extends Entity {
 			life = 0;
 			
 			defended.life -= damage;
-		}*/
+		}
 	}
 	
 	@Override

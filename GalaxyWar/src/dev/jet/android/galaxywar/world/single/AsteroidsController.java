@@ -1,12 +1,13 @@
-package dev.jet.android.galaxywar.world;
+package dev.jet.android.galaxywar.world.single;
 
 import dev.jet.android.galaxywar.media.Media;
 import dev.jet.android.galaxywar.utils.GeomUtil;
 import dev.jet.android.galaxywar.utils.MathUtil;
-import dev.jet.android.galaxywar.world.actors.Asteroid;
-import dev.jet.android.galaxywar.world.state.AsteroidState;
+import dev.jet.android.galaxywar.world.GroupController;
+import dev.jet.android.galaxywar.world.World;
+import dev.jet.android.galaxywar.world.single.state.AsteroidSingleState;
 
-public class AsteroidsController extends GroupController<Asteroid> {
+public class AsteroidsController extends GroupController<AsteroidSingle> {
 	
 	private static final int MAX_ASTEROIDS_NUMBER = 25;
 	
@@ -26,11 +27,11 @@ public class AsteroidsController extends GroupController<Asteroid> {
 	
 	private float initGenTime;
 	
-	private AsteroidState state;
+	private AsteroidSingleState state;
 	
 	public AsteroidsController(World world, Media media) {
 		
-		super(Asteroid.class, world, media.getPicture("asteroid"), null, MAX_ASTEROIDS_NUMBER);
+		super(AsteroidSingle.class, world, media.getPicture("asteroid"), null, MAX_ASTEROIDS_NUMBER);
 		
 		deltaTime = 0;
 		
@@ -38,7 +39,7 @@ public class AsteroidsController extends GroupController<Asteroid> {
 		DISP_RADIUS = (int)(GEN_RADIUS*0.3f); 
 	}
 	
-	public void setState(AsteroidState _state) {
+	public void setState(AsteroidSingleState _state) {
 		state = _state;
 		
 		genTime = state.getGenTime();
@@ -63,7 +64,7 @@ public class AsteroidsController extends GroupController<Asteroid> {
 	}
 
 	@Override
-	public void initEntity(Asteroid ast) {
+	public void initEntity(AsteroidSingle ast) {
 		
 		int astX, astY, shipX, shipY;
 		
@@ -88,7 +89,7 @@ public class AsteroidsController extends GroupController<Asteroid> {
 		astX += (int)delta[0];
 		astY += (int)delta[1];
 		
-		ast.setDamage(state.getDamage());
+		ast.setDamage( (int)state.getDamage());
 		
 		ast.setPosition(astX, astY);
 		ast.setDirAngle((float) GeomUtil.getAngle(astX, astY, shipX, shipY));
