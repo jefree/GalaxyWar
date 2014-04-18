@@ -1,6 +1,7 @@
 package dev.jet.android.galaxywar.world.single.state;
 
-import dev.jet.android.galaxywar.world.ScoreBonification;
+import dev.jet.android.galaxywar.world.single.ScoreBonification;
+
 
 public class ShipShieldState {
 	

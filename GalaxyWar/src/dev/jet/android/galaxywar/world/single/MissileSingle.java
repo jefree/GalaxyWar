@@ -1,6 +1,5 @@
 package dev.jet.android.galaxywar.world.single;
 
-import dev.jet.android.galaxywar.world.ScoreBonification;
 import dev.jet.android.galaxywar.world.actors.Missile;
 
 public class MissileSingle extends Missile {

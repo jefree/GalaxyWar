@@ -4,7 +4,6 @@ import com.badlogic.gdx.utils.Timer;
 
 import dev.jet.android.galaxywar.media.Media;
 import dev.jet.android.galaxywar.utils.MathUtil;
-import dev.jet.android.galaxywar.world.ScoreBonification;
 import dev.jet.android.galaxywar.world.World;
 import dev.jet.android.galaxywar.world.single.state.AsteroidSingleState;
 import dev.jet.android.galaxywar.world.single.state.ShipShieldState;

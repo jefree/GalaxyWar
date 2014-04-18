@@ -1,4 +1,6 @@
-package dev.jet.android.galaxywar.world;
+package dev.jet.android.galaxywar.world.single;
+
+import dev.jet.android.galaxywar.world.World;
 
 public class ScoreBonification {
 	
@@ -57,6 +59,5 @@ public class ScoreBonification {
 	public void reboot() {
 		scoreBonus = 1.0f;
 		timeIncrease = 0.0f;
-		timeBonus = 0.0f;
 	}
 }
