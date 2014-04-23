@@ -12,8 +12,8 @@ public abstract class GroupController <T extends Entity> extends Group {
 	private T[] group;
 	protected World world;
 	
-	public abstract boolean shouldGenerate(float delta);
-	public abstract void initEntity(T entity);
+	protected abstract boolean shouldGenerate(float delta);
+	protected abstract void initEntity(T entity);
 	
 	public GroupController(Class <T> tClass, World _world, Picture _pic, Sound _sound, int groupSize) {
 		

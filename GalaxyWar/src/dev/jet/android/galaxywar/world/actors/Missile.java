@@ -2,23 +2,34 @@ package dev.jet.android.galaxywar.world.actors;
 
 import dev.jet.android.galaxywar.utils.GeomUtil;
 
-public class Missile extends Entity {
+public abstract class Missile extends Entity {
 	
-	public static float scoreBonus = 1.0f;
-	public final static int DESTROY_SCORE = 10; 
+	public abstract void onAstCollision(float delta);
+	public abstract void onLifeZero(float delta);
 	
 	@Override
 	public void act(float delta) {
 		
 		super.act(delta);
 		
-		if (life < 0) {
+		if (life <= 0) {
 			
-			scoreBonus = 1.0f;
+			onLifeZero(delta);
 
 			destroy();
 			return;
 		}
+		
+		float speed[] = GeomUtil.getSides(getSpeed()*delta, getRotation());
+		
+		translate(speed[0], speed[1]);
+		
+		doAstCollision(delta);
+		
+		life -= delta;
+	}
+	
+	public void doAstCollision (float delta) {
 		
 		Asteroid[] asteroids = world.getAsteroids(); 
 		
@@ -27,25 +38,13 @@ public class Missile extends Entity {
 			if (this.collide(ast)) {	
 				ast.destroy();
 				destroy();
-				
-				if (scoreBonus < 3.0) {
-					scoreBonus += 0.1;
-				} 
+
+				onAstCollision(delta);
 				
 				world.explosion(this, ast);
-				world.deltaScore( (int) (DESTROY_SCORE*scoreBonus) );
+				
 			}
-		}
-		
-		float speed[] = GeomUtil.getSides(getSpeed()*delta, getRotation());
-		
-		translate(speed[0], speed[1]);
-		
-		life -= delta;
-	}
-	
-	public void destroy() {
-		super.destroy();
+		}	
 	}
 	
 	public void reboot() {

@@ -27,6 +27,9 @@ public class MathUtil {
 		return getRandom(min, max, false);
 	}
 	
+	public static float toSeconds(float minutes, float seconds) {
+		return minutes*60 + seconds;
+	}
 	
 
 }

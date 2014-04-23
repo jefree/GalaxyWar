@@ -16,14 +16,15 @@ import dev.jet.android.galaxywar.media.Media;
 import dev.jet.android.galaxywar.ui.BasicUI;
 import dev.jet.android.galaxywar.utils.ScreenUtil;
 import dev.jet.android.galaxywar.world.World;
+import dev.jet.android.galaxywar.world.single.WorldStateSingle;
 
 public class GameUI extends BasicUI {
 	
 	ImageButton bRight;
 	ImageButton bLeft;
 	
-	ImageButton bMissile;
-	//ImageButton bSpeed;
+	ImageButton bMissile1;
+	ImageButton bMissile2;
 	
 	MissileBar mBar;
 	ShieldBar sBar;
@@ -44,8 +45,8 @@ public class GameUI extends BasicUI {
 		bRight = (ImageButton)BasicUI.createButton(media, "bArrow", "", "");
 		bLeft = (ImageButton)BasicUI.createButton(media, "bArrow", "", "");
 		
-		bMissile = (ImageButton)BasicUI.createButton(media, "bMissile", "", "");
-		//bSpeed = (ImageButton)BasicUI.createButton(media, "bSpeed", "", "");
+		bMissile1 = (ImageButton)BasicUI.createButton(media, "bMissile", "", "");
+		bMissile2 = (ImageButton)BasicUI.createButton(media, "bMissile", "", "");
 		
 		mBar = new MissileBar(media);
 		sBar = new ShieldBar(media);
@@ -69,8 +70,8 @@ public class GameUI extends BasicUI {
 		wrapper.setPosition(25, 5);
 		bRight.setPosition(media.getScreenWidth() - bRight.getWidth() - 25, 5);
 		
-		bMissile.setPosition(media.getScreenWidth()/2 + 80, 5);
-		//bSpeed.setPosition(media.getScreenWidth()/2 - bSpeed.getWidth() - 80, 5);
+		bMissile1.setPosition(media.getScreenWidth()/2 + 140, 5);
+		bMissile2.setPosition(media.getScreenWidth()/2 - bMissile2.getWidth() - 140, 5);
 		
 		mBar.setPosition(media.getScreenWidth() - mBar.getWidth() - 25, media.getScreenHeight() - mBar.getHeight() - 5);
 		sBar.setPosition(25, media.getScreenHeight() - mBar.getHeight() - 5);
@@ -80,8 +81,8 @@ public class GameUI extends BasicUI {
 		
 		addActor(bRight);
 		addActor(wrapper);
-		//addActor(bSpeed);
-		addActor(bMissile);
+		addActor(bMissile2);
+		addActor(bMissile1);
 		addActor(mBar);
 		addActor(sBar);
 		addActor(message);
@@ -91,11 +92,11 @@ public class GameUI extends BasicUI {
 	@Override
 	public void act(float delta) {
 		
-		if (world.getState() == World.PAUSE) {
+		if (world.getState() == WorldStateSingle.PAUSE) {
 			return;
 		}
 		
-		if (world.getState() == World.END) {
+		if (world.getState() == WorldStateSingle.END) {
 			screen.showEnd();
 		}
 		
@@ -126,7 +127,7 @@ public class GameUI extends BasicUI {
 		
 		Actor a = hit(x, y, true);
 		
-		if (a == bMissile) {
+		if (a == bMissile1 || a == bMissile2) {
 			world.shot();
 		}
 		

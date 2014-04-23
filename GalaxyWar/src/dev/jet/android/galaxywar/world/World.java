@@ -5,7 +5,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
 
 import dev.jet.android.galaxywar.media.Media;
-import dev.jet.android.galaxywar.media.TapestryPicture;
 import dev.jet.android.galaxywar.utils.GeomUtil;
 import dev.jet.android.galaxywar.world.actors.Asteroid;
 import dev.jet.android.galaxywar.world.actors.Entity;
@@ -13,39 +12,39 @@ import dev.jet.android.galaxywar.world.actors.Explosion;
 import dev.jet.android.galaxywar.world.actors.Missile;
 import dev.jet.android.galaxywar.world.actors.Shield;
 import dev.jet.android.galaxywar.world.actors.Ship;
-import dev.jet.android.galaxywar.world.actors.ShipShield;
+import dev.jet.android.galaxywar.world.single.AstExplosionController;
+import dev.jet.android.galaxywar.world.single.AsteroidsController;
+import dev.jet.android.galaxywar.world.single.MissileController;
+import dev.jet.android.galaxywar.world.single.ShipShield;
+import dev.jet.android.galaxywar.world.single.WorldStateSingle;
 
-public class World extends Group {
+
+public abstract class World extends Group {
 	
-	public static int RUN = 0;
-	public static int PAUSE = 1;
-	public static int STOP = 2;
-	public static int END = 3;
+	protected Ship ship;
+	protected ShipShield shield;
+	protected Explosion shipExplosion;
 	
-	private Ship ship;
-	private Shield shield;
-	private Explosion shipExplosion;
+	protected MissileController missiles;
+	protected AsteroidsController asteroids;
+	protected AstExplosionController explosions;
 	
-	private MissileController missiles;
-	private AsteroidsController asteroids;
-	private AstExplosionController explosions;
+	protected Entity back;
+	protected Music music;
 	
-	private float offsetX;
-	private float offsetY;
+	protected WorldState status;
 	
-	private int state;
-	private int score;
+	protected float offsetX;
+	protected float offsetY;
 	
-	Entity back;
-	TapestryPicture background;
-	Music music;
+	protected int score;
+	
+	protected abstract void setTimers();
 	
 	public World (Media media) {
 		
 		setWidth(media.getScreenWidth());
 		setHeight(media.getScreenHeight());
-		
-		state = STOP;
 		
 		offsetX = getWidth()/2;
 		offsetY = getHeight()/2;
@@ -62,14 +61,16 @@ public class World extends Group {
 		shipExplosion.setDuration(3);
 		
 		asteroids = new AsteroidsController(this, media);
-		missiles = new MissileController(this, media);	
+		missiles = new MissileController(this, media);
 		explosions = new AstExplosionController(this, media);
 		
 		back = new Background();
 		back.create(this, media.getPicture("space"), null);
 		
 		music = media.getMusic("sounds/music");
-		music.setLooping(true);
+		music.setLooping(true); 
+		
+		setTimers();
 		
 		addActor(back);
 		addActor(ship);
@@ -83,50 +84,28 @@ public class World extends Group {
 	
 	@Override
 	public void act(float delta) {
-		
-		if (state == RUN && ship.getLife() < 0) {
-			
-			state = STOP;
-			
-			addActor(shipExplosion);
-			
-			music.setVolume(0.1f);
-			
-			shipExplosion.playSound();
-			
-			ship.remove();
-			shield.remove();
-		
-		} else if(state == STOP) { 
-			
-			shipExplosion.setPosition(ship.getX(), ship.getY());
-			
-			if(shipExplosion.isFinished()) {
-				state = END;
-			}
-		} 
-		
-		if (state != PAUSE) {
-			
-			super.act(delta);
-			
-			offsetX = getWidth()/2 - ship.getX();
-			offsetY = getHeight()/2 - ship.getY();
-		} 
+		super.act(delta);
 	}
 	
 	public void pause() {
-		state = PAUSE;
+		status.state = WorldStateSingle.PAUSE;
 		
 		music.pause();
 	}
 	
 	public void run() {
-		state = RUN;
+		status.state = WorldStateSingle.RUN;
 		
-		music.setVolume(0.3f);
+		music.setVolume(0.5f);
 		music.play();
+	}
+	
+	public void shot() {
 		
+		if (ship.getLife() > 0 && ship.getMissiles() > 0) {
+			missiles.genNew();
+			ship.deltaMissiles(-1);
+		}
 	}
 	
 	public void reboot() {
@@ -139,8 +118,7 @@ public class World extends Group {
 		
 		addActor(ship);
 		addActor(shield);
-		
-		Missile.scoreBonus = 1.0f;
+
 		score = 0;
 		
 		music.stop();
@@ -155,14 +133,6 @@ public class World extends Group {
 		
 		ex.setPosition(pos.x, pos.y);
 		ex.setRotation(a.getRotation());
-	}
-	
-	public void shot() {
-		
-		if (ship.getLife() > 0 && ship.getMissiles() > 0) {
-			missiles.genNew();
-			ship.deltaMissiles(-1);
-		}
 	}
 	
 	public void deltaScore(int score) {
@@ -198,6 +168,6 @@ public class World extends Group {
 	}
 	
 	public int getState() {
-		return state;
+		return status.state;
 	}
 }

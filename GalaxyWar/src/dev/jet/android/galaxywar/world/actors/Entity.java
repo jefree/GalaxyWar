@@ -31,8 +31,6 @@ public class Entity extends Actor {
 		setOrigin(getWidth()/2, getHeight()/2);
 		
 		rectangle = new Rectangle();
-		
-		reboot();
 	}
 	
 	public Rectangle getRectangle() {
@@ -58,8 +56,12 @@ public class Entity extends Actor {
 		remove();
 	}
 	
-	public void playSound() {
-		sound.play();
+	public Sound getSound() {
+		return sound;
+	}
+	
+	public long playSound() {
+		return sound.play();
 	}
 	
 	public void setEnable(boolean _enable) {
