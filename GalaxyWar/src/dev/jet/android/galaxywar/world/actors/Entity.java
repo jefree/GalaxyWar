@@ -2,31 +2,32 @@ package dev.jet.android.galaxywar.world.actors;
 
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import dev.jet.android.galaxywar.media.Picture;
 import dev.jet.android.galaxywar.world.World;
 
-public class Entity extends Actor {
+public abstract class Entity extends Actor {
 	
 	boolean enable;
 	int speed;
 	float life;
 	protected World world;
 	
-	protected Picture picture;
+	protected TextureRegion image;
 	protected Sound sound;
 	private Rectangle rectangle;
 	
-	public void create(World _world, Picture _picture, Sound _sound) {
+	public void create(World world, TextureRegion image, Sound sound) {
 		
-		world = _world;
-		picture = _picture;
-		sound = _sound;
+		this.world = world;
+		this.sound = sound;
+		this.image = image;
 		
-		setWidth(picture.getWidth());
-		setHeight(picture.getHeight());
+		setWidth(image.getRegionWidth());
+		setHeight(image.getRegionHeight());
 		
 		setOrigin(getWidth()/2, getHeight()/2);
 		
@@ -111,6 +112,10 @@ public class Entity extends Actor {
 	
 	@Override
 	public void draw(SpriteBatch batch, float alphaParent) {
-		picture.draw(this, batch, alphaParent);
+		batch.draw(image, getScreenX() - getWidth()/2, getScreenY() - getHeight()/2, 
+				getOriginX(), getOriginY(),
+                getWidth(), getHeight(),
+                getScaleX(), getScaleY(), 
+                getRotation());
 	}
 }
