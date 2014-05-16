@@ -30,7 +30,7 @@ public abstract class World extends Group {
 	protected AsteroidsController asteroids;
 	protected AstExplosionController explosions;
 	
-	protected Entity back;
+	protected Background back;
 	protected Music music;
 	
 	protected WorldState status;
@@ -59,6 +59,7 @@ public abstract class World extends Group {
 		
 		shipExplosion =  new Explosion();
 		shipExplosion.create(this, null, media.getSound("sounds/explosionShip"));
+		shipExplosion.setAnimData(media.getTextureAtlas("explosion/ship/anim"), 3);
 		
 		asteroids = new AsteroidsController(this, media);
 		missiles = new MissileController(this, media);
@@ -66,6 +67,7 @@ public abstract class World extends Group {
 		
 		back = new Background();
 		back.create(this, media.getTextureRegion("space"), null);
+		back.setScreenSize(media.getScreenWidth(), media.getScreenHeight());
 		
 		music = media.getMusic("sounds/music");
 		music.setLooping(true); 

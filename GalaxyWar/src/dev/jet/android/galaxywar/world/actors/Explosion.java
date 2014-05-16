@@ -1,14 +1,15 @@
 package dev.jet.android.galaxywar.world.actors;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 public class Explosion extends Entity {
 
 	Animation anim;
 	float stateTime;
 	
-	public void setAnimation(Animation anim) {
-		this.anim = anim;
+	public void setAnimData(TextureAtlas atlas, float time) {
+		anim = new Animation(time, atlas.getRegions());
 	}
 	
 	@Override
