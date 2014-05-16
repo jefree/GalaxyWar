@@ -1,6 +1,7 @@
 package dev.jet.android.galaxywar.world;
 
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
 
@@ -50,21 +51,21 @@ public abstract class World extends Group {
 		offsetY = getHeight()/2;
 		
 		ship = new Ship();
-		ship.create(this, media.getPicture("ship").getImage(), null);
+		ship.create(this, media.getTextureRegion("ship"), null);
 		
 		shield = new ShipShield();
-		shield.create(this, media.getPicture("shield").getImage(), null);
+		shield.create(this, media.getTextureRegion("shield"), null);
 		shield.setDefended(ship);
 		
 		shipExplosion =  new Explosion();
-		shipExplosion.create(this, media.getPicture("explosion/ship/anim"), media.getSound("sounds/explosionShip"), 3);
+		shipExplosion.create(this, null, media.getSound("sounds/explosionShip"));
 		
 		asteroids = new AsteroidsController(this, media);
 		missiles = new MissileController(this, media);
 		explosions = new AstExplosionController(this, media);
 		
 		back = new Background();
-		back.create(this, media.getPicture("space").getImage(), null);
+		back.create(this, media.getTextureRegion("space"), null);
 		
 		music = media.getMusic("sounds/music");
 		music.setLooping(true); 

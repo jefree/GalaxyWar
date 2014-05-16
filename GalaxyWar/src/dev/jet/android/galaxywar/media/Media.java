@@ -3,7 +3,10 @@ package dev.jet.android.galaxywar.media;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public class Media {
@@ -53,6 +56,19 @@ public class Media {
 		return pic;
 	}
 	
+	public void loadTextureRegion(String filename) {
+		resources.add(getKeyByFilename(filename),
+				new TextureRegion(new Texture(filename)), 
+				TextureRegion.class);
+	}
+	
+	public void loadTextureAtlas(String filename) {
+		resources.add(getKeyByFilename(filename), 
+				new TextureAtlas(filename),
+				TextureAtlas.class);
+		
+	}
+	
 	public void loadSound(String filename) {
 		String key = getKeyByFilename(filename);
 		Sound sound = Gdx.audio.newSound(Gdx.files.internal(filename));
@@ -74,23 +90,6 @@ public class Media {
 		resources.add(path, font);
 	}
 	
-	public void loadAnimPicture(String fileName) {
-		loadPicture(AnimationPicture.class, fileName);
-	}
-	
-	public void loadSinglePicture(String fileName) {
-		loadPicture(SinglePicture.class, fileName);
-	}
-	
-	public void loadTapestryPicture(String fileName) {
-		TapestryPicture pic = (TapestryPicture) loadPicture(TapestryPicture.class, fileName);
-		pic.setScreenSize(getScreenWidth(), getScreenHeight());
-	}
-	
-	public void loadAlphaLifePicture(String fileName){
-		loadPicture(AlphaLifePicture.class, fileName);
-	}
-	
 	private String getKeyByFilename(String filename) {
 		
 		String[] split = filename.split("\\.");
@@ -105,8 +104,12 @@ public class Media {
 		
 	}
 	
-	public Picture getPicture(String key) {
-		return resources.get(key, Picture.class);
+	public TextureRegion getTextureRegion(String key) {
+		return resources.get(key, TextureRegion.class);
+	}
+	
+	public TextureAtlas getTextureAtlas (String key) {
+		return resources.get(key, TextureAtlas.class);
 	}
 	
 	public Sound getSound(String key) {

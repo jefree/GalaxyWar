@@ -26,42 +26,42 @@ public class GameScreen extends AbstractScreen{
 		
 		super.show();
 		
-		media.loadSinglePicture("ship.png");	
-		media.loadSinglePicture("missile.png");	
-		media.loadSinglePicture("asteroid.png");
+		media.loadTextureRegion("ship.png");	
+		media.loadTextureRegion("missile.png");	
+		media.loadTextureRegion("asteroid.png");
 		
-		media.loadSinglePicture("bArrowUp.png");
-		media.loadSinglePicture("bArrowDown.png");
+		media.loadTextureRegion("bArrowUp.png");
+		media.loadTextureRegion("bArrowDown.png");
 		
-		media.loadSinglePicture("bMissileUp.png");
-		media.loadSinglePicture("bMissileDown.png");
+		media.loadTextureRegion("bMissileUp.png");
+		media.loadTextureRegion("bMissileDown.png");
 		
-		media.loadSinglePicture("bSpeedUp.png");
-		media.loadSinglePicture("bSpeedDown.png");
+		media.loadTextureRegion("bSpeedUp.png");
+		media.loadTextureRegion("bSpeedDown.png");
 		
-		media.loadTapestryPicture("space.jpg");
+		media.loadTextureRegion("space.jpg");
 		
-		media.loadSinglePicture("missilesbar/edge.png");
-		media.loadSinglePicture("missilesbar/normal.png");
-		media.loadSinglePicture("missilesbar/warning.png");
+		media.loadTextureRegion("missilesbar/edge.png");
+		media.loadTextureRegion("missilesbar/normal.png");
+		media.loadTextureRegion("missilesbar/warning.png");
 		
-		media.loadSinglePicture("end/back.png");
+		media.loadTextureRegion("end/back.png");
 		
-		media.loadSinglePicture("buttons/redUp.png");
-		media.loadSinglePicture("buttons/redDown.png");
-		media.loadSinglePicture("buttons/blackUp.png");
-		media.loadSinglePicture("buttons/blackDown.png");
-		media.loadSinglePicture("buttons/blueUp.png");
-		media.loadSinglePicture("buttons/blueDown.png");
+		media.loadTextureRegion("buttons/redUp.png");
+		media.loadTextureRegion("buttons/redDown.png");
+		media.loadTextureRegion("buttons/blackUp.png");
+		media.loadTextureRegion("buttons/blackDown.png");
+		media.loadTextureRegion("buttons/blueUp.png");
+		media.loadTextureRegion("buttons/blueDown.png");
 		
-		media.loadSinglePicture("shieldbar/edge.png");
-		media.loadSinglePicture("shieldbar/shield.png");
+		media.loadTextureRegion("shieldbar/edge.png");
+		media.loadTextureRegion("shieldbar/shield.png");
 		
-		media.loadAnimPicture("explosion/asteroid/anim.atlas");
+		media.loadTextureAtlas("explosion/asteroid/anim.atlas");
 		
-		media.loadAlphaLifePicture("shield.png");
+		media.loadTextureRegion("shield.png");
 		
-		media.loadAnimPicture("explosion/ship/anim.atlas");
+		media.loadTextureAtlas("explosion/ship/anim.atlas");
 		
 		media.loadFont("fonts/Comic Sans MS");
 		media.loadFont("fonts/AmazDoom");
