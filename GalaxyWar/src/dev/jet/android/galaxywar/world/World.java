@@ -50,22 +50,21 @@ public abstract class World extends Group {
 		offsetY = getHeight()/2;
 		
 		ship = new Ship();
-		ship.create(this, media.getPicture("ship"), null);
+		ship.create(this, media.getPicture("ship").getImage(), null);
 		
 		shield = new ShipShield();
-		shield.create(this, media.getPicture("shield"), null);
+		shield.create(this, media.getPicture("shield").getImage(), null);
 		shield.setDefended(ship);
 		
 		shipExplosion =  new Explosion();
-		shipExplosion.create(this, media.getPicture("explosion/ship/anim"), media.getSound("sounds/explosionShip"));
-		shipExplosion.setDuration(3);
+		shipExplosion.create(this, media.getPicture("explosion/ship/anim"), media.getSound("sounds/explosionShip"), 3);
 		
 		asteroids = new AsteroidsController(this, media);
 		missiles = new MissileController(this, media);
 		explosions = new AstExplosionController(this, media);
 		
 		back = new Background();
-		back.create(this, media.getPicture("space"), null);
+		back.create(this, media.getPicture("space").getImage(), null);
 		
 		music = media.getMusic("sounds/music");
 		music.setLooping(true); 

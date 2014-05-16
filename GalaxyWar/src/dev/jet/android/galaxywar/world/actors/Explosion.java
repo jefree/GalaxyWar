@@ -1,25 +1,23 @@
 package dev.jet.android.galaxywar.world.actors;
 
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
-import dev.jet.android.galaxywar.media.AnimationPicture;
-import dev.jet.android.galaxywar.media.Picture;
 import dev.jet.android.galaxywar.world.World;
 
 public class Explosion extends Entity {
 
-	AnimationPicture sequence;
+	Animation anim;
+	TextureAtlas atlas;
+	
 	float stateTime;
 	
-	@Override
-	public void create(World _world, Picture _picture, Sound _sound) {
-		super.create(_world, _picture, _sound);
+	public void create(World world, TextureAtlas atlas, Sound sound, float durationTime) {
+		super.create(world, null, sound);
 		
-		sequence = (AnimationPicture) this.picture;
-	}
-	
-	public void setDuration(float time) {
-		sequence.setFrameDuration(time / sequence.getNFrames());
+		this.atlas = atlas; 
+		anim = new Animation(durationTime/atlas.getRegions().size, atlas.getRegions());
 	}
 	
 	@Override
@@ -41,17 +39,14 @@ public class Explosion extends Entity {
 		super.act(delta);
 		
 		stateTime += delta;
+		image = anim.getKeyFrame(stateTime);
 		
-		sequence.setStateTime(stateTime);
-		
-		if(sequence.isFinished(stateTime)){
+		if(anim.isAnimationFinished(stateTime)){
 			destroy();
 		}
 	}
 	
 	public boolean isFinished() {
-		return sequence.isFinished(stateTime);
+		return anim.isAnimationFinished(stateTime);
 	}
-
-	
 }
