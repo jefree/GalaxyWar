@@ -2,7 +2,7 @@ package dev.jet.android.galaxywar.world.actors;
 
 import dev.jet.android.galaxywar.utils.GeomUtil;
 
-public abstract class Missile extends Entity {
+public abstract class Missile extends SoundEntity {
 	
 	public abstract void onAstCollision(float delta);
 	public abstract void onLifeZero(float delta);

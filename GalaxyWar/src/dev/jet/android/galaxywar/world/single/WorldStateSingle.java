@@ -1,13 +1,13 @@
 package dev.jet.android.galaxywar.world.single;
 
-import dev.jet.android.galaxywar.world.World;
+import dev.jet.android.galaxywar.world.BaseWorld;
 import dev.jet.android.galaxywar.world.WorldState;
 import dev.jet.android.galaxywar.world.single.state.AsteroidSingleState;
 import dev.jet.android.galaxywar.world.single.state.ShipShieldState;
 
 public final class WorldStateSingle extends WorldState {
 	
-	public WorldStateSingle(World _world) {
+	public WorldStateSingle(BaseWorld _world) {
 		
 		AsteroidSingleState astInitial = new AsteroidSingleState();
 		AsteroidSingleState astMedium = new AsteroidSingleState();

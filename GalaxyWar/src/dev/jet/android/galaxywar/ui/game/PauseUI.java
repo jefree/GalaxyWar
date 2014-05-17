@@ -6,13 +6,13 @@ import dev.jet.android.galaxywar.main.screens.GameScreen;
 import dev.jet.android.galaxywar.media.Media;
 import dev.jet.android.galaxywar.ui.BasicUI;
 import dev.jet.android.galaxywar.utils.ScreenUtil;
-import dev.jet.android.galaxywar.world.World;
+import dev.jet.android.galaxywar.world.BaseWorld;
 
 public class PauseUI extends EndUI {
 	
 	Actor run;
 	
-	public PauseUI(World _world, Media _media, GameScreen _screen) {
+	public PauseUI(BaseWorld _world, Media _media, GameScreen _screen) {
 		super(_world, _media, _screen);
 				
 		run = BasicUI.createButton(media, "buttons/blue", "Volver al Juego", "fonts/Comic Sans MS");

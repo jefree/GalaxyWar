@@ -15,7 +15,7 @@ import dev.jet.android.galaxywar.main.screens.GameScreen;
 import dev.jet.android.galaxywar.media.Media;
 import dev.jet.android.galaxywar.ui.BasicUI;
 import dev.jet.android.galaxywar.utils.ScreenUtil;
-import dev.jet.android.galaxywar.world.World;
+import dev.jet.android.galaxywar.world.BaseWorld;
 import dev.jet.android.galaxywar.world.single.WorldStateSingle;
 
 public class GameUI extends BasicUI {
@@ -32,10 +32,10 @@ public class GameUI extends BasicUI {
 	Label score;
 	Label message;
 	
-	World world;
+	BaseWorld world;
 	GameScreen screen;
 	
-	public GameUI(World _world, Media _media, GameScreen _screen) {
+	public GameUI(BaseWorld _world, Media _media, GameScreen _screen) {
 		
 		super(_media);
 		

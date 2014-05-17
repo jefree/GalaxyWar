@@ -1,6 +1,5 @@
 package dev.jet.android.galaxywar.world;
 
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -30,8 +29,8 @@ public class Background extends Entity {
 	int height; 
 	
 	@Override
-	public void create(World world, TextureRegion image, Sound sound) {
-		super.create(world, image, sound);
+	public void create(BaseWorld world, TextureRegion image) {
+		super.create(world, image);
 		
 		tWidth = (int)image.getRegionWidth();
 		tHeight = (int)image.getRegionHeight();

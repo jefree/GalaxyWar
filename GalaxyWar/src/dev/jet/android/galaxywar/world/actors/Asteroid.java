@@ -29,6 +29,8 @@ public abstract class Asteroid extends Entity {
 		translate(speed[0], speed[1]);
 		
 		doAstCollision(delta);
+		
+		System.out.println(getX() + " "+ getY());
 	}
 	
 	private void doAstCollision(float delta) {

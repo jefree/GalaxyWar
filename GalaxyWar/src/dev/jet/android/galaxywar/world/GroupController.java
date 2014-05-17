@@ -2,20 +2,18 @@ package dev.jet.android.galaxywar.world;
 
 import java.lang.reflect.Array;
 
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import dev.jet.android.galaxywar.world.actors.Entity;
 
 public abstract class GroupController <T extends Entity> extends Group {
 
 	private T[] group;
-	protected World world;
+	protected BaseWorld world;
 	
 	protected abstract boolean shouldGenerate(float delta);
 	protected abstract void initEntity(T entity);
 	
-	public GroupController(Class <T> tClass, World world, TextureRegion image, Sound sound, int groupSize) {
+	public GroupController(Class <T> tClass, BaseWorld world, int groupSize) {
 		
 		this.world = world;
 		
@@ -25,7 +23,7 @@ public abstract class GroupController <T extends Entity> extends Group {
 		
 			for (int i=0; i<groupSize; i++) {
 				group[i] = tClass.newInstance();
-				group[i].create(world, image, sound);
+				group[i].create(world);
 			}
 		
 		}catch(Exception e){
@@ -72,7 +70,7 @@ public abstract class GroupController <T extends Entity> extends Group {
 		}
 	}
 	
-	public World getWorld() {
+	public BaseWorld getWorld() {
 		return world;
 	}
 	

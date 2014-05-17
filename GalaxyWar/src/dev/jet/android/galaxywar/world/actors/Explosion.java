@@ -3,7 +3,7 @@ package dev.jet.android.galaxywar.world.actors;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
-public class Explosion extends Entity {
+public class Explosion extends SoundEntity {
 
 	Animation anim;
 	float stateTime;

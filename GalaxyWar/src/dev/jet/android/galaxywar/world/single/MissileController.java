@@ -1,10 +1,12 @@
 package dev.jet.android.galaxywar.world.single;
 
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
 import dev.jet.android.galaxywar.media.Media;
 import dev.jet.android.galaxywar.utils.GeomUtil;
 import dev.jet.android.galaxywar.world.GroupController;
-import dev.jet.android.galaxywar.world.World;
-import dev.jet.android.galaxywar.world.actors.Missile;
+import dev.jet.android.galaxywar.world.BaseWorld;
 import dev.jet.android.galaxywar.world.actors.Ship;
 
 public class MissileController extends GroupController<MissileSingle> {
@@ -14,9 +16,15 @@ public class MissileController extends GroupController<MissileSingle> {
 	private static final float MISSILE_LIFE = 4; 
 	private static final int MISSILE_SPEED = 200; 
 	
-	public MissileController(World world, Media media){
+	TextureRegion image;
+	Sound sound;
+	
+	public MissileController(BaseWorld world, Media media){
 		
-		super(MissileSingle.class, world, media.getTextureRegion("missile"), media.getSound("sounds/shot"), MAX_MISSILES_NUMBER);
+		super(MissileSingle.class, world, MAX_MISSILES_NUMBER);
+		
+		image = media.getTextureRegion("missile");
+		sound = media.getSound("sounds/shot");
 	}
 	
 	@Override
@@ -26,6 +34,9 @@ public class MissileController extends GroupController<MissileSingle> {
 
 	@Override
 	public void initEntity(MissileSingle missile) {
+		
+		missile.setImage(image);
+		missile.setSound(sound);
 		
 		Ship ship = getWorld().getShip();
 		float delta[] = GeomUtil.getSides(ship.getHeight()/2 + missile.getHeight()/2, ship.getRotation());
@@ -37,8 +48,7 @@ public class MissileController extends GroupController<MissileSingle> {
 		missile.setSpeed(MISSILE_SPEED + world.getShip().getSpeed());
 		missile.setLife(MISSILE_LIFE);
 		
-		long idSound = missile.playSound();
-		missile.getSound().setVolume(idSound, 0.5f);
+		missile.playSound(0.5f);
 		
 	}
 	

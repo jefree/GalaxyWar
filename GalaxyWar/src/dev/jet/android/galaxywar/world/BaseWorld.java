@@ -1,7 +1,6 @@
 package dev.jet.android.galaxywar.world;
 
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
 
@@ -20,7 +19,7 @@ import dev.jet.android.galaxywar.world.single.ShipShield;
 import dev.jet.android.galaxywar.world.single.WorldStateSingle;
 
 
-public abstract class World extends Group {
+public abstract class BaseWorld extends Group {
 	
 	protected Ship ship;
 	protected ShipShield shield;
@@ -42,7 +41,7 @@ public abstract class World extends Group {
 	
 	protected abstract void setTimers();
 	
-	public World (Media media) {
+	public BaseWorld (Media media) {
 		
 		setWidth(media.getScreenWidth());
 		setHeight(media.getScreenHeight());
@@ -51,14 +50,14 @@ public abstract class World extends Group {
 		offsetY = getHeight()/2;
 		
 		ship = new Ship();
-		ship.create(this, media.getTextureRegion("ship"), null);
+		ship.create(this, media.getTextureRegion("ship"));
 		
 		shield = new ShipShield();
-		shield.create(this, media.getTextureRegion("shield"), null);
+		shield.create(this, media.getTextureRegion("shield"));
 		shield.setDefended(ship);
 		
 		shipExplosion =  new Explosion();
-		shipExplosion.create(this, null, media.getSound("sounds/explosionShip"));
+		shipExplosion.create(this, media.getSound("sounds/explosionShip"));
 		shipExplosion.setAnimData(media.getTextureAtlas("explosion/ship/anim"), 3);
 		
 		asteroids = new AsteroidsController(this, media);
@@ -66,7 +65,7 @@ public abstract class World extends Group {
 		explosions = new AstExplosionController(this, media);
 		
 		back = new Background();
-		back.create(this, media.getTextureRegion("space"), null);
+		back.create(this, media.getTextureRegion("space"));
 		back.setScreenSize(media.getScreenWidth(), media.getScreenHeight());
 		
 		music = media.getMusic("sounds/music");

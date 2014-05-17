@@ -6,13 +6,13 @@ import dev.jet.android.galaxywar.main.GalaxyWar;
 import dev.jet.android.galaxywar.ui.game.EndUI;
 import dev.jet.android.galaxywar.ui.game.GameUI;
 import dev.jet.android.galaxywar.ui.game.PauseUI;
-import dev.jet.android.galaxywar.world.World;
+import dev.jet.android.galaxywar.world.BaseWorld;
 import dev.jet.android.galaxywar.world.single.WorldSingle;
 import dev.jet.android.galaxywar.world.single.WorldStateSingle;
 
 public class GameScreen extends AbstractScreen{
 	
-	World world;
+	BaseWorld world;
 	
 	GameUI gui;
 	PauseUI pui;

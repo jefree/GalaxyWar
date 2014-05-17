@@ -1,6 +1,6 @@
 package dev.jet.android.galaxywar.world.single;
 
-import dev.jet.android.galaxywar.world.World;
+import dev.jet.android.galaxywar.world.BaseWorld;
 
 public class ScoreBonification {
 	
@@ -16,9 +16,9 @@ public class ScoreBonification {
 	float scoreBonus;
 	float score;
 	
-	World world;
+	BaseWorld world;
 	
-	public ScoreBonification(World _world, float _score, float delta, float max, float tBonus, float tIncrease ) {
+	public ScoreBonification(BaseWorld _world, float _score, float delta, float max, float tBonus, float tIncrease ) {
 		world = _world;
 		
 		score = _score;

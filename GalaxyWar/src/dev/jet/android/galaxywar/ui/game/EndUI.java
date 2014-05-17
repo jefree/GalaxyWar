@@ -11,11 +11,11 @@ import dev.jet.android.galaxywar.main.screens.GameScreen;
 import dev.jet.android.galaxywar.media.Media;
 import dev.jet.android.galaxywar.ui.BasicUI;
 import dev.jet.android.galaxywar.utils.ScreenUtil;
-import dev.jet.android.galaxywar.world.World;
+import dev.jet.android.galaxywar.world.BaseWorld;
 
 public class EndUI extends BasicUI {
 
-	World world;
+	BaseWorld world;
 	GameScreen screen;
 	
 	Image back;
@@ -26,7 +26,7 @@ public class EndUI extends BasicUI {
 	Label score;
 	
 	
-	public EndUI(World _world, Media _media, GameScreen _screen) {
+	public EndUI(BaseWorld _world, Media _media, GameScreen _screen) {
 		super(_media);
 		
 		world = _world;

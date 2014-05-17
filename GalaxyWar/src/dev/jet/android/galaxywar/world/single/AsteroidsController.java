@@ -1,10 +1,12 @@
 package dev.jet.android.galaxywar.world.single;
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
 import dev.jet.android.galaxywar.media.Media;
 import dev.jet.android.galaxywar.utils.GeomUtil;
 import dev.jet.android.galaxywar.utils.MathUtil;
 import dev.jet.android.galaxywar.world.GroupController;
-import dev.jet.android.galaxywar.world.World;
+import dev.jet.android.galaxywar.world.BaseWorld;
 import dev.jet.android.galaxywar.world.single.state.AsteroidSingleState;
 
 public class AsteroidsController extends GroupController<AsteroidSingle> {
@@ -22,6 +24,8 @@ public class AsteroidsController extends GroupController<AsteroidSingle> {
 	private int GEN_RADIUS = 0;
 	private int DISP_RADIUS = 0;	
 	
+	private TextureRegion image;
+	
 	private float genTime;
 	private float deltaTime;
 	
@@ -29,11 +33,13 @@ public class AsteroidsController extends GroupController<AsteroidSingle> {
 	
 	private AsteroidSingleState state;
 	
-	public AsteroidsController(World world, Media media) {
+	public AsteroidsController(BaseWorld world, Media media) {
 		
-		super(AsteroidSingle.class, world, media.getTextureRegion("asteroid"), null, MAX_ASTEROIDS_NUMBER);
+		super(AsteroidSingle.class, world, MAX_ASTEROIDS_NUMBER);
 		
 		deltaTime = 0;
+		
+		image = media.getTextureRegion("asteroid");
 		
 		GEN_RADIUS = (int)(world.getWidth()/2 + media.getTextureRegion("asteroid").getRegionWidth()/2);
 		DISP_RADIUS = (int)(GEN_RADIUS*0.3f); 
@@ -72,6 +78,7 @@ public class AsteroidsController extends GroupController<AsteroidSingle> {
 		float borderAngle;
 		float disp;
 		
+		ast.setImage(image);
 		ast.setSpeedRotation(MathUtil.getRandom(MIN_ASTEROIDS_ROTATTION_SPEED, MAX_ASTEROIDS_ROTATTION_SPEED));
 		
 		shipX = (int)world.getShip().getX();

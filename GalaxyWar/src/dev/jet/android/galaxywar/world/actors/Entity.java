@@ -1,38 +1,31 @@
 package dev.jet.android.galaxywar.world.actors;
 
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import dev.jet.android.galaxywar.world.World;
+import dev.jet.android.galaxywar.world.BaseWorld;
 
 public abstract class Entity extends Actor {
 	
 	boolean enable;
 	int speed;
 	float life;
-	protected World world;
+	protected BaseWorld world;
 	
 	protected TextureRegion image;
-	protected Sound sound;
 	private Rectangle rectangle;
 	
-	public void create(World world, TextureRegion image, Sound sound) {
+	public void create(BaseWorld world, TextureRegion image) {
+		
+		this.create(world);
+		setImage(image);
+	}
+	
+	public void create(BaseWorld world) {
 		
 		this.world = world;
-		this.sound = sound;
-		
-		if (image != null) {
-			this.image = image;
-			
-			setWidth(image.getRegionWidth());
-			setHeight(image.getRegionHeight());
-		
-			setOrigin(getWidth()/2, getHeight()/2);
-		}
-		
 		rectangle = new Rectangle();
 	}
 	
@@ -57,14 +50,6 @@ public abstract class Entity extends Actor {
 	public void destroy() {
 		enable = false;
 		remove();
-	}
-	
-	public Sound getSound() {
-		return sound;
-	}
-	
-	public long playSound() {
-		return sound.play();
 	}
 	
 	public void setEnable(boolean _enable) {
@@ -97,6 +82,16 @@ public abstract class Entity extends Actor {
 	
 	public float getScreenY() {
 		return getY() + world.getOffsetY();
+	}
+	
+	public void setImage(TextureRegion image) {
+		
+		this.image = image;
+		
+		setWidth(image.getRegionWidth());
+		setHeight(image.getRegionHeight());
+	
+		setOrigin(getWidth()/2, getHeight()/2);
 	}
 	
 	public boolean collide (Entity e) {
