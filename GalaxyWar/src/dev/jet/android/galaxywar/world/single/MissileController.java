@@ -16,7 +16,7 @@ public class MissileController extends GroupController<MissileSingle> {
 	
 	public MissileController(World world, Media media){
 		
-		super(MissileSingle.class, world, media.getPicture("missile"), media.getSound("sounds/shot"), MAX_MISSILES_NUMBER);
+		super(MissileSingle.class, world, media.getTextureRegion("missile"), media.getSound("sounds/shot"), MAX_MISSILES_NUMBER);
 	}
 	
 	@Override

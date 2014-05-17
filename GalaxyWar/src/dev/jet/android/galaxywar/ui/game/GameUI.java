@@ -154,9 +154,9 @@ public class GameUI extends BasicUI {
 		
 		public MissileBar (Media media) {
 			
-			edge = media.getPicture("missilesbar/edge").getTexture();
-			normal = media.getPicture("missilesbar/normal").getTexture();
-			warning = media.getPicture("missilesbar/warning").getTexture();
+			edge = media.getTextureRegion("missilesbar/edge").getTexture();
+			normal = media.getTextureRegion("missilesbar/normal").getTexture();
+			warning = media.getTextureRegion("missilesbar/warning").getTexture();
 			
 			setWidth(edge.getWidth());
 			setHeight(edge.getHeight());
@@ -198,8 +198,8 @@ public class GameUI extends BasicUI {
 		
 		public ShieldBar(Media media) {
 			
-			edge = media.getPicture("shieldbar/edge").getTexture();
-			shield = media.getPicture("shieldbar/shield").getTexture();
+			edge = media.getTextureRegion("shieldbar/edge").getTexture();
+			shield = media.getTextureRegion("shieldbar/shield").getTexture();
 			score = 100;
 			
 			setWidth(shield.getWidth());

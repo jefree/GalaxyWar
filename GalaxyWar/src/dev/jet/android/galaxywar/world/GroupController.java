@@ -3,6 +3,7 @@ package dev.jet.android.galaxywar.world;
 import java.lang.reflect.Array;
 
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import dev.jet.android.galaxywar.media.Picture;
 import dev.jet.android.galaxywar.world.actors.Entity;
@@ -15,9 +16,9 @@ public abstract class GroupController <T extends Entity> extends Group {
 	protected abstract boolean shouldGenerate(float delta);
 	protected abstract void initEntity(T entity);
 	
-	public GroupController(Class <T> tClass, World _world, Picture _pic, Sound _sound, int groupSize) {
+	public GroupController(Class <T> tClass, World world, TextureRegion image, Sound sound, int groupSize) {
 		
-		world = _world;
+		this.world = world;
 		
 		group = (T[]) Array.newInstance(tClass, groupSize);
 		
@@ -25,7 +26,7 @@ public abstract class GroupController <T extends Entity> extends Group {
 		
 			for (int i=0; i<groupSize; i++) {
 				group[i] = tClass.newInstance();
-				group[i].create(_world, _pic, _sound);
+				group[i].create(world, image, sound);
 			}
 		
 		}catch(Exception e){

@@ -31,11 +31,11 @@ public class AsteroidsController extends GroupController<AsteroidSingle> {
 	
 	public AsteroidsController(World world, Media media) {
 		
-		super(AsteroidSingle.class, world, media.getPicture("asteroid"), null, MAX_ASTEROIDS_NUMBER);
+		super(AsteroidSingle.class, world, media.getTextureRegion("asteroid"), null, MAX_ASTEROIDS_NUMBER);
 		
 		deltaTime = 0;
 		
-		GEN_RADIUS = (int)(world.getWidth()/2 + media.getPicture("asteroid").getWidth()/2);
+		GEN_RADIUS = (int)(world.getWidth()/2 + media.getTextureRegion("asteroid").getRegionWidth()/2);
 		DISP_RADIUS = (int)(GEN_RADIUS*0.3f); 
 	}
 	

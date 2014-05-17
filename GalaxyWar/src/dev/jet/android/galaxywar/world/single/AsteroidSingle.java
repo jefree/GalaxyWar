@@ -1,6 +1,7 @@
 package dev.jet.android.galaxywar.world.single;
 
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import dev.jet.android.galaxywar.media.Picture;
 import dev.jet.android.galaxywar.utils.GeomUtil;
@@ -12,8 +13,8 @@ public class AsteroidSingle extends Asteroid {
 	private int maxDistanceShip; 
 	
 	@Override
-	public void create(World _world, Picture _picture, Sound _sound) {
-		super.create(_world, _picture, _sound);
+	public void create(World world, TextureRegion image, Sound sound) {
+		super.create(world, image, sound);
 		
 		maxDistanceShip = (int)(world.getWidth()*1.5);
 	}

@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import dev.jet.android.galaxywar.media.Picture;
 import dev.jet.android.galaxywar.world.World;
 
 public abstract class Entity extends Actor {
@@ -24,12 +23,15 @@ public abstract class Entity extends Actor {
 		
 		this.world = world;
 		this.sound = sound;
-		this.image = image;
 		
-		setWidth(image.getRegionWidth());
-		setHeight(image.getRegionHeight());
+		if (image != null) {
+			this.image = image;
+			
+			setWidth(image.getRegionWidth());
+			setHeight(image.getRegionHeight());
 		
-		setOrigin(getWidth()/2, getHeight()/2);
+			setOrigin(getWidth()/2, getHeight()/2);
+		}
 		
 		rectangle = new Rectangle();
 	}

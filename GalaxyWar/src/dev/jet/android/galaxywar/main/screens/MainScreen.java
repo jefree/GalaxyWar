@@ -17,14 +17,14 @@ public class MainScreen extends AbstractScreen {
 	public void show() {
 		super.show();
 		
-		media.loadSinglePicture("main/back.png");
+		media.loadTextureRegion("main/back.png");
 		
-		media.loadSinglePicture("buttons/greenUp.png");
-		media.loadSinglePicture("buttons/greenDown.png");
-		media.loadSinglePicture("buttons/blueUp.png");
-		media.loadSinglePicture("buttons/blueDown.png");
-		media.loadSinglePicture("buttons/blackUp.png");
-		media.loadSinglePicture("buttons/blackDown.png");
+		media.loadTextureRegion("buttons/greenUp.png");
+		media.loadTextureRegion("buttons/greenDown.png");
+		media.loadTextureRegion("buttons/blueUp.png");
+		media.loadTextureRegion("buttons/blueDown.png");
+		media.loadTextureRegion("buttons/blackUp.png");
+		media.loadTextureRegion("buttons/blackDown.png");
 		
 		media.loadFont("fonts/Complex");
 		media.loadFont("fonts/AmazDoom");

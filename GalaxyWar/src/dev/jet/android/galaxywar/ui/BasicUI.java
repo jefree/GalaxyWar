@@ -37,8 +37,8 @@ public abstract class BasicUI extends Group {
 		if (text.equals("")){
 			ImageButtonStyle ibs = new ImageButtonStyle();
 			
-			ibs.up = new TextureRegionDrawable(media.getPicture(name+"Up").getImage());
-			ibs.down = new TextureRegionDrawable(media.getPicture(name+"Down").getImage());
+			ibs.up = new TextureRegionDrawable(media.getTextureRegion(name+"Up"));
+			ibs.down = new TextureRegionDrawable(media.getTextureRegion(name+"Down"));
 			
 			button = new ImageButton(ibs);
 		
@@ -46,8 +46,8 @@ public abstract class BasicUI extends Group {
 			
 			ImageTextButtonStyle itbs = new ImageTextButtonStyle();
 			
-			itbs.up = new TextureRegionDrawable(media.getPicture(name+"Up").getImage());
-			itbs.down = new TextureRegionDrawable(media.getPicture(name+"Down").getImage());
+			itbs.up = new TextureRegionDrawable(media.getTextureRegion(name+"Up"));
+			itbs.down = new TextureRegionDrawable(media.getTextureRegion(name+"Down"));
 			itbs.font = media.getFont(font);
 			
 			ImageTextButton aux = new ImageTextButton(text, itbs);

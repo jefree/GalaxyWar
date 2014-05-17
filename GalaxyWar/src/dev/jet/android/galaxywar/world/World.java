@@ -131,7 +131,7 @@ public abstract class World extends Group {
 	public void explosion(Entity e, Entity a) {
 		
 		Explosion ex = explosions.genNew();
-		Vector2 pos = GeomUtil.midPoint(e.getCenter(), e.getCenter());
+		Vector2 pos = GeomUtil.midPoint(a.getCenter(), e.getCenter());
 		
 		ex.setPosition(pos.x, pos.y);
 		ex.setRotation(a.getRotation());

@@ -32,7 +32,7 @@ public class EndUI extends BasicUI {
 		world = _world;
 		screen = _screen;
 		
-		back = new Image(media.getPicture("end/back").getTexture());
+		back = new Image(media.getTextureRegion("end/back"));
 		
 		again = BasicUI.createButton(media, "buttons/red", "Reintentar", "fonts/Comic Sans MS");
 		exit = BasicUI.createButton(media, "buttons/black", "Salir", "fonts/Comic Sans MS");

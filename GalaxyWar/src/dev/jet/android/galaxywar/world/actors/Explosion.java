@@ -9,7 +9,11 @@ public class Explosion extends Entity {
 	float stateTime;
 	
 	public void setAnimData(TextureAtlas atlas, float time) {
-		anim = new Animation(time, atlas.getRegions());
+		anim = new Animation(time/atlas.getRegions().size, atlas.getRegions());
+		image = anim.getKeyFrame(0);
+		
+		setWidth(image.getRegionWidth());
+		setHeight(image.getRegionHeight());	
 	}
 	
 	@Override

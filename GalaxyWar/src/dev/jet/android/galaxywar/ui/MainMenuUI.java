@@ -30,7 +30,7 @@ public class MainMenuUI extends BasicUI {
 		
 		main = _main;
 		
-		back = new Image(media.getPicture("main/back").getTexture());
+		back = new Image(media.getTextureRegion("main/back"));
 		
 		title = new Label("galaxy war", new LabelStyle(media.getFont("fonts/Complex"),
 				new Color(1,1,1,1)));
