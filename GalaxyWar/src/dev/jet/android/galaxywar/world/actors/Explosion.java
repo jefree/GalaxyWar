@@ -14,6 +14,8 @@ public class Explosion extends Entity {
 		
 		setWidth(image.getRegionWidth());
 		setHeight(image.getRegionHeight());	
+		
+		setOrigin(getWidth()/2, getHeight()/2);
 	}
 	
 	@Override

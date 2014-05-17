@@ -5,7 +5,6 @@ import java.lang.reflect.Array;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import dev.jet.android.galaxywar.media.Picture;
 import dev.jet.android.galaxywar.world.actors.Entity;
 
 public abstract class GroupController <T extends Entity> extends Group {

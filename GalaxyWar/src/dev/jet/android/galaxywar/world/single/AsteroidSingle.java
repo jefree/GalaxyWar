@@ -3,7 +3,6 @@ package dev.jet.android.galaxywar.world.single;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-import dev.jet.android.galaxywar.media.Picture;
 import dev.jet.android.galaxywar.utils.GeomUtil;
 import dev.jet.android.galaxywar.world.World;
 import dev.jet.android.galaxywar.world.actors.Asteroid;

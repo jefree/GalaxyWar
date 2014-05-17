@@ -32,30 +32,6 @@ public class Media {
 		return screenHeight;
 	}
 	
-	private Picture loadPicture(Class<?> cls, String fileName) {
-		
-		Picture pic = null;
-		
-		String key = getKeyByFilename(fileName);
-		
-		try {
-			
-			pic = (Picture)cls.newInstance();
-			pic.load(fileName);
-			
-			resources.add(key, pic, Picture.class);
-			
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return pic;
-	}
-	
 	public void loadTextureRegion(String filename) {
 		resources.add(getKeyByFilename(filename),
 				new TextureRegion(new Texture(filename)), 
