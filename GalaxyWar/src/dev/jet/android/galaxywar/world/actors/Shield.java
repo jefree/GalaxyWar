@@ -50,12 +50,11 @@ public class Shield extends Entity {
 		}
 	}
 	
-	public void reboot() {
-		super.reboot();
+	public void reset() {
+		super.reset();
 		
 		setPosition(0, 0);
 		
 		life = 50;
-		enable = true;
 	}
 }

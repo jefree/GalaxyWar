@@ -18,7 +18,7 @@ public abstract class Asteroid extends Entity {
 		
 		if ( shouldBeDestroy(delta) ) 
 		{	
-			destroy();
+			remove();
 		}
 		
 		super.act(delta);
@@ -47,13 +47,6 @@ public abstract class Asteroid extends Entity {
 				world.explosion(this, ast);
 			}
 		}
-	}
-	
-	public void reboot() {
-		super.reboot();
-		
-		remove();
-		
 	}
 	
 	public void setDamage(int _damage) {

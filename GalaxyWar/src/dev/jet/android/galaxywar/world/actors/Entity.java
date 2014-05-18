@@ -5,13 +5,16 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+
 import dev.jet.android.galaxywar.world.BaseWorld;
+import dev.jet.android.galaxywar.world.GroupController;
 
 public abstract class Entity extends Actor {
 	
-	boolean enable;
 	int speed;
 	float life;
+	boolean enable;
+	
 	protected BaseWorld world;
 	
 	protected TextureRegion image;
@@ -26,6 +29,7 @@ public abstract class Entity extends Actor {
 	public void create(BaseWorld world) {
 		
 		this.world = world;
+		enable = true;
 		rectangle = new Rectangle();
 	}
 	
@@ -43,23 +47,6 @@ public abstract class Entity extends Actor {
 		return getRectangle().getCenter(new Vector2());
 	}
 	
-	public void reboot() {
-		enable = false;
-	}
-
-	public void destroy() {
-		enable = false;
-		remove();
-	}
-	
-	public void setEnable(boolean _enable) {
-		enable = _enable;
-	}
-	
-	public boolean isEnable() {
-		return enable;
-	}
-	
 	public int getSpeed() {
 		return speed;
 	}
@@ -75,7 +62,11 @@ public abstract class Entity extends Actor {
 	public void setLife(float life) {
 		this.life = life;
 	}
-
+	
+	public boolean isEnable() {
+		return enable;
+	}
+	
 	public float getScreenX() {
 		return getX() + world.getOffsetX();
 	}
@@ -96,15 +87,20 @@ public abstract class Entity extends Actor {
 	
 	public boolean collide (Entity e) {
 		
-		if (enable & e.isEnable()){
-			
-			Rectangle own = getRectangle();
-			Rectangle other = e.getRectangle();
-			
-			return own.overlaps(other);
-		}
+		Rectangle own = getRectangle();
+		Rectangle other = e.getRectangle();
 		
-		return false;
+		return own.overlaps(other);
+		
+	}
+	
+	public void reset() {
+		enable = true;
+	}
+	
+	public void destroy() {
+		enable = false;
+		remove();
 	}
 	
 	@Override

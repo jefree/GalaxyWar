@@ -1,80 +1,72 @@
 package dev.jet.android.galaxywar.world;
 
-import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.utils.Pool;
+
 import dev.jet.android.galaxywar.world.actors.Entity;
 
 public abstract class GroupController <T extends Entity> extends Group {
-
-	private T[] group;
+	
 	protected BaseWorld world;
+	protected ArrayList<T> entities;
 	
-	protected abstract boolean shouldGenerate(float delta);
-	protected abstract void initEntity(T entity);
+	protected abstract T createNew();
+	protected abstract void init(T obj);
 	
-	public GroupController(Class <T> tClass, BaseWorld world, int groupSize) {
+	public GroupController(BaseWorld world) {
 		
 		this.world = world;
-		
-		group = (T[]) Array.newInstance(tClass, groupSize);
-		
-		try {
-		
-			for (int i=0; i<groupSize; i++) {
-				group[i] = tClass.newInstance();
-				group[i].create(world);
-			}
-		
-		}catch(Exception e){
-			e.printStackTrace();
-		}
+		entities = new ArrayList<T>();
 		
 		setWidth(world.getWidth());
 		setHeight(world.getHeight());
 	}
 	
-	public void reboot() {
+	public T create() {
 		
-		for (Entity e : group) {
-			e.reboot();
-		}
-	}
-	
-	public T genNew() {
+		T entity = null;
 		
-		for (T e : group) {
-			
-			if(!e.isEnable()) {
-				
-				e.setEnable(true);
-				
-				initEntity(e);
-				
-				addActor(e);
-				
-				return e;
+		for (T e : entities) {
+			if ( !e.isEnable() ) {
+				entity = e;
 			}
 		}
 		
-		return null;
-	}
-	
-	@Override
-	public void act(float delta) {
-		
-		super.act(delta);
-		
-		if (shouldGenerate(delta)) {
-			genNew();
+		if (entity == null) {
+			entity = createNew();
+			entities.add(entity);
 		}
+		
+		entity.reset();
+		init(entity);
+		
+		addActor(entity);
+		
+		return entity;
 	}
 	
 	public BaseWorld getWorld() {
 		return world;
 	}
 	
-	public T[] getGroup() {
-		return group;
+	public ArrayList<T> getEnabledEntities() {
+		
+		ArrayList<T> result = new ArrayList<T>();
+		
+		for (T e : entities) {
+			if(e.isEnable()) {
+				result.add(e);
+			}
+		}
+		
+		return result;
+	} 
+	
+	public void reset() {
+		for (T e : entities) {
+			e.reset();
+		}
 	}
 }

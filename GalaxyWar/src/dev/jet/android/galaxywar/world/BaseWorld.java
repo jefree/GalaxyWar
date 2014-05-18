@@ -1,5 +1,7 @@
 package dev.jet.android.galaxywar.world;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -13,8 +15,10 @@ import dev.jet.android.galaxywar.world.actors.Missile;
 import dev.jet.android.galaxywar.world.actors.Shield;
 import dev.jet.android.galaxywar.world.actors.Ship;
 import dev.jet.android.galaxywar.world.single.AstExplosionController;
-import dev.jet.android.galaxywar.world.single.AsteroidsController;
+import dev.jet.android.galaxywar.world.single.AsteroidSingle;
+import dev.jet.android.galaxywar.world.single.AsteroidSingleGroup;
 import dev.jet.android.galaxywar.world.single.MissileController;
+import dev.jet.android.galaxywar.world.single.MissileSingle;
 import dev.jet.android.galaxywar.world.single.ShipShield;
 import dev.jet.android.galaxywar.world.single.WorldStateSingle;
 
@@ -26,7 +30,7 @@ public abstract class BaseWorld extends Group {
 	protected Explosion shipExplosion;
 	
 	protected MissileController missiles;
-	protected AsteroidsController asteroids;
+	protected AsteroidSingleGroup asteroids;
 	protected AstExplosionController explosions;
 	
 	protected Background back;
@@ -60,7 +64,7 @@ public abstract class BaseWorld extends Group {
 		shipExplosion.create(this, media.getSound("sounds/explosionShip"));
 		shipExplosion.setAnimData(media.getTextureAtlas("explosion/ship/anim"), 3);
 		
-		asteroids = new AsteroidsController(this, media);
+		asteroids = new AsteroidSingleGroup(this, media);
 		missiles = new MissileController(this, media);
 		explosions = new AstExplosionController(this, media);
 		
@@ -104,18 +108,18 @@ public abstract class BaseWorld extends Group {
 	public void shot() {
 		
 		if (ship.getLife() > 0 && ship.getMissiles() > 0) {
-			missiles.genNew();
+			missiles.create();
 			ship.deltaMissiles(-1);
 		}
 	}
 	
-	public void reboot() {
+	public void reset() {
 		
-		ship.reboot();
-		shield.reboot();
-		asteroids.reboot();
-		missiles.reboot();
-		shipExplosion.reboot();
+		ship.reset();
+		shield.reset();
+		asteroids.reset();
+		missiles.reset();
+		shipExplosion.reset();
 		
 		addActor(ship);
 		addActor(shield);
@@ -129,7 +133,7 @@ public abstract class BaseWorld extends Group {
 	
 	public void explosion(Entity e, Entity a) {
 		
-		Explosion ex = explosions.genNew();
+		Explosion ex = explosions.create();
 		Vector2 pos = GeomUtil.midPoint(a.getCenter(), e.getCenter());
 		
 		ex.setPosition(pos.x, pos.y);
@@ -160,12 +164,12 @@ public abstract class BaseWorld extends Group {
 		return offsetY;
 	}
 
-	public Asteroid[] getAsteroids() {
-		return asteroids.getGroup();
+	public ArrayList<AsteroidSingle> getAsteroids() {
+		return asteroids.getEnabledEntities();
 	}
 
-	public Missile[] getMissiles() {
-		return missiles.getGroup();
+	public ArrayList<MissileSingle> getMissiles() {
+		return missiles.getEnabledEntities();
 	}
 	
 	public int getState() {

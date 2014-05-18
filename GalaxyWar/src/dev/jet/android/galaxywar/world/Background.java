@@ -118,5 +118,11 @@ public class Background extends Entity {
 		}
 		
 	}
+
+	@Override
+	public void reset() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

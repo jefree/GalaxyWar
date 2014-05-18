@@ -31,9 +31,7 @@ public abstract class Missile extends SoundEntity {
 	
 	public void doAstCollision (float delta) {
 		
-		Asteroid[] asteroids = world.getAsteroids(); 
-		
-		for (Asteroid ast : asteroids) {
+		for (Asteroid ast :  world.getAsteroids()) {
 			
 			if (this.collide(ast)) {	
 				ast.destroy();
@@ -45,12 +43,6 @@ public abstract class Missile extends SoundEntity {
 				
 			}
 		}	
-	}
-	
-	public void reboot() {
-		super.reboot();
-		
-		remove();
 	}
 	
 	@Override

@@ -9,9 +9,7 @@ import dev.jet.android.galaxywar.world.GroupController;
 import dev.jet.android.galaxywar.world.BaseWorld;
 import dev.jet.android.galaxywar.world.single.state.AsteroidSingleState;
 
-public class AsteroidsController extends GroupController<AsteroidSingle> {
-	
-	private static final int MAX_ASTEROIDS_NUMBER = 25;
+public class AsteroidSingleGroup extends GroupController<AsteroidSingle> {
 	
 	private static final int MAX_ASTEROIDS_ROTATTION_SPEED = 2;
 	private static final int MIN_ASTEROIDS_ROTATTION_SPEED = 1;
@@ -33,9 +31,8 @@ public class AsteroidsController extends GroupController<AsteroidSingle> {
 	
 	private AsteroidSingleState state;
 	
-	public AsteroidsController(BaseWorld world, Media media) {
-		
-		super(AsteroidSingle.class, world, MAX_ASTEROIDS_NUMBER);
+	public AsteroidSingleGroup(BaseWorld world, Media media) {
+		super(world);
 		
 		deltaTime = 0;
 		
@@ -45,32 +42,26 @@ public class AsteroidsController extends GroupController<AsteroidSingle> {
 		DISP_RADIUS = (int)(GEN_RADIUS*0.3f); 
 	}
 	
-	public void setState(AsteroidSingleState _state) {
-		state = _state;
-		
-		genTime = state.getGenTime();
-	}
-	
 	@Override
-	public boolean shouldGenerate(float delta) {
+	public void act(float delta) {
+		super.act(delta);
 		
-		if (initGenTime <= INIT_GEN_TIME_LIMIT){
+		if (initGenTime >= INIT_GEN_TIME_LIMIT){
 			initGenTime += delta;
-			return false;
-		} 
+			return;
+		}
 		
 		deltaTime += delta;
 		
 		if(deltaTime >= genTime) {
 			deltaTime = 0;
-			return true;
+			create();
 		}
 		
-		return false;
 	}
 
 	@Override
-	public void initEntity(AsteroidSingle ast) {
+	protected void init(AsteroidSingle ast) {
 		
 		int astX, astY, shipX, shipY;
 		
@@ -78,7 +69,6 @@ public class AsteroidsController extends GroupController<AsteroidSingle> {
 		float borderAngle;
 		float disp;
 		
-		ast.setImage(image);
 		ast.setSpeedRotation(MathUtil.getRandom(MIN_ASTEROIDS_ROTATTION_SPEED, MAX_ASTEROIDS_ROTATTION_SPEED));
 		
 		shipX = (int)world.getShip().getX();
@@ -103,10 +93,25 @@ public class AsteroidsController extends GroupController<AsteroidSingle> {
 		ast.setSpeed((int)MathUtil.getRandom(MIN_ASTEROID_SPEED, MAX_ASTEROID_SPEED));
 	}
 	
-	@Override
-	public void reboot() {
-		super.reboot();
+	public void setState(AsteroidSingleState _state) {
+		state = _state;
 		
-		initGenTime = 0.0f;
+		genTime = state.getGenTime();
+	}
+	
+	@Override
+	protected AsteroidSingle createNew() {
+		
+		AsteroidSingle ast = new AsteroidSingle();
+		ast.create(world, image);
+		
+		return ast;
+	}
+
+	@Override
+	public void reset() {
+		super.reset();
+		
+		initGenTime = 0;
 	}
 }

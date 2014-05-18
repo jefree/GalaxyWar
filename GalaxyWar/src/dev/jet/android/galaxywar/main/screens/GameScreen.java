@@ -78,7 +78,7 @@ public class GameScreen extends AbstractScreen{
 		stage.addActor(world);
 		stage.addActor(gui);
 		
-		world.reboot();
+		world.reset();
 	}
 	
 	public void backMainMenu() {

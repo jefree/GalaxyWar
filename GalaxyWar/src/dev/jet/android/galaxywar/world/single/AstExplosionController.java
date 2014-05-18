@@ -10,30 +10,31 @@ import dev.jet.android.galaxywar.world.actors.Explosion;
 
 public class AstExplosionController extends GroupController<Explosion>{
 
-	static int MAX_NUMBER_EXPLOSIONS = 10;
+	private final float EXPLOSION_DURATION = 0.5f;
 	TextureAtlas atlas;
 	
 	Sound sound;
 	
 	public AstExplosionController(BaseWorld world, Media media) {
-		super(Explosion.class, world, MAX_NUMBER_EXPLOSIONS);
+		super(world);
 		
 		atlas = media.getTextureAtlas("explosion/asteroid/anim");
 		sound = media.getSound("sounds/explosionAst");
 	}
 
 	@Override
-	public boolean shouldGenerate(float delta) {
-		return false;
+	protected Explosion createNew() {
+		
+		Explosion e = new Explosion();
+		e.create(world, sound);
+		e.setAnimData(atlas, EXPLOSION_DURATION);
+		
+		return e;	
+	}
+	
+	@Override
+	protected void init(Explosion e){
+		e.playSound(0.3f);
 	}
 
-	@Override
-	public void initEntity(Explosion entity) {
-		entity.reboot();	
-		
-		entity.setSound(sound);
-		entity.setAnimData(atlas, 0.5f);
-		
-		entity.playSound(0.3f);
-	}
 }

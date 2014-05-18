@@ -8,6 +8,7 @@ import dev.jet.android.galaxywar.world.BaseWorld;
 public class SoundEntity extends Entity {
 	
 	Sound sound;
+	long soundId;
 
 	public void create(BaseWorld world, Sound sound) {
 		super.create(world);
@@ -24,12 +25,20 @@ public class SoundEntity extends Entity {
 	}
 	
 	public void playSound(float volume) {
-		long id = sound.play();
-		sound.setVolume(id, volume);
+		soundId = sound.play();
+		sound.setVolume(soundId, volume);
 	}
 	
 	public void playSound() {
 		playSound(1.0f);
+	}
+
+	@Override
+	public void reset() {
+		super.reset();
+		
+		sound.stop(soundId);
+		soundId = -1;
 	}
 	
 }

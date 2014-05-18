@@ -11,8 +11,6 @@ import dev.jet.android.galaxywar.world.actors.Ship;
 
 public class MissileController extends GroupController<MissileSingle> {
 
-	public static final int MAX_MISSILES_NUMBER = 7;
-	
 	private static final float MISSILE_LIFE = 4; 
 	private static final int MISSILE_SPEED = 200; 
 	
@@ -21,22 +19,14 @@ public class MissileController extends GroupController<MissileSingle> {
 	
 	public MissileController(BaseWorld world, Media media){
 		
-		super(MissileSingle.class, world, MAX_MISSILES_NUMBER);
+		super(world);
 		
 		image = media.getTextureRegion("missile");
 		sound = media.getSound("sounds/shot");
 	}
 	
 	@Override
-	public boolean shouldGenerate(float delta) {
-		return false;
-	}
-
-	@Override
-	public void initEntity(MissileSingle missile) {
-		
-		missile.setImage(image);
-		missile.setSound(sound);
+	protected void init(MissileSingle missile) {
 		
 		Ship ship = getWorld().getShip();
 		float delta[] = GeomUtil.getSides(ship.getHeight()/2 + missile.getHeight()/2, ship.getRotation());
@@ -53,9 +43,20 @@ public class MissileController extends GroupController<MissileSingle> {
 	}
 	
 	@Override
-	public void reboot() {
-		super.reboot();
+	public void reset() {
+		super.reset();
 		
 		MissileSingle.bonus.reboot();
 	}
+
+	@Override
+	protected MissileSingle createNew() {
+		
+		MissileSingle m = new MissileSingle();
+		m.create(world, image, sound);
+		
+		return m;
+		
+	}
+
 }

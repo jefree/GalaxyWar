@@ -34,8 +34,8 @@ public class Ship extends Entity {
 		translate(speed[0], speed[1]);
 	}
 	
-	public void reboot() {
-		super.reboot();
+	public void reset() {
+		super.reset();
 		
 		setPosition(0, 0);
 		
@@ -44,9 +44,8 @@ public class Ship extends Entity {
 		
 		life = 1;
 		speed = 80;
-		nMissiles = MissileController.MAX_MISSILES_NUMBER;
+		nMissiles = 7;
 		
-		enable = true;
 	}
 	
 	public int getMissiles() {
@@ -57,7 +56,7 @@ public class Ship extends Entity {
 		
 		float sign = Math.signum(delta);
 		
-		if ( (sign > 0 && nMissiles < MissileController.MAX_MISSILES_NUMBER) 
+		if ( (sign > 0 && nMissiles < 7) 
 				|| (sign < 0 && nMissiles > 0))
 		{
 			this.nMissiles += delta;

@@ -73,7 +73,7 @@ public class EndUI extends BasicUI {
 		Actor a = hit(x, y, true);
 		
 		if (a == again) {
-			world.reboot();
+			world.reset();
 			screen.showGame();
 		} else if (a == exit) {
 			screen.backMainMenu();

@@ -33,9 +33,8 @@ public class ShipShield extends Shield {
 	}
 	
 	@Override
-	public void reboot() {
-		super.reboot();
-		
+	public void reset() {
+		super.reset();
 		state.getBonus().reboot();
 	}
 	

@@ -19,17 +19,10 @@ public class Explosion extends SoundEntity {
 	}
 	
 	@Override
-	public void reboot() {
-		super.reboot();
-		
+	public void reset() {
+		super.reset();
+
 		stateTime = 0;
-	}
-	
-	@Override
-	public void destroy() {
-		super.destroy();
-		
-		remove();
 	}
 	
 	@Override
