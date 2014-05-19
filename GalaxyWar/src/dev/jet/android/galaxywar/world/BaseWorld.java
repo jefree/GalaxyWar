@@ -1,6 +1,7 @@
 package dev.jet.android.galaxywar.world;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.Vector2;
@@ -8,42 +9,39 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 
 import dev.jet.android.galaxywar.media.Media;
 import dev.jet.android.galaxywar.utils.GeomUtil;
-import dev.jet.android.galaxywar.world.actors.Asteroid;
 import dev.jet.android.galaxywar.world.actors.Entity;
 import dev.jet.android.galaxywar.world.actors.Explosion;
-import dev.jet.android.galaxywar.world.actors.Missile;
 import dev.jet.android.galaxywar.world.actors.Shield;
 import dev.jet.android.galaxywar.world.actors.Ship;
-import dev.jet.android.galaxywar.world.single.AstExplosionController;
+import dev.jet.android.galaxywar.world.single.ExplosionSingleGroup;
 import dev.jet.android.galaxywar.world.single.AsteroidSingle;
 import dev.jet.android.galaxywar.world.single.AsteroidSingleGroup;
-import dev.jet.android.galaxywar.world.single.MissileController;
+import dev.jet.android.galaxywar.world.single.MissileSingleGroup;
 import dev.jet.android.galaxywar.world.single.MissileSingle;
 import dev.jet.android.galaxywar.world.single.ShipShield;
-import dev.jet.android.galaxywar.world.single.WorldStateSingle;
-
 
 public abstract class BaseWorld extends Group {
+	
+	public enum WorldState { RUN, PAUSE, STOP, END };
+	
+	protected WorldState status;
+	private HashMap<String, EntityState> states;
 	
 	protected Ship ship;
 	protected ShipShield shield;
 	protected Explosion shipExplosion;
 	
-	protected MissileController missiles;
+	protected MissileSingleGroup missiles;
 	protected AsteroidSingleGroup asteroids;
-	protected AstExplosionController explosions;
+	protected ExplosionSingleGroup explosions;
 	
 	protected Background back;
 	protected Music music;
 	
-	protected WorldState status;
-	
 	protected float offsetX;
 	protected float offsetY;
 	
-	protected int score;
-	
-	protected abstract void setTimers();
+	protected abstract void setActions();
 	
 	public BaseWorld (Media media) {
 		
@@ -52,6 +50,10 @@ public abstract class BaseWorld extends Group {
 		
 		offsetX = getWidth()/2;
 		offsetY = getHeight()/2;
+		
+		status = WorldState.RUN;
+		
+		states = new HashMap<String, EntityState>();
 		
 		ship = new Ship();
 		ship.create(this, media.getTextureRegion("ship"));
@@ -65,8 +67,8 @@ public abstract class BaseWorld extends Group {
 		shipExplosion.setAnimData(media.getTextureAtlas("explosion/ship/anim"), 3);
 		
 		asteroids = new AsteroidSingleGroup(this, media);
-		missiles = new MissileController(this, media);
-		explosions = new AstExplosionController(this, media);
+		missiles = new MissileSingleGroup(this, media);
+		explosions = new ExplosionSingleGroup(this, media);
 		
 		back = new Background();
 		back.create(this, media.getTextureRegion("space"));
@@ -75,7 +77,7 @@ public abstract class BaseWorld extends Group {
 		music = media.getMusic("sounds/music");
 		music.setLooping(true); 
 		
-		setTimers();
+		setActions();
 		
 		addActor(back);
 		addActor(ship);
@@ -93,13 +95,13 @@ public abstract class BaseWorld extends Group {
 	}
 	
 	public void pause() {
-		status.state = WorldStateSingle.PAUSE;
+		status = WorldState.PAUSE;
 		
 		music.pause();
 	}
 	
 	public void run() {
-		status.state = WorldStateSingle.RUN;
+		status = WorldState.RUN;
 		
 		music.setVolume(0.5f);
 		music.play();
@@ -123,8 +125,6 @@ public abstract class BaseWorld extends Group {
 		
 		addActor(ship);
 		addActor(shield);
-
-		score = 0;
 		
 		music.stop();
 		
@@ -140,12 +140,12 @@ public abstract class BaseWorld extends Group {
 		ex.setRotation(a.getRotation());
 	}
 	
-	public void deltaScore(int score) {
-		this.score += score;
+	public void addState(String key, EntityState state) {
+		states.put(key, state);
 	}
 	
-	public int getScore() {
-		return score;
+	public EntityState getState(String key) {
+		return states.get(key);
 	}
 	
 	public Ship getShip() {
@@ -172,7 +172,7 @@ public abstract class BaseWorld extends Group {
 		return missiles.getEnabledEntities();
 	}
 	
-	public int getState() {
-		return status.state;
+	public WorldState getState() {
+		return status;
 	}
 }

@@ -124,5 +124,10 @@ public class Background extends Entity {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void setState(EntityState state) {
+		// TODO Auto-generated method stub
+	}
 	
 }

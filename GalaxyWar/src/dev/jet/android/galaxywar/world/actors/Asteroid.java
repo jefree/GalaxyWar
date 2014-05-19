@@ -6,7 +6,7 @@ public abstract class Asteroid extends Entity {
 	
 	float speedRotation;
 	float dirAngle;
-	private int damage;
+	private float damage;
 	
 	protected abstract boolean shouldBeDestroy(float delta); 
 	protected abstract void onAstCollision(float delta);
@@ -29,8 +29,6 @@ public abstract class Asteroid extends Entity {
 		translate(speed[0], speed[1]);
 		
 		doAstCollision(delta);
-		
-		System.out.println(getX() + " "+ getY());
 	}
 	
 	private void doAstCollision(float delta) {
@@ -49,11 +47,11 @@ public abstract class Asteroid extends Entity {
 		}
 	}
 	
-	public void setDamage(int _damage) {
-		damage = _damage;
+	public void setDamage(float damage) {
+		this.damage = damage;
 	}
 	
-	public int getDamage() {
+	public float getDamage() {
 		return damage;
 	}
 

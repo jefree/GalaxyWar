@@ -1,7 +1,8 @@
 package dev.jet.android.galaxywar.world.actors;
 
 import dev.jet.android.galaxywar.utils.GeomUtil;
-import dev.jet.android.galaxywar.world.single.MissileController;
+import dev.jet.android.galaxywar.world.EntityState;
+import dev.jet.android.galaxywar.world.single.MissileSingleGroup;
 
 public class Ship extends Entity {
 	
@@ -67,5 +68,11 @@ public class Ship extends Entity {
 	public void setRotParameter(float rotParam) {
 		rOrientation = (int)Math.signum(rOrientation + rotParam);
 		rDelta = Math.abs(rotParam);
+	}
+
+	@Override
+	public void setState(EntityState state) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -1,6 +1,6 @@
 package dev.jet.android.galaxywar.world.actors;
 
-public class Shield extends Entity {
+public abstract class Shield extends Entity {
 	
 	Entity defended;
 	float regeneration;

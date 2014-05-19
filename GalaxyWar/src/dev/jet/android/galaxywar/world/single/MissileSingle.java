@@ -1,25 +1,30 @@
 package dev.jet.android.galaxywar.world.single;
 
+import dev.jet.android.galaxywar.world.BaseWorld;
 import dev.jet.android.galaxywar.world.actors.Missile;
 
 public class MissileSingle extends Missile {
 	
-	public static ScoreBonification bonus;
+	ScoreBonus bonus;
+	WorldSingle world;
 	
-	public static void setBonus(ScoreBonification _bonus) {
-		bonus = _bonus;
+	@Override
+	public void create(BaseWorld world) {
+		super.create(world);
+		this.world = (WorldSingle) world;
 	}
 	
+	public void setBonus(ScoreBonus bonus) {
+		this.bonus = bonus;
+	}
+
 	public void onLifeZero(float delta) {
-		bonus.reboot();
+		bonus.reset();
 	}
 	
 	@Override
 	public void onAstCollision(float deltaTime) {
-		
-		System.out.println("missile");
-		
-		bonus.increase(deltaTime);
-		bonus.apply(deltaTime);
+		bonus.increase();
+		bonus.apply();
 	}
 }

@@ -5,29 +5,32 @@ import com.badlogic.gdx.utils.Timer;
 import dev.jet.android.galaxywar.media.Media;
 import dev.jet.android.galaxywar.utils.MathUtil;
 import dev.jet.android.galaxywar.world.BaseWorld;
-import dev.jet.android.galaxywar.world.single.state.AsteroidSingleState;
+import dev.jet.android.galaxywar.world.single.state.AsteroidSingleGroupState;
+import dev.jet.android.galaxywar.world.single.state.ScoreBonusState;
 import dev.jet.android.galaxywar.world.single.state.ShipShieldState;
 
 public class WorldSingle extends BaseWorld {
 	
+	protected int score;
+	
 	public WorldSingle(Media media) {
 		super(media);
 		
-		this.status = new WorldStateSingle(this);
-		this.status.state = WorldStateSingle.STOP;
+		status = WorldState.STOP;
 		
-		shield.setState(status.getState("shieldI", ShipShieldState.class));
-		asteroids.setState(status.getState("astI", AsteroidSingleState.class));
-		MissileSingle.setBonus(status.getState("mBInitial", ScoreBonification.class));
+		addStates();
 		
+		shield.setState(getState("shieldI"));
+		asteroids.setState(getState("astI"));
+		missiles.setState(getState("mBInitial"));
 	}
 	
 	@Override
 	public void act(float delta) {
 		
-		if (status.state == WorldStateSingle.RUN && ship.getLife() < 0) {
+		if (status == WorldState.RUN && ship.getLife() < 0) {
 			
-			status.state = WorldStateSingle.STOP;
+			status = WorldState.STOP;
 			
 			addActor(shipExplosion);
 			
@@ -38,16 +41,16 @@ public class WorldSingle extends BaseWorld {
 			ship.remove();
 			shield.remove();
 		
-		} else if(status.state == WorldStateSingle.STOP) { 
+		} else if(status == WorldState.STOP) { 
 			
 			shipExplosion.setPosition(ship.getX(), ship.getY());
 			
 			if(shipExplosion.isFinished()) {
-				status.state = WorldStateSingle.END;
+				status = WorldState.END;
 			}
 		} 
 		
-		if (status.state != WorldStateSingle.PAUSE) {
+		if (status != WorldState.PAUSE) {
 			
 			super.act(delta);
 			
@@ -56,14 +59,24 @@ public class WorldSingle extends BaseWorld {
 		} 
 	}
 	
-	public void setTimers () {
+	public void addScore(int score) {
+		this.score += score;
+	}
+	
+	public int getScore() {
+		return score;
+	}
+	
+	
+	@Override
+	public void setActions() {
 		
 		Timer.Task medium = new Timer.Task() {
 			@Override
 			public void run() {
 				
-				asteroids.setState(status.getState("astM", AsteroidSingleState.class));
-				MissileSingle.setBonus(status.getState("mBMedium", ScoreBonification.class));
+				asteroids.setState(getState("astM"));
+				missiles.setState(getState("mBMedium"));
 			}
 		};
 		
@@ -71,14 +84,42 @@ public class WorldSingle extends BaseWorld {
 			@Override
 			public void run() {
 				
-				asteroids.setState(status.getState("astH", AsteroidSingleState.class));
-				shield.setState(status.getState("shieldH", ShipShieldState.class));
-				MissileSingle.setBonus(status.getState("mBHard", ScoreBonification.class));
+				asteroids.setState(getState("astH"));
+				shield.setState(getState("shieldH"));
+				missiles.setState(getState("mBHard"));
 			}
 		};
 		
 		Timer.schedule(medium, MathUtil.toSeconds(0, 15));
 		Timer.schedule(hard, MathUtil.toSeconds(0, 30));
 	} 
+	
+	public void addStates() {
+		
+		AsteroidSingleGroupState astInitial = new AsteroidSingleGroupState(20, 1.2f);
+		AsteroidSingleGroupState astMedium = new AsteroidSingleGroupState(30, 0.8f);
+		AsteroidSingleGroupState astHard = new AsteroidSingleGroupState(45, 0.6f);
+		
+		ScoreBonusState mBInitial = new ScoreBonusState(10, 10, 50, 0, 0);
+		ScoreBonusState mBMedium = new ScoreBonusState(15, 15, 75, 0, 0);
+		ScoreBonusState mBHard = new ScoreBonusState(20, 20, 100, 0, 0);
+		
+		ScoreBonus sBInitial = new ScoreBonus(this, 5, 5, 30, 5, 5);
+		ScoreBonus sBHard = new ScoreBonus(this, 5, 5, 60, 5, 5);
+		
+		ShipShieldState shieldInitial = new ShipShieldState(5, sBInitial);
+		ShipShieldState shieldHard = new ShipShieldState(3, sBHard);
+				
+		addState("astI", astInitial);
+		addState("astM", astMedium);
+		addState("astH", astHard);
+		
+		addState("shieldI", shieldInitial);
+		addState("shieldH", shieldHard);
+		
+		addState("mBInitial", mBInitial);
+		addState("mBMedium", mBMedium);
+		addState("mBHard", mBHard);
+	}
 
 }

@@ -14,6 +14,7 @@ public abstract class GroupController <T extends Entity> extends Group {
 	
 	protected abstract T createNew();
 	protected abstract void init(T obj);
+	public abstract void setState(EntityState state);
 	
 	public GroupController(BaseWorld world) {
 		

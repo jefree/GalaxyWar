@@ -1,29 +1,15 @@
 package dev.jet.android.galaxywar.world.single.state;
 
-import dev.jet.android.galaxywar.world.single.ScoreBonification;
+import dev.jet.android.galaxywar.world.EntityState;
+import dev.jet.android.galaxywar.world.single.ScoreBonus;
 
-
-public class ShipShieldState {
+public class ShipShieldState implements EntityState {
 	
-	float regeneration;
-	ScoreBonification bonus;
+	public final float regeneration;
+	public final ScoreBonus bonus;
 	
-	public void setBonus(ScoreBonification _bonus) {
-		bonus = _bonus;
-	}
-	
-	public ScoreBonification getBonus() {
-		return bonus;
-	}
-	
-	public void setRegeneration(float regeneration) {
+	public ShipShieldState(float regeneration, ScoreBonus bonus) {
 		this.regeneration = regeneration;
+		this.bonus = bonus;
 	}
-	
-	public float getRegeneration() {
-		return regeneration;
-	}
-
-	
-	
 }

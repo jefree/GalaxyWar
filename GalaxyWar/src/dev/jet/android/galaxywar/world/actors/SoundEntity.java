@@ -4,6 +4,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import dev.jet.android.galaxywar.world.BaseWorld;
+import dev.jet.android.galaxywar.world.EntityState;
 
 public class SoundEntity extends Entity {
 	
@@ -39,6 +40,12 @@ public class SoundEntity extends Entity {
 		
 		sound.stop(soundId);
 		soundId = -1;
+	}
+
+	@Override
+	public void setState(EntityState state) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

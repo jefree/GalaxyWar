@@ -5,9 +5,10 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import dev.jet.android.galaxywar.media.Media;
 import dev.jet.android.galaxywar.utils.GeomUtil;
 import dev.jet.android.galaxywar.utils.MathUtil;
+import dev.jet.android.galaxywar.world.EntityState;
 import dev.jet.android.galaxywar.world.GroupController;
 import dev.jet.android.galaxywar.world.BaseWorld;
-import dev.jet.android.galaxywar.world.single.state.AsteroidSingleState;
+import dev.jet.android.galaxywar.world.single.state.AsteroidSingleGroupState;
 
 public class AsteroidSingleGroup extends GroupController<AsteroidSingle> {
 	
@@ -29,7 +30,7 @@ public class AsteroidSingleGroup extends GroupController<AsteroidSingle> {
 	
 	private float initGenTime;
 	
-	private AsteroidSingleState state;
+	private AsteroidSingleGroupState state;
 	
 	public AsteroidSingleGroup(BaseWorld world, Media media) {
 		super(world);
@@ -46,7 +47,7 @@ public class AsteroidSingleGroup extends GroupController<AsteroidSingle> {
 	public void act(float delta) {
 		super.act(delta);
 		
-		if (initGenTime >= INIT_GEN_TIME_LIMIT){
+		if (initGenTime <= INIT_GEN_TIME_LIMIT){
 			initGenTime += delta;
 			return;
 		}
@@ -86,17 +87,17 @@ public class AsteroidSingleGroup extends GroupController<AsteroidSingle> {
 		astX += (int)delta[0];
 		astY += (int)delta[1];
 		
-		ast.setDamage( (int)state.getDamage());
+		ast.setDamage(state.damage);
 		
 		ast.setPosition(astX, astY);
 		ast.setDirAngle((float) GeomUtil.getAngle(astX, astY, shipX, shipY));
 		ast.setSpeed((int)MathUtil.getRandom(MIN_ASTEROID_SPEED, MAX_ASTEROID_SPEED));
 	}
 	
-	public void setState(AsteroidSingleState _state) {
-		state = _state;
+	public void setState(EntityState state) {
 		
-		genTime = state.getGenTime();
+		this.state = (AsteroidSingleGroupState) state;
+		genTime = this.state.genTime;
 	}
 	
 	@Override

@@ -4,18 +4,19 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 import dev.jet.android.galaxywar.media.Media;
+import dev.jet.android.galaxywar.world.EntityState;
 import dev.jet.android.galaxywar.world.GroupController;
 import dev.jet.android.galaxywar.world.BaseWorld;
 import dev.jet.android.galaxywar.world.actors.Explosion;
 
-public class AstExplosionController extends GroupController<Explosion>{
+public class ExplosionSingleGroup extends GroupController<Explosion>{
 
 	private final float EXPLOSION_DURATION = 0.5f;
 	TextureAtlas atlas;
 	
 	Sound sound;
 	
-	public AstExplosionController(BaseWorld world, Media media) {
+	public ExplosionSingleGroup(BaseWorld world, Media media) {
 		super(world);
 		
 		atlas = media.getTextureAtlas("explosion/asteroid/anim");
@@ -35,6 +36,10 @@ public class AstExplosionController extends GroupController<Explosion>{
 	@Override
 	protected void init(Explosion e){
 		e.playSound(0.3f);
+	}
+
+	@Override
+	public void setState(EntityState state) {
 	}
 
 }

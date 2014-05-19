@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 import dev.jet.android.galaxywar.world.BaseWorld;
-import dev.jet.android.galaxywar.world.GroupController;
+import dev.jet.android.galaxywar.world.EntityState;
 
 public abstract class Entity extends Actor {
 	
@@ -19,6 +19,8 @@ public abstract class Entity extends Actor {
 	
 	protected TextureRegion image;
 	private Rectangle rectangle;
+	
+	public abstract void setState(EntityState state);
 	
 	public void create(BaseWorld world, TextureRegion image) {
 		

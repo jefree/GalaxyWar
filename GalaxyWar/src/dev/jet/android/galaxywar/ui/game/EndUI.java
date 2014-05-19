@@ -12,10 +12,11 @@ import dev.jet.android.galaxywar.media.Media;
 import dev.jet.android.galaxywar.ui.BasicUI;
 import dev.jet.android.galaxywar.utils.ScreenUtil;
 import dev.jet.android.galaxywar.world.BaseWorld;
+import dev.jet.android.galaxywar.world.single.WorldSingle;
 
 public class EndUI extends BasicUI {
 
-	BaseWorld world;
+	WorldSingle world;
 	GameScreen screen;
 	
 	Image back;
@@ -25,12 +26,11 @@ public class EndUI extends BasicUI {
 	Label title;
 	Label score;
 	
-	
-	public EndUI(BaseWorld _world, Media _media, GameScreen _screen) {
-		super(_media);
+	public EndUI(BaseWorld world, Media media, GameScreen screen) {
+		super(media);
 		
-		world = _world;
-		screen = _screen;
+		this.world = (WorldSingle) world;
+		this.screen = screen;
 		
 		back = new Image(media.getTextureRegion("end/back"));
 		
@@ -39,7 +39,7 @@ public class EndUI extends BasicUI {
 		title = new Label("GAME OVER", new LabelStyle(media.getFont("fonts/AmazDoom"), new Color(1,1,1,1)));
 		score = new Label("", new LabelStyle(media.getFont("fonts/AmazDoom"), new Color (0,0,0,1)));
 		
-		score.setText("Score: " + world.getScore());
+		score.setText("Score: " + this.world.getScore());
 		score.setAlignment(Align.center);
 		score.setFontScale(1.5f);
 		
