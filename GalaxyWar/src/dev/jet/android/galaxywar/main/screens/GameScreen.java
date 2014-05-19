@@ -8,7 +8,7 @@ import dev.jet.android.galaxywar.ui.game.GameUI;
 import dev.jet.android.galaxywar.ui.game.PauseUI;
 import dev.jet.android.galaxywar.world.BaseWorld;
 import dev.jet.android.galaxywar.world.BaseWorld.WorldState;
-import dev.jet.android.galaxywar.world.single.WorldSingle;
+import dev.jet.android.galaxywar.world.single.SingleWorld;
 
 public class GameScreen extends AbstractScreen{
 	
@@ -71,7 +71,7 @@ public class GameScreen extends AbstractScreen{
 		media.loadSound("sounds/explosionShip.mp3");
 		media.loadMusic("sounds/music.mp3");
 		
-		world = new WorldSingle(media);
+		world = new SingleWorld(media);
 		gui = new GameUI(world, media, this);
 		pui = new PauseUI(world, media, this);
 		

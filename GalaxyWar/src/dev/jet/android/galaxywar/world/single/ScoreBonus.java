@@ -16,17 +16,17 @@ public class ScoreBonus {
 	float aCounter;
 	float aTime;
 	
-	WorldSingle world;
+	SingleWorld world;
 	
-	public ScoreBonus(WorldSingle world) {
+	public ScoreBonus(SingleWorld world) {
 		this(world, 0, 0, 0);
 	}
 	
-	public ScoreBonus(WorldSingle world, int base, int delta, int max) {
+	public ScoreBonus(SingleWorld world, int base, int delta, int max) {
 		this(world, base, delta, max, 0, 0);
 	}
 	
-	public ScoreBonus (WorldSingle world, int base, int delta, int max, float iSecs, float aSecs) {
+	public ScoreBonus (SingleWorld world, int base, int delta, int max, float iSecs, float aSecs) {
 		
 		this.world = world;
 		

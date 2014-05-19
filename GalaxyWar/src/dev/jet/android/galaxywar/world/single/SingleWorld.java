@@ -1,24 +1,26 @@
 package dev.jet.android.galaxywar.world.single;
 
-import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.scenes.scene2d.actions.DelayAction;
 
 import dev.jet.android.galaxywar.media.Media;
-import dev.jet.android.galaxywar.utils.MathUtil;
 import dev.jet.android.galaxywar.world.BaseWorld;
 import dev.jet.android.galaxywar.world.single.state.AsteroidSingleGroupState;
 import dev.jet.android.galaxywar.world.single.state.ScoreBonusState;
 import dev.jet.android.galaxywar.world.single.state.ShipShieldState;
 
-public class WorldSingle extends BaseWorld {
+public class SingleWorld extends BaseWorld {
 	
 	protected int score;
 	
-	public WorldSingle(Media media) {
+	public SingleWorld(Media media) {
 		super(media);
 		
 		status = WorldState.STOP;
 		
 		addStates();
+		
+		setFocusActor(ship);
 		
 		shield.setState(getState("shieldI"));
 		asteroids.setState(getState("astI"));
@@ -51,11 +53,7 @@ public class WorldSingle extends BaseWorld {
 		} 
 		
 		if (status != WorldState.PAUSE) {
-			
 			super.act(delta);
-			
-			offsetX = getWidth()/2 - ship.getX();
-			offsetY = getHeight()/2 - ship.getY();
 		} 
 	}
 	
@@ -69,29 +67,40 @@ public class WorldSingle extends BaseWorld {
 	
 	
 	@Override
-	public void setActions() {
+	public void addActions() {
 		
-		Timer.Task medium = new Timer.Task() {
+		DelayAction mediumLevel = new DelayAction(15);
+		DelayAction hardLevel = new DelayAction(30);
+		
+		mediumLevel.setAction(new Action() {
 			@Override
-			public void run() {
+			public boolean act(float delta) {
+				
+				System.out.println("Enter Medium Lv");
 				
 				asteroids.setState(getState("astM"));
 				missiles.setState(getState("mBMedium"));
+				
+				return true;
 			}
-		};
+		});
 		
-		Timer.Task hard = new Timer.Task() {
+		hardLevel.setAction(new Action() {
 			@Override
-			public void run() {
+			public boolean act(float delta) {
+				
+				System.out.println("Enter Hard Lv");
 				
 				asteroids.setState(getState("astH"));
 				shield.setState(getState("shieldH"));
 				missiles.setState(getState("mBHard"));
+				
+				return true;
 			}
-		};
+		});
 		
-		Timer.schedule(medium, MathUtil.toSeconds(0, 15));
-		Timer.schedule(hard, MathUtil.toSeconds(0, 30));
+		addAction(mediumLevel);
+		addAction(hardLevel);
 	} 
 	
 	public void addStates() {

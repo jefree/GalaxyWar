@@ -8,14 +8,14 @@ import dev.jet.android.galaxywar.world.actors.Asteroid;
 public class AsteroidSingle extends Asteroid {
 	
 	private int maxDistanceShip; 
-	protected WorldSingle world;
+	protected SingleWorld world;
 	
 	
 	@Override
 	public void create(BaseWorld world) {
 		super.create(world);
 		
-		this.world = (WorldSingle) world;
+		this.world = (SingleWorld) world;
 		maxDistanceShip = (int)(world.getWidth()*1.5);
 	}
 

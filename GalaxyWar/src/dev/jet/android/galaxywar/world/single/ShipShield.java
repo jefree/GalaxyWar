@@ -8,13 +8,13 @@ import dev.jet.android.galaxywar.world.single.state.ShipShieldState;
 public class ShipShield extends Shield {
 	
 	private ScoreBonus bonus;
-	protected WorldSingle world;
+	protected SingleWorld world;
 	
 	@Override
 	public void create(BaseWorld world) {
 		super.create(world);
 		
-		this.world = (WorldSingle) world;
+		this.world = (SingleWorld) world;
 	}
 	
 	public void setState(EntityState state) {

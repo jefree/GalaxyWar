@@ -12,11 +12,11 @@ import dev.jet.android.galaxywar.media.Media;
 import dev.jet.android.galaxywar.ui.BasicUI;
 import dev.jet.android.galaxywar.utils.ScreenUtil;
 import dev.jet.android.galaxywar.world.BaseWorld;
-import dev.jet.android.galaxywar.world.single.WorldSingle;
+import dev.jet.android.galaxywar.world.single.SingleWorld;
 
 public class EndUI extends BasicUI {
 
-	WorldSingle world;
+	SingleWorld world;
 	GameScreen screen;
 	
 	Image back;
@@ -29,7 +29,7 @@ public class EndUI extends BasicUI {
 	public EndUI(BaseWorld world, Media media, GameScreen screen) {
 		super(media);
 		
-		this.world = (WorldSingle) world;
+		this.world = (SingleWorld) world;
 		this.screen = screen;
 		
 		back = new Image(media.getTextureRegion("end/back"));

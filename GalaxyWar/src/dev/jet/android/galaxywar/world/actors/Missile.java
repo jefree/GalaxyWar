@@ -45,7 +45,7 @@ public abstract class Missile extends SoundEntity {
 		}	
 	}
 	
-	@Override
+	/*@Override
 	public float getScreenX() {
 		float deltaX = getX() - world.getShip().getX();
 		return world.getWidth()/2 + deltaX;
@@ -55,5 +55,5 @@ public abstract class Missile extends SoundEntity {
 	public float getScreenY() {
 		float deltaY = getY() - world.getShip().getY();
 		return world.getHeight()/2 + deltaY;
-	}
+	}*/
 }

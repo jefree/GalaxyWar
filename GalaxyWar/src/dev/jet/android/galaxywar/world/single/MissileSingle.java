@@ -6,12 +6,12 @@ import dev.jet.android.galaxywar.world.actors.Missile;
 public class MissileSingle extends Missile {
 	
 	ScoreBonus bonus;
-	WorldSingle world;
+	SingleWorld world;
 	
 	@Override
 	public void create(BaseWorld world) {
 		super.create(world);
-		this.world = (WorldSingle) world;
+		this.world = (SingleWorld) world;
 	}
 	
 	public void setBonus(ScoreBonus bonus) {

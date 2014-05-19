@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 
 import dev.jet.android.galaxywar.media.Media;
@@ -38,18 +39,18 @@ public abstract class BaseWorld extends Group {
 	protected Background back;
 	protected Music music;
 	
-	protected float offsetX;
-	protected float offsetY;
+	private Actor focus;
+	private Vector2 offset;
 	
-	protected abstract void setActions();
+	protected abstract void addActions();
 	
 	public BaseWorld (Media media) {
 		
 		setWidth(media.getScreenWidth());
 		setHeight(media.getScreenHeight());
 		
-		offsetX = getWidth()/2;
-		offsetY = getHeight()/2;
+		focus = null;
+		offset = new Vector2();
 		
 		status = WorldState.RUN;
 		
@@ -77,7 +78,7 @@ public abstract class BaseWorld extends Group {
 		music = media.getMusic("sounds/music");
 		music.setLooping(true); 
 		
-		setActions();
+		addActions();
 		
 		addActor(back);
 		addActor(ship);
@@ -92,6 +93,17 @@ public abstract class BaseWorld extends Group {
 	@Override
 	public void act(float delta) {
 		super.act(delta);
+		
+		float dx = getX(), 
+			  dy = getY();
+		
+		if (focus != null) {
+			dx = focus.getX();
+			dy = focus.getY();
+		}
+		
+		offset.x = getWidth()/2 - dx;
+		offset.y = getHeight()/2 - dy;
 	}
 	
 	public void pause() {
@@ -110,6 +122,7 @@ public abstract class BaseWorld extends Group {
 	public void shot() {
 		
 		if (ship.getLife() > 0 && ship.getMissiles() > 0) {
+			
 			missiles.create();
 			ship.deltaMissiles(-1);
 		}
@@ -140,6 +153,10 @@ public abstract class BaseWorld extends Group {
 		ex.setRotation(a.getRotation());
 	}
 	
+	public void setFocusActor(Actor actor) {
+		focus = actor;
+	}
+	
 	public void addState(String key, EntityState state) {
 		states.put(key, state);
 	}
@@ -157,11 +174,11 @@ public abstract class BaseWorld extends Group {
 	}
 	
 	public float getOffsetX() {
-		return offsetX;
+		return offset.x;
 	}
 
 	public float getOffsetY() {
-		return offsetY;
+		return offset.y;
 	}
 
 	public ArrayList<AsteroidSingle> getAsteroids() {

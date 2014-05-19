@@ -27,7 +27,7 @@ public class MissileSingleGroup extends GroupController<MissileSingle> {
 		image = media.getTextureRegion("missile");
 		sound = media.getSound("sounds/shot");
 		
-		bonus = new ScoreBonus( (WorldSingle) world );
+		bonus = new ScoreBonus( (SingleWorld) world );
 	}
 	
 	@Override

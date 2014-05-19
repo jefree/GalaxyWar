@@ -17,7 +17,7 @@ import dev.jet.android.galaxywar.ui.BasicUI;
 import dev.jet.android.galaxywar.utils.ScreenUtil;
 import dev.jet.android.galaxywar.world.BaseWorld;
 import dev.jet.android.galaxywar.world.BaseWorld.WorldState;
-import dev.jet.android.galaxywar.world.single.WorldSingle;
+import dev.jet.android.galaxywar.world.single.SingleWorld;
 
 public class GameUI extends BasicUI {
 	
@@ -33,14 +33,14 @@ public class GameUI extends BasicUI {
 	Label score;
 	Label message;
 	
-	WorldSingle world;
+	SingleWorld world;
 	GameScreen screen;
 	
 	public GameUI(BaseWorld world, Media media, GameScreen screen) {
 		
 		super(media);
 		
-		this.world = (WorldSingle) world;
+		this.world = (SingleWorld) world;
 		this.screen = screen;
 		
 		bRight = (ImageButton)BasicUI.createButton(media, "bArrow", "", "");

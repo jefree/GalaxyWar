@@ -2,7 +2,6 @@ package dev.jet.android.galaxywar.world.actors;
 
 import dev.jet.android.galaxywar.utils.GeomUtil;
 import dev.jet.android.galaxywar.world.EntityState;
-import dev.jet.android.galaxywar.world.single.MissileSingleGroup;
 
 public class Ship extends Entity {
 	
