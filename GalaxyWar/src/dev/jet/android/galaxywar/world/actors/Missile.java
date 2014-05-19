@@ -1,7 +1,5 @@
 package dev.jet.android.galaxywar.world.actors;
 
-import dev.jet.android.galaxywar.utils.GeomUtil;
-
 public abstract class Missile extends SoundEntity {
 	
 	public abstract void onAstCollision(float delta);
@@ -19,10 +17,6 @@ public abstract class Missile extends SoundEntity {
 			destroy();
 			return;
 		}
-		
-		float speed[] = GeomUtil.getSides(getSpeed()*delta, getRotation());
-		
-		translate(speed[0], speed[1]);
 		
 		doAstCollision(delta);
 		
@@ -44,16 +38,4 @@ public abstract class Missile extends SoundEntity {
 			}
 		}	
 	}
-	
-	/*@Override
-	public float getScreenX() {
-		float deltaX = getX() - world.getShip().getX();
-		return world.getWidth()/2 + deltaX;
-	}
-	
-	@Override
-	public float getScreenY() {
-		float deltaY = getY() - world.getShip().getY();
-		return world.getHeight()/2 + deltaY;
-	}*/
 }

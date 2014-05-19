@@ -3,7 +3,6 @@ package dev.jet.android.galaxywar.world;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.utils.Pool;
 
 import dev.jet.android.galaxywar.world.actors.Entity;
 

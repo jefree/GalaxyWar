@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.DelayAction;
 import dev.jet.android.galaxywar.media.Media;
 import dev.jet.android.galaxywar.world.BaseWorld;
 import dev.jet.android.galaxywar.world.single.state.AsteroidSingleGroupState;
-import dev.jet.android.galaxywar.world.single.state.ScoreBonusState;
+import dev.jet.android.galaxywar.world.single.state.MissileSingleState;
 import dev.jet.android.galaxywar.world.single.state.ShipShieldState;
 
 public class SingleWorld extends BaseWorld {
@@ -24,7 +24,7 @@ public class SingleWorld extends BaseWorld {
 		
 		shield.setState(getState("shieldI"));
 		asteroids.setState(getState("astI"));
-		missiles.setState(getState("mBInitial"));
+		missiles.setState(getState("mInitial"));
 	}
 	
 	@Override
@@ -79,7 +79,7 @@ public class SingleWorld extends BaseWorld {
 				System.out.println("Enter Medium Lv");
 				
 				asteroids.setState(getState("astM"));
-				missiles.setState(getState("mBMedium"));
+				missiles.setState(getState("mMedium"));
 				
 				return true;
 			}
@@ -93,7 +93,7 @@ public class SingleWorld extends BaseWorld {
 				
 				asteroids.setState(getState("astH"));
 				shield.setState(getState("shieldH"));
-				missiles.setState(getState("mBHard"));
+				missiles.setState(getState("mHard"));
 				
 				return true;
 			}
@@ -109,15 +109,19 @@ public class SingleWorld extends BaseWorld {
 		AsteroidSingleGroupState astMedium = new AsteroidSingleGroupState(30, 0.8f);
 		AsteroidSingleGroupState astHard = new AsteroidSingleGroupState(45, 0.6f);
 		
-		ScoreBonusState mBInitial = new ScoreBonusState(10, 10, 50, 0, 0);
-		ScoreBonusState mBMedium = new ScoreBonusState(15, 15, 75, 0, 0);
-		ScoreBonusState mBHard = new ScoreBonusState(20, 20, 100, 0, 0);
+		ScoreBonus mBInitial = new ScoreBonus(this, 10, 10, 50, 0, 0);
+		ScoreBonus mBMedium = new ScoreBonus(this, 15, 15, 75, 0, 0);
+		ScoreBonus mBHard = new ScoreBonus(this, 20, 20, 100, 0, 0);
 		
 		ScoreBonus sBInitial = new ScoreBonus(this, 5, 5, 30, 5, 5);
 		ScoreBonus sBHard = new ScoreBonus(this, 5, 5, 60, 5, 5);
 		
 		ShipShieldState shieldInitial = new ShipShieldState(5, sBInitial);
 		ShipShieldState shieldHard = new ShipShieldState(3, sBHard);
+		
+		MissileSingleState missileInitial = new MissileSingleState(4, 200, mBInitial);
+		MissileSingleState missileMedium = new MissileSingleState(4, 200, mBMedium);
+		MissileSingleState missileHard = new MissileSingleState(4, 200, mBHard);
 				
 		addState("astI", astInitial);
 		addState("astM", astMedium);
@@ -126,9 +130,9 @@ public class SingleWorld extends BaseWorld {
 		addState("shieldI", shieldInitial);
 		addState("shieldH", shieldHard);
 		
-		addState("mBInitial", mBInitial);
-		addState("mBMedium", mBMedium);
-		addState("mBHard", mBHard);
+		addState("mInitial", missileInitial);
+		addState("mMedium", missileMedium);
+		addState("mHard", missileHard);
 	}
 
 }

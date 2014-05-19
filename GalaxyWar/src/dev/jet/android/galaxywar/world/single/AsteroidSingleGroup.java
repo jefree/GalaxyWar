@@ -1,6 +1,7 @@
 package dev.jet.android.galaxywar.world.single;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 
 import dev.jet.android.galaxywar.media.Media;
 import dev.jet.android.galaxywar.utils.GeomUtil;
@@ -66,7 +67,7 @@ public class AsteroidSingleGroup extends GroupController<AsteroidSingle> {
 		
 		int astX, astY, shipX, shipY;
 		
-		float[] delta;
+		Vector2 delta;
 		float borderAngle;
 		float disp;
 		
@@ -75,22 +76,22 @@ public class AsteroidSingleGroup extends GroupController<AsteroidSingle> {
 		shipX = (int)world.getShip().getX();
 		shipY = (int)world.getShip().getY();
 		
-		delta = GeomUtil.getSides(GEN_RADIUS, world.getShip().getRotation());
+		delta = GeomUtil.getVector2(GEN_RADIUS, world.getShip().getRotation());
 		borderAngle = world.getShip().getRotation() + 90; 
 		
-		astX = shipX + (int)delta[0];
-		astY = shipY + (int)delta[1];
+		astX = shipX + (int)delta.x;
+		astY = shipY + (int)delta.y;
 		
 		disp = MathUtil.getRandSign() * DISP_RADIUS;
-		delta = GeomUtil.getSides(disp, borderAngle);
+		delta = GeomUtil.getVector2(disp, borderAngle);
 		
-		astX += (int)delta[0];
-		astY += (int)delta[1];
+		astX += (int)delta.x;
+		astY += (int)delta.y;
 		
 		ast.setDamage(state.damage);
 		
 		ast.setPosition(astX, astY);
-		ast.setDirAngle((float) GeomUtil.getAngle(astX, astY, shipX, shipY));
+		ast.setDirection((float) GeomUtil.getAngle(astX, astY, shipX, shipY));
 		ast.setSpeed((int)MathUtil.getRandom(MIN_ASTEROID_SPEED, MAX_ASTEROID_SPEED));
 	}
 	

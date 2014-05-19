@@ -6,19 +6,22 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
+import dev.jet.android.galaxywar.utils.GeomUtil;
 import dev.jet.android.galaxywar.world.BaseWorld;
 import dev.jet.android.galaxywar.world.EntityState;
 
 public abstract class Entity extends Actor {
 	
-	int speed;
-	float life;
-	boolean enable;
+	protected int speed;
+	protected float life;
+	protected boolean enable;
 	
 	protected BaseWorld world;
 	
 	protected TextureRegion image;
 	private Rectangle rectangle;
+	
+	private Vector2 direction;
 	
 	public abstract void setState(EntityState state);
 	
@@ -33,6 +36,15 @@ public abstract class Entity extends Actor {
 		this.world = world;
 		enable = true;
 		rectangle = new Rectangle();
+		
+		direction = new Vector2();
+	}
+	
+	@Override
+	public void act(float delta) {
+		super.act(delta);
+		
+		translate(direction.x * speed * delta, direction.y * speed * delta);
 	}
 	
 	public Rectangle getRectangle() {
@@ -47,6 +59,24 @@ public abstract class Entity extends Actor {
 	
 	public Vector2 getCenter() {
 		return getRectangle().getCenter(new Vector2());
+	}
+	
+	public void setDirection(Vector2 direction) {
+		this.direction = direction;
+	}
+	
+	public void setDirection(float degrees) {
+		this.direction = GeomUtil.getVector2(1, degrees);
+	}
+	
+	public Vector2 getDirection() {
+		return direction;
+	}
+	
+	public float getDirAngle(){
+		
+		return GeomUtil.getAngle(0, 0,direction.x, direction.y);
+		
 	}
 	
 	public int getSpeed() {

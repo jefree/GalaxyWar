@@ -23,12 +23,12 @@ public class GeomUtil {
 		return (float)Math.toDegrees(ang) - 90;
 	}
 	
-	public static float[] getSides(float hypotenuse, float angle) {
+	public static Vector2 getVector2(float hypotenuse, float angle) {
 		
 		angle = (float)Math.toRadians(angle);
-		float []sides = { -(float)Math.sin(angle) * hypotenuse, 
-		        (float)Math.cos(angle) * hypotenuse};
+		Vector2 vector = new Vector2 ( -(float)Math.sin(angle) * hypotenuse, 
+		        (float)Math.cos(angle) * hypotenuse);
 		
-		return sides;
+		return vector;
 	}
 }

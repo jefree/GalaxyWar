@@ -12,6 +12,7 @@ import dev.jet.android.galaxywar.media.Media;
 import dev.jet.android.galaxywar.utils.GeomUtil;
 import dev.jet.android.galaxywar.world.actors.Entity;
 import dev.jet.android.galaxywar.world.actors.Explosion;
+import dev.jet.android.galaxywar.world.actors.Missile;
 import dev.jet.android.galaxywar.world.actors.Shield;
 import dev.jet.android.galaxywar.world.actors.Ship;
 import dev.jet.android.galaxywar.world.single.ExplosionSingleGroup;
@@ -49,7 +50,7 @@ public abstract class BaseWorld extends Group {
 		setWidth(media.getScreenWidth());
 		setHeight(media.getScreenHeight());
 		
-		focus = null;
+		focus = this;
 		offset = new Vector2();
 		
 		status = WorldState.RUN;
@@ -94,16 +95,8 @@ public abstract class BaseWorld extends Group {
 	public void act(float delta) {
 		super.act(delta);
 		
-		float dx = getX(), 
-			  dy = getY();
-		
-		if (focus != null) {
-			dx = focus.getX();
-			dy = focus.getY();
-		}
-		
-		offset.x = getWidth()/2 - dx;
-		offset.y = getHeight()/2 - dy;
+		offset.x = getWidth()/2 - focus.getX();;
+		offset.y = getHeight()/2 - focus.getY();;
 	}
 	
 	public void pause() {
@@ -119,13 +112,12 @@ public abstract class BaseWorld extends Group {
 		music.play();
 	}
 	
-	public void shot() {
+	public void genMissile(Vector2 position, Vector2 direction) {
 		
-		if (ship.getLife() > 0 && ship.getMissiles() > 0) {
-			
-			missiles.create();
-			ship.deltaMissiles(-1);
-		}
+		Missile missile = missiles.create();
+		
+		missile.translate(position.x, position.y);
+		missile.setDirection(direction);
 	}
 	
 	public void reset() {

@@ -1,6 +1,7 @@
 package dev.jet.android.galaxywar.world.actors;
 
-import dev.jet.android.galaxywar.utils.GeomUtil;
+import com.badlogic.gdx.math.Vector2;
+
 import dev.jet.android.galaxywar.world.EntityState;
 
 public class Ship extends Entity {
@@ -13,7 +14,19 @@ public class Ship extends Entity {
 	int nMissiles;
 	float timeNewMissile;
 	
+	public void shoot() {
+		
+		if (isEnable() && nMissiles > 0) {
+			
+			nMissiles -= 1;
+			
+			Vector2 pos = new Vector2(getX(), getY());
+			world.genMissile(pos, getDirection());
+		}
+	}
+	
 	public void act(float delta) {
+		super.act(delta);
 		
 		timeNewMissile += delta;
 		
@@ -25,19 +38,18 @@ public class Ship extends Entity {
 		if (rDelta > 0) {
 			
 			rotate(MAX_ROTATION_SPEED * rOrientation * rDelta * delta);
+			setDirection(getRotation());
 			rDelta = 0;
 		}
 		
-		float speed[] = GeomUtil.getSides(getSpeed()*delta, getRotation());
-		
 		rOrientation = 0;
-		translate(speed[0], speed[1]);
 	}
 	
 	public void reset() {
 		super.reset();
 		
 		setPosition(0, 0);
+		setDirection(0);
 		
 		rOrientation = 0;
 		rDelta = 0;

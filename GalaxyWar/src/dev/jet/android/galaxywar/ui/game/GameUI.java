@@ -129,7 +129,7 @@ public class GameUI extends BasicUI {
 		Actor a = hit(x, y, true);
 		
 		if (a == bMissile1 || a == bMissile2) {
-			world.shot();
+			world.getShip().shoot();
 		}
 		
 	}
