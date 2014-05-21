@@ -220,4 +220,10 @@ public class GameUI extends BasicUI {
 		}
 		
 	}
+
+	@Override
+	protected void init(Table table) {
+		// TODO Auto-generated method stub
+		
+	}
 }

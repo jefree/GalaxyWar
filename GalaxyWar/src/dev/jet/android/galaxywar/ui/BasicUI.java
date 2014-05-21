@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton.ImageTextButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import dev.jet.android.galaxywar.media.Media;
@@ -16,19 +17,41 @@ import dev.jet.android.galaxywar.media.Media;
 public abstract class BasicUI extends Group {
 	
 	protected Media media;
+	private Table table;
 	
-	public BasicUI(Media _media) {
+	public BasicUI(Media media) {
 		
-		media = _media;
+		this.media = media;
+		this.table = new Table();
 		
 		setWidth(media.getScreenWidth());
 		setHeight(media.getScreenHeight());
 		
-		addListener(new BasicUIListener());
+		init(this.table);
+		
+		this.addActor(table);
+		
+		addListener(new InputListener(){
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y,
+					int pointer, int button) {
+				onTouchDown(x, y);
+				
+				return true;
+			}
+			
+			@Override
+			public void touchUp(InputEvent event, float x, float y, int pointer,
+					int button) {
+				// TODO Auto-generated method stub
+				onTouchUp(x, y);
+			}
+		});
 	}
 	
 	public abstract void onTouchDown(float x, float y);
 	public abstract void onTouchUp(float x, float y);
+	protected abstract void init(Table table);
 	
 	public static Actor createButton(Media media, String name, String text, String font) {
 		
@@ -61,24 +84,4 @@ public abstract class BasicUI extends Group {
 		return button;
 		
 	}
-	
-	class BasicUIListener extends InputListener {
-		
-		@Override
-		public boolean touchDown(InputEvent event, float x, float y,
-				int pointer, int button) {
-			onTouchDown(x, y);
-			
-			return true;
-		}
-		
-		@Override
-		public void touchUp(InputEvent event, float x, float y, int pointer,
-				int button) {
-			// TODO Auto-generated method stub
-			onTouchUp(x, y);
-		}
-		
-	}
-
 }
