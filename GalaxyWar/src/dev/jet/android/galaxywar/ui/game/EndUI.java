@@ -76,7 +76,7 @@ public class EndUI extends BasicUI {
 			world.reset();
 			screen.showGame();
 		} else if (a == exit) {
-			screen.backMainMenu();
+			screen.backToMain();
 		}
 	}
 
