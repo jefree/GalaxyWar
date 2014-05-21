@@ -7,18 +7,19 @@ import dev.jet.android.galaxywar.world.EntityState;
 public class Ship extends Entity {
 	
 	private final float MAX_ROTATION_SPEED = (float)120.0;
+	private final int MAX_MISSILES_NUMBER = 7;
 	
 	public int rOrientation;
 	float rDelta;
 	
-	int nMissiles;
+	int missilesN;
 	float timeNewMissile;
 	
 	public void shoot() {
 		
-		if (isEnable() && nMissiles > 0) {
+		if (isEnable() && missilesN > 0) {
 			
-			nMissiles -= 1;
+			missilesN -= 1;
 			
 			Vector2 pos = new Vector2(getX(), getY());
 			world.genMissile(pos, getDirection());
@@ -31,7 +32,11 @@ public class Ship extends Entity {
 		timeNewMissile += delta;
 		
 		if (timeNewMissile > 1.5) {
-			deltaMissiles(+1);
+			
+			if (missilesN < MAX_MISSILES_NUMBER) {
+				missilesN += 1;
+			}
+			
 			timeNewMissile = 0;
 		}
 		
@@ -57,24 +62,12 @@ public class Ship extends Entity {
 		
 		life = 1;
 		speed = 80;
-		nMissiles = 7;
+		missilesN = MAX_MISSILES_NUMBER;
 		
 	}
 	
 	public int getMissiles() {
-		return nMissiles;
-	}
-
-	public void deltaMissiles(int delta) {
-		
-		float sign = Math.signum(delta);
-		
-		if ( (sign > 0 && nMissiles < 7) 
-				|| (sign < 0 && nMissiles > 0))
-		{
-			this.nMissiles += delta;
-		
-		}
+		return missilesN;
 	}
 	
 	public void setRotParameter(float rotParam) {
@@ -84,7 +77,6 @@ public class Ship extends Entity {
 
 	@Override
 	public void setState(EntityState state) {
-		// TODO Auto-generated method stub
 		
 	}
 }
