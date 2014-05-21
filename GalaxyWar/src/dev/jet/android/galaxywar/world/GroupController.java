@@ -66,7 +66,7 @@ public abstract class GroupController <T extends Entity> extends Group {
 	
 	public void reset() {
 		for (T e : entities) {
-			e.reset();
+			e.destroy();
 		}
 	}
 }

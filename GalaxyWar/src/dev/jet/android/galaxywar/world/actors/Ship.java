@@ -50,6 +50,7 @@ public class Ship extends Entity {
 		
 		setPosition(0, 0);
 		setDirection(0);
+		setRotation(0);
 		
 		rOrientation = 0;
 		rDelta = 0;

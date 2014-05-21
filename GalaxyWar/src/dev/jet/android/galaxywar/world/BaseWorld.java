@@ -43,8 +43,6 @@ public abstract class BaseWorld extends Group {
 	private Actor focus;
 	private Vector2 offset;
 	
-	protected abstract void addActions();
-	
 	public BaseWorld (Media media) {
 		
 		setWidth(media.getScreenWidth());
@@ -79,8 +77,6 @@ public abstract class BaseWorld extends Group {
 		music = media.getMusic("sounds/music");
 		music.setLooping(true); 
 		
-		addActions();
-		
 		addActor(back);
 		addActor(ship);
 		addActor(shield);
@@ -99,17 +95,21 @@ public abstract class BaseWorld extends Group {
 		offset.y = getHeight()/2 - focus.getY();;
 	}
 	
-	public void pause() {
-		status = WorldState.PAUSE;
-		
-		music.pause();
-	}
-	
 	public void run() {
 		status = WorldState.RUN;
 		
 		music.setVolume(0.5f);
 		music.play();
+	}
+	
+	public void resume() {
+		status = WorldState.RUN;
+		music.play();
+	}
+	
+	public void pause() {
+		status = WorldState.PAUSE;
+		music.pause();
 	}
 	
 	public void genMissile(Vector2 position, Vector2 direction) {

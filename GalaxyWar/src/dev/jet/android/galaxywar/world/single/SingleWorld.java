@@ -28,33 +28,64 @@ public class SingleWorld extends BaseWorld {
 	}
 	
 	@Override
+	public void run() {
+		super.run();
+		
+		createLevelUpActions();
+		
+		addAction(new Action() {
+			
+			@Override
+			public boolean act(float arg0) {
+				
+				if(ship.getLife() <= 0) {
+					
+					createShipExplosion();
+					return true;
+				}
+				
+				return false;
+			}
+		});
+	}
+	
+	@Override
 	public void act(float delta) {
 		
-		if (status == WorldState.RUN && ship.getLife() < 0) {
-			
-			status = WorldState.STOP;
-			
-			addActor(shipExplosion);
-			
-			music.setVolume(0.1f);
-			
-			shipExplosion.playSound();
-			
-			ship.remove();
-			shield.remove();
+		if (status == WorldState.PAUSE){
+			return;
+		}
 		
-		} else if(status == WorldState.STOP) { 
+		super.act(delta);
+	}
+	
+	private void createShipExplosion() {
+		
+		status = WorldState.STOP;
+
+		shipExplosion.setPosition(ship.getX(), ship.getY());
+		addActor(shipExplosion);
+		
+		ship.remove();
+		shield.remove();
+		
+		music.setVolume(0.1f);
+		shipExplosion.playSound();
+
+		
+		addAction(new Action() {
 			
-			shipExplosion.setPosition(ship.getX(), ship.getY());
-			
-			if(shipExplosion.isFinished()) {
-				status = WorldState.END;
+			@Override
+			public boolean act(float arg0) {
+				if(shipExplosion.isFinished()) {
+					
+					status = WorldState.END;
+					return true;
+				}
+				
+				return false;
 			}
-		} 
-		
-		if (status != WorldState.PAUSE) {
-			super.act(delta);
-		} 
+		});
 	}
 	
 	public void addScore(int score) {
@@ -65,9 +96,7 @@ public class SingleWorld extends BaseWorld {
 		return score;
 	}
 	
-	
-	@Override
-	public void addActions() {
+	public void createLevelUpActions() {
 		
 		DelayAction mediumLevel = new DelayAction(15);
 		DelayAction hardLevel = new DelayAction(30);
@@ -75,8 +104,6 @@ public class SingleWorld extends BaseWorld {
 		mediumLevel.setAction(new Action() {
 			@Override
 			public boolean act(float delta) {
-				
-				System.out.println("Enter Medium Lv");
 				
 				asteroids.setState(getState("astM"));
 				missiles.setState(getState("mMedium"));
@@ -88,8 +115,6 @@ public class SingleWorld extends BaseWorld {
 		hardLevel.setAction(new Action() {
 			@Override
 			public boolean act(float delta) {
-				
-				System.out.println("Enter Hard Lv");
 				
 				asteroids.setState(getState("astH"));
 				shield.setState(getState("shieldH"));
