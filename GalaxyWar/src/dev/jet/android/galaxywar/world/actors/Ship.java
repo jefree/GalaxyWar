@@ -63,7 +63,6 @@ public class Ship extends Entity {
 		life = 1;
 		speed = 80;
 		missilesN = MAX_MISSILES_NUMBER;
-		
 	}
 	
 	public int getMissiles() {

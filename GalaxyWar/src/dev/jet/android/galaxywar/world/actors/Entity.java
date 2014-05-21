@@ -107,6 +107,10 @@ public abstract class Entity extends Actor {
 		return getY() + world.getOffsetY();
 	}
 	
+	public Vector2 getPosition() {
+		return new Vector2(getX(), getY());
+	}
+	
 	public void setImage(TextureRegion image) {
 		
 		this.image = image;

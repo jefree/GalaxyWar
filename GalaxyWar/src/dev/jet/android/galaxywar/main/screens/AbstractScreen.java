@@ -16,9 +16,9 @@ public class AbstractScreen implements Screen, InputProcessor {
 	protected GalaxyWar game;
 	protected Media media;
 	
-	public AbstractScreen (GalaxyWar _game) {
-		game = _game;
-		media = game.getMedia();
+	public AbstractScreen (GalaxyWar game) {
+		this.game = game;
+		this.media = game.getMedia();
 		
 	}
 	

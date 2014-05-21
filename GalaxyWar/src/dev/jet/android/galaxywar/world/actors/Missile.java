@@ -1,9 +1,11 @@
 package dev.jet.android.galaxywar.world.actors;
 
+import dev.jet.android.galaxywar.utils.GeomUtil;
+
 public abstract class Missile extends SoundEntity {
 	
 	public abstract void onAstCollision(float delta);
-	public abstract void onLifeZero(float delta);
+	public abstract void onDestroyed(float delta);
 	
 	@Override
 	public void act(float delta) {
@@ -12,7 +14,7 @@ public abstract class Missile extends SoundEntity {
 		
 		if (life <= 0) {
 			
-			onLifeZero(delta);
+			onDestroyed(delta);
 
 			destroy();
 			return;
@@ -33,7 +35,7 @@ public abstract class Missile extends SoundEntity {
 
 				onAstCollision(delta);
 				
-				world.explosion(this, ast);
+				world.genAstExplosion( GeomUtil.midPoint( this.getCenter(), ast.getCenter()) );
 				
 			}
 		}	

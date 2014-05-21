@@ -10,15 +10,15 @@ import dev.jet.android.galaxywar.world.BaseWorld;
 import dev.jet.android.galaxywar.world.BaseWorld.WorldState;
 import dev.jet.android.galaxywar.world.single.SingleWorld;
 
-public class GameScreen extends AbstractScreen{
+public class GameScreen extends AbstractScreen {
 	
 	BaseWorld world;
 	
 	GameUI gui;
 	PauseUI pui;
 	
-	public GameScreen (GalaxyWar _game) {
-		super(_game);
+	public GameScreen (GalaxyWar game) {
+		super(game);
 	}
 	
 	@Override
