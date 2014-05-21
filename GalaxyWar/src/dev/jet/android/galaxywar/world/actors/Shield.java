@@ -1,5 +1,7 @@
 package dev.jet.android.galaxywar.world.actors;
 
+import dev.jet.android.galaxywar.utils.GeomUtil;
+
 public abstract class Shield extends Entity {
 	
 	Entity defended;
@@ -43,7 +45,7 @@ public abstract class Shield extends Entity {
 				
 				receiveDamage(ast.getDamage());
 				
-				world.explosion(this, ast);
+				world.genAstExplosion(GeomUtil.midPoint(this.getCenter(),ast.getCenter()));
 				
 				ast.destroy();
 			}

@@ -9,8 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 
 import dev.jet.android.galaxywar.media.Media;
-import dev.jet.android.galaxywar.utils.GeomUtil;
-import dev.jet.android.galaxywar.world.actors.Entity;
 import dev.jet.android.galaxywar.world.actors.Explosion;
 import dev.jet.android.galaxywar.world.actors.Missile;
 import dev.jet.android.galaxywar.world.actors.Shield;
@@ -136,13 +134,10 @@ public abstract class BaseWorld extends Group {
 		run();
 	}
 	
-	public void explosion(Entity e, Entity a) {
+	public void genAstExplosion(Vector2 pos) {
 		
 		Explosion ex = explosions.create();
-		Vector2 pos = GeomUtil.midPoint(a.getCenter(), e.getCenter());
-		
 		ex.setPosition(pos.x, pos.y);
-		ex.setRotation(a.getRotation());
 	}
 	
 	public void setFocusActor(Actor actor) {

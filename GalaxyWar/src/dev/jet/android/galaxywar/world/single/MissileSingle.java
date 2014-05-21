@@ -20,7 +20,7 @@ public class MissileSingle extends Missile {
 		this.bonus = bonus;
 	}
 
-	public void onLifeZero(float delta) {
+	public void onDestroyed(float delta) {
 		bonus.reset();
 	}
 	

@@ -1,5 +1,7 @@
 package dev.jet.android.galaxywar.world.actors;
 
+import dev.jet.android.galaxywar.utils.GeomUtil;
+
 public abstract class Asteroid extends Entity {
 	
 	float speedRotation;
@@ -32,9 +34,9 @@ public abstract class Asteroid extends Entity {
 				ast.destroy();
 				destroy();
 				
-				onAstCollision(delta);
+				world.genAstExplosion(GeomUtil.midPoint(this.getCenter(), ast.getCenter()));
 				
-				world.explosion(this, ast);
+				onAstCollision(delta);
 			}
 		}
 	}
