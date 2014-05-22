@@ -6,6 +6,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 import dev.jet.android.galaxywar.main.GalaxyWar;
 import dev.jet.android.galaxywar.media.Media;
@@ -32,6 +33,7 @@ public class AbstractScreen implements Screen, InputProcessor {
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
         stage.act(Gdx.graphics.getDeltaTime());
 		stage.draw();
+		Table.drawDebug(stage);
 	}
 
 	@Override
