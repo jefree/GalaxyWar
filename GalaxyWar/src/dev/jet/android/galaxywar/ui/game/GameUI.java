@@ -4,17 +4,16 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.Widget;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
 import dev.jet.android.galaxywar.main.screens.GameScreen;
 import dev.jet.android.galaxywar.media.Media;
 import dev.jet.android.galaxywar.ui.BasicUI;
-import dev.jet.android.galaxywar.utils.ScreenUtil;
 import dev.jet.android.galaxywar.world.BaseWorld;
 import dev.jet.android.galaxywar.world.BaseWorld.WorldState;
 import dev.jet.android.galaxywar.world.single.SingleWorld;
@@ -43,11 +42,18 @@ public class GameUI extends BasicUI {
 		this.world = (SingleWorld) world;
 		this.screen = screen;
 		
-		bRight = (ImageButton)BasicUI.createButton(media, "bArrow", "", "");
-		bLeft = (ImageButton)BasicUI.createButton(media, "bArrow", "", "");
+		score.setFontScale(1.5f);
+		score.setAlignment(Align.center);
+	}
+	
+	@Override
+	protected void init(Table table) {
 		
-		bMissile1 = (ImageButton)BasicUI.createButton(media, "bMissile", "", "");
-		bMissile2 = (ImageButton)BasicUI.createButton(media, "bMissile", "", "");
+		bRight = BasicUI.createButton(media, "bArrow");
+		bLeft = BasicUI.createButton(media, "bArrow");
+		
+		bMissile1 = BasicUI.createButton(media, "bMissile");
+		bMissile2 = BasicUI.createButton(media, "bMissile");
 		
 		mBar = new MissileBar(media);
 		sBar = new ShieldBar(media);
@@ -64,30 +70,23 @@ public class GameUI extends BasicUI {
 		wrapper.setSize(bLeft.getWidth(), bLeft.getHeight());
 		wrapper.setOrigin(wrapper.getPrefWidth()/2, wrapper.getPrefHeight()/2);
 		wrapper.rotate(180);
+		wrapper.pack();
 		
-		score.setFontScale(1.5f);
-		score.setAlignment(Align.center);
+		//table.debug();
 		
-		wrapper.setPosition(25, 5);
-		bRight.setPosition(media.getScreenWidth() - bRight.getWidth() - 25, 5);
+		table.setFillParent(true);
+		table.pad(25);
 		
-		bMissile1.setPosition(media.getScreenWidth()/2 + 140, 5);
-		bMissile2.setPosition(media.getScreenWidth()/2 - bMissile2.getWidth() - 140, 5);
+		table.row().expandY().top();
+		table.add(sBar).left().colspan(2);
+		table.add(score).expandX().spaceRight(70);
+		table.add(mBar).right();
 		
-		mBar.setPosition(media.getScreenWidth() - mBar.getWidth() - 25, media.getScreenHeight() - mBar.getHeight() - 5);
-		sBar.setPosition(25, media.getScreenHeight() - mBar.getHeight() - 5);
+		table.row().expandY().bottom();
 		
-		ScreenUtil.centerTop(score, this, 0, -60);
-		ScreenUtil.top(message, this, 45, -40);
-		
-		addActor(bRight);
-		addActor(wrapper);
-		addActor(bMissile2);
-		addActor(bMissile1);
-		addActor(mBar);
-		addActor(sBar);
-		addActor(message);
-		addActor(score);
+		table.add(wrapper).right().padRight(10);
+		table.add(bRight).left();
+		table.add(bMissile1).right().colspan(2);
 	}
 	
 	@Override
@@ -99,6 +98,7 @@ public class GameUI extends BasicUI {
 		
 		if (world.getState() == WorldState.END) {
 			screen.showEnd();
+			return;
 		}
 		
 		int mShip = (int) world.getShip().getMissiles();
@@ -145,7 +145,7 @@ public class GameUI extends BasicUI {
 	 * @author jefferson
 	 *
 	 */
-	class MissileBar extends Image {
+	class MissileBar extends Widget {
 		
 		Texture edge;
 		Texture normal;
@@ -158,13 +158,21 @@ public class GameUI extends BasicUI {
 			edge = media.getTextureRegion("missilesbar/edge").getTexture();
 			normal = media.getTextureRegion("missilesbar/normal").getTexture();
 			warning = media.getTextureRegion("missilesbar/warning").getTexture();
-			
-			setWidth(edge.getWidth());
-			setHeight(edge.getHeight());
 		}
 		
 		public void setScore(int _score) {
 			score = _score;
+		}
+		
+
+		@Override
+		public float getPrefWidth() {
+			return edge.getWidth();
+		}
+		
+		@Override
+		public float getPrefHeight() {
+			return edge.getHeight();
 		}
 		
 		@Override
@@ -190,7 +198,7 @@ public class GameUI extends BasicUI {
 	 * @author jefferson
 	 *
 	 */
-	class ShieldBar extends Image {
+	class ShieldBar extends Widget {
 		
 		Texture edge;
 		Texture shield;
@@ -202,13 +210,20 @@ public class GameUI extends BasicUI {
 			edge = media.getTextureRegion("shieldbar/edge").getTexture();
 			shield = media.getTextureRegion("shieldbar/shield").getTexture();
 			score = 100;
-			
-			setWidth(shield.getWidth());
-			setHeight(shield.getHeight());
 		}
 		
 		public void setScore(int _score) {
 			score = _score;
+		}
+		
+		@Override
+		public float getPrefWidth() {
+			return edge.getWidth();
+		}
+		
+		@Override
+		public float getPrefHeight() {
+			return edge.getHeight();
 		}
 		
 		public void draw(SpriteBatch batch, float parentAlpha) {

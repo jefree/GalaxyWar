@@ -9,8 +9,8 @@ public class MainScreen extends AbstractScreen {
 	
 	MainMenuUI menu;
 	
-	public MainScreen(GalaxyWar _game) {
-		super(_game);
+	public MainScreen(GalaxyWar game) {
+		super(game);
 	}
 	
 	@Override

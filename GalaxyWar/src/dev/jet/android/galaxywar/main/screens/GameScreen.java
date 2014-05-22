@@ -81,7 +81,7 @@ public class GameScreen extends AbstractScreen {
 		world.reset();
 	}
 	
-	public void backMainMenu() {
+	public void backToMain() {
 		game.setScreen(new MainScreen(game));
 	}
 	
@@ -103,10 +103,6 @@ public class GameScreen extends AbstractScreen {
 		
 		stage.addActor(world);
 		stage.addActor(gui);
-		
-		if(world.getState() == WorldState.PAUSE){
-			world.resume();
-		}
 	}
 	
 	@Override
@@ -119,6 +115,7 @@ public class GameScreen extends AbstractScreen {
 				showPause();
 			
 			} else if (world.getState() == WorldState.PAUSE) {
+				world.resume();
 				showGame();
 			}
 		}

@@ -1,6 +1,5 @@
 package dev.jet.android.galaxywar.ui;
 
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -9,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton.ImageTextButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import dev.jet.android.galaxywar.media.Media;
@@ -16,69 +16,63 @@ import dev.jet.android.galaxywar.media.Media;
 public abstract class BasicUI extends Group {
 	
 	protected Media media;
+	private Table table;
 	
-	public BasicUI(Media _media) {
+	public BasicUI(Media media) {
 		
-		media = _media;
+		this.media = media;
+		this.table = new Table();
 		
 		setWidth(media.getScreenWidth());
 		setHeight(media.getScreenHeight());
 		
-		addListener(new BasicUIListener());
+		init(this.table);
+		
+		this.addActor(table);
+		
+		addListener(new InputListener(){
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y,
+					int pointer, int button) {
+				onTouchDown(x, y);
+				
+				return true;
+			}
+			
+			@Override
+			public void touchUp(InputEvent event, float x, float y, int pointer,
+					int button) {
+				// TODO Auto-generated method stub
+				onTouchUp(x, y);
+			}
+		});
 	}
 	
 	public abstract void onTouchDown(float x, float y);
 	public abstract void onTouchUp(float x, float y);
+	protected abstract void init(Table table);
 	
-	public static Actor createButton(Media media, String name, String text, String font) {
+	public static ImageButton createButton(Media media, String name) {
 		
-		Actor button = null;
+		ImageButtonStyle ibs = new ImageButtonStyle();
 		
-		if (text.equals("")){
-			ImageButtonStyle ibs = new ImageButtonStyle();
-			
-			ibs.up = new TextureRegionDrawable(media.getTextureRegion(name+"Up"));
-			ibs.down = new TextureRegionDrawable(media.getTextureRegion(name+"Down"));
-			
-			button = new ImageButton(ibs);
+		ibs.up = new TextureRegionDrawable(media.getTextureRegion(name+"Up"));
+		ibs.down = new TextureRegionDrawable(media.getTextureRegion(name+"Down"));
 		
-		} else {
-			
-			ImageTextButtonStyle itbs = new ImageTextButtonStyle();
-			
-			itbs.up = new TextureRegionDrawable(media.getTextureRegion(name+"Up"));
-			itbs.down = new TextureRegionDrawable(media.getTextureRegion(name+"Down"));
-			itbs.font = media.getFont(font);
-			
-			ImageTextButton aux = new ImageTextButton(text, itbs);
-			
-			aux.getLabel().setTouchable(Touchable.disabled);
-			
-			button = aux;
-			
-		}
-		
-		return button;
-		
+		return new ImageButton(ibs);
 	}
 	
-	class BasicUIListener extends InputListener {
+	public static ImageTextButton createButton(Media media, String name, String text, String font) {
 		
-		@Override
-		public boolean touchDown(InputEvent event, float x, float y,
-				int pointer, int button) {
-			onTouchDown(x, y);
-			
-			return true;
-		}
+		ImageTextButtonStyle itbs = new ImageTextButtonStyle();
 		
-		@Override
-		public void touchUp(InputEvent event, float x, float y, int pointer,
-				int button) {
-			// TODO Auto-generated method stub
-			onTouchUp(x, y);
-		}
+		itbs.up = new TextureRegionDrawable(media.getTextureRegion(name+"Up"));
+		itbs.down = new TextureRegionDrawable(media.getTextureRegion(name+"Down"));
+		itbs.font = media.getFont(font);
 		
+		ImageTextButton btn = new ImageTextButton(text, itbs);
+		btn.getLabel().setTouchable(Touchable.disabled);
+		
+		return btn;
 	}
-
 }
