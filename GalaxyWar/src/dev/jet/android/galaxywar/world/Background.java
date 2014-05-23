@@ -1,6 +1,6 @@
 package dev.jet.android.galaxywar.world;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import dev.jet.android.galaxywar.world.actors.Entity;
@@ -65,7 +65,7 @@ public class Background extends Entity {
 		}
 	}
 	
-	private void drawImage(SpriteBatch batch) {
+	private void drawImage(Batch batch) {
 		batch.draw(image.getTexture(), 
 				dstX, dstY,
 				0, 0,
@@ -77,7 +77,7 @@ public class Background extends Entity {
 	}
 	
 	@Override
-	public void draw(SpriteBatch batch, float alphaParent) {
+	public void draw(Batch batch, float alphaParent) {
 		
 		setBackPosition(getScreenX(), getScreenY());
 		

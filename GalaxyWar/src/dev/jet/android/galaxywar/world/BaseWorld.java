@@ -114,7 +114,7 @@ public abstract class BaseWorld extends Group {
 		
 		Missile missile = missiles.create();
 		
-		missile.translate(position.x, position.y);
+		missile.moveBy(position.x, position.y);
 		missile.setDirection(direction);
 	}
 	

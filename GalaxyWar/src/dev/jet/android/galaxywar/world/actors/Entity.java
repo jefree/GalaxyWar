@@ -1,6 +1,6 @@
 package dev.jet.android.galaxywar.world.actors;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -44,7 +44,7 @@ public abstract class Entity extends Actor {
 	public void act(float delta) {
 		super.act(delta);
 		
-		translate(direction.x * speed * delta, direction.y * speed * delta);
+		moveBy(direction.x * speed * delta, direction.y * speed * delta);
 	}
 	
 	public Rectangle getRectangle() {
@@ -140,7 +140,7 @@ public abstract class Entity extends Actor {
 	}
 	
 	@Override
-	public void draw(SpriteBatch batch, float alphaParent) {
+	public void draw(Batch batch, float alphaParent) {
 		batch.draw(image, getScreenX() - getWidth()/2, getScreenY() - getHeight()/2, 
 				getOriginX(), getOriginY(),
                 getWidth(), getHeight(),

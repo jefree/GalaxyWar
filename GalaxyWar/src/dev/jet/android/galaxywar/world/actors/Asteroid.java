@@ -20,7 +20,7 @@ public abstract class Asteroid extends Entity {
 		
 		super.act(delta);
 		
-		rotate(speedRotation);
+		rotateBy(speedRotation);
 		
 		doAstCollision(delta);
 	}

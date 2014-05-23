@@ -2,7 +2,7 @@ package dev.jet.android.galaxywar.ui.game;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -69,10 +69,10 @@ public class GameUI extends BasicUI {
 		wrapper.setTransform(true);
 		wrapper.setSize(bLeft.getWidth(), bLeft.getHeight());
 		wrapper.setOrigin(wrapper.getPrefWidth()/2, wrapper.getPrefHeight()/2);
-		wrapper.rotate(180);
+		wrapper.rotateBy(180);
 		wrapper.pack();
 		
-		//table.debug();
+		table.debug();
 		
 		table.setFillParent(true);
 		table.pad(25);
@@ -176,7 +176,7 @@ public class GameUI extends BasicUI {
 		}
 		
 		@Override
-		public void draw(SpriteBatch batch, float parentAlpha) {
+		public void draw(Batch batch, float parentAlpha) {
 			
 			super.draw(batch, parentAlpha);
 			
@@ -226,7 +226,8 @@ public class GameUI extends BasicUI {
 			return edge.getHeight();
 		}
 		
-		public void draw(SpriteBatch batch, float parentAlpha) {
+		@Override
+		public void draw(Batch batch, float parentAlpha) {
 			super.draw(batch, parentAlpha);
 			
 			batch.draw(edge, getX(), getY());

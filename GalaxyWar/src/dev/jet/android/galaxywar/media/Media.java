@@ -8,6 +8,9 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonReader;
+import com.badlogic.gdx.utils.JsonValue;
 
 public class Media {
 	
@@ -16,10 +19,41 @@ public class Media {
 	int screenWidth;
 	int screenHeight;
 	
-	public Media(int w, int h) {
-		
+	public Media() {
 		resources = new Skin();
+	}
+	
+	public void loadJson(String jsonFile) {
 		
+		JsonValue data = new JsonReader().parse(Gdx.files.internal(jsonFile));
+		
+		for (JsonValue entry = data.child(); entry != null; entry = entry.next()) {
+			
+			String[] list = entry.asStringArray();
+			
+			for (String string : list) {
+				
+				if (entry.name().equals("texture")) {
+					loadTextureRegion(string);
+				
+				} else if (entry.name().equals("atlas")) {
+					loadTextureAtlas(string);
+				
+				} else if (entry.name().equals("font")) {
+					loadFont(string);
+					
+				} else if (entry.name().equals("sound")) {
+					loadSound(string);
+					
+				} else if (entry.name().equals("music")) {
+					loadMusic(string);
+				}
+			}
+		}
+		
+	}
+	
+	public void setScreenSize(int w, int h) {
 		screenWidth = w;
 		screenHeight = h;
 	}
@@ -102,4 +136,18 @@ public class Media {
 	public void dispose() {
 		resources.dispose();
 	}
+	
+	class MediaSkin extends Skin implements Json.Serializable {
+
+		@Override
+		public void read(Json arg0, JsonValue arg1) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void write(Json arg0) {
+			// TODO Auto-generated method stub
+			
+		}}
 }

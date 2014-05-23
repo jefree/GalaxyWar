@@ -33,7 +33,7 @@ public abstract class Shield extends Entity {
 	public void act(float delta) {
 		
 		setPosition(defended.getX(), defended.getY());
-		rotate(45*delta);
+		rotateBy(45*delta);
 		
 		if (life < 100) {	
 			life += regeneration*delta;

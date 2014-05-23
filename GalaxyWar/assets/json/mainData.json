@@ -1,0 +1,20 @@
+{
+	texture: [
+		"main/back.png",
+		"buttons/greenUp.png",
+		"buttons/greenDown.png",
+		"buttons/blueUp.png",
+		"buttons/blueDown.png",
+		"buttons/blackUp.png",
+		"buttons/blackDown.png",
+	],
+	
+	font : [
+		"fonts/Complex",
+		"fonts/AmazDoom",	
+	],
+
+	music: [
+		"sounds/main.mp3",
+	]
+}

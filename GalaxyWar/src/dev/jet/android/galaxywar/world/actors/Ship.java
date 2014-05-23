@@ -42,7 +42,7 @@ public class Ship extends Entity {
 		
 		if (rDelta > 0) {
 			
-			rotate(MAX_ROTATION_SPEED * rOrientation * rDelta * delta);
+			rotateBy(MAX_ROTATION_SPEED * rOrientation * rDelta * delta);
 			setDirection(getRotation());
 			rDelta = 0;
 		}

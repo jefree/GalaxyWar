@@ -1,0 +1,60 @@
+{
+	texture: [
+		
+		"ship.png",	
+		"missile.png",	
+		"asteroid.png",
+		
+		"bArrowUp.png",
+		"bArrowDown.png",
+		
+		"bMissileUp.png",
+		"bMissileDown.png",
+		
+		"bSpeedUp.png",
+		"bSpeedDown.png",
+		
+		"space.jpg",
+		
+		"missilesbar/edge.png",
+		"missilesbar/normal.png",
+		"missilesbar/warning.png",
+		
+		"end/back.png",
+		
+		"buttons/redUp.png",
+		"buttons/redDown.png",
+		"buttons/blackUp.png",
+		"buttons/blackDown.png",
+		"buttons/blueUp.png",
+		"buttons/blueDown.png",
+		
+		"shieldbar/edge.png",
+		"shieldbar/shield.png",
+		
+		"shield.png",
+	
+	], 
+	
+	atlas: [
+		"explosion/asteroid/anim.atlas",
+		"explosion/ship/anim.atlas",
+	],
+	
+	
+	font: [
+		"fonts/Comic Sans MS",
+		"fonts/AmazDoom",
+	],
+	
+	sound: [
+		"sounds/shot.mp3",
+		"sounds/explosionAst.mp3",
+		"sounds/explosionShip.mp3",
+	],
+	
+	music: [
+		"sounds/music.mp3",
+	]
+
+}

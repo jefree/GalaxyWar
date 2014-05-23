@@ -13,7 +13,8 @@ public class GalaxyWar extends Game {
 	@Override
 	public void create() {
 		
-		media = new Media(788, 480);
+		media = new Media();
+		media.setScreenSize(788, 480);
 		
 		Gdx.input.setCatchBackKey(true);
 		

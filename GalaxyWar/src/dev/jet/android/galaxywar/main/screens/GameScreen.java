@@ -26,50 +26,7 @@ public class GameScreen extends AbstractScreen {
 		
 		super.show();
 		
-		media.loadTextureRegion("ship.png");	
-		media.loadTextureRegion("missile.png");	
-		media.loadTextureRegion("asteroid.png");
-		
-		media.loadTextureRegion("bArrowUp.png");
-		media.loadTextureRegion("bArrowDown.png");
-		
-		media.loadTextureRegion("bMissileUp.png");
-		media.loadTextureRegion("bMissileDown.png");
-		
-		media.loadTextureRegion("bSpeedUp.png");
-		media.loadTextureRegion("bSpeedDown.png");
-		
-		media.loadTextureRegion("space.jpg");
-		
-		media.loadTextureRegion("missilesbar/edge.png");
-		media.loadTextureRegion("missilesbar/normal.png");
-		media.loadTextureRegion("missilesbar/warning.png");
-		
-		media.loadTextureRegion("end/back.png");
-		
-		media.loadTextureRegion("buttons/redUp.png");
-		media.loadTextureRegion("buttons/redDown.png");
-		media.loadTextureRegion("buttons/blackUp.png");
-		media.loadTextureRegion("buttons/blackDown.png");
-		media.loadTextureRegion("buttons/blueUp.png");
-		media.loadTextureRegion("buttons/blueDown.png");
-		
-		media.loadTextureRegion("shieldbar/edge.png");
-		media.loadTextureRegion("shieldbar/shield.png");
-		
-		media.loadTextureAtlas("explosion/asteroid/anim.atlas");
-		
-		media.loadTextureRegion("shield.png");
-		
-		media.loadTextureAtlas("explosion/ship/anim.atlas");
-		
-		media.loadFont("fonts/Comic Sans MS");
-		media.loadFont("fonts/AmazDoom");
-		
-		media.loadSound("sounds/shot.mp3");
-		media.loadSound("sounds/explosionAst.mp3");
-		media.loadSound("sounds/explosionShip.mp3");
-		media.loadMusic("sounds/music.mp3");
+		media.loadJson("json/gameData.json");
 		
 		world = new SingleWorld(media);
 		gui = new GameUI(world, media, this);
