@@ -72,7 +72,7 @@ public class GameUI extends BasicUI {
 		wrapper.rotateBy(180);
 		wrapper.pack();
 		
-		table.debug();
+		//table.debug();
 		
 		table.setFillParent(true);
 		table.pad(25);

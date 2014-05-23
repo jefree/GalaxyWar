@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 
@@ -136,18 +135,4 @@ public class Media {
 	public void dispose() {
 		resources.dispose();
 	}
-	
-	class MediaSkin extends Skin implements Json.Serializable {
-
-		@Override
-		public void read(Json arg0, JsonValue arg1) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void write(Json arg0) {
-			// TODO Auto-generated method stub
-			
-		}}
 }
