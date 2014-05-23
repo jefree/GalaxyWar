@@ -50,6 +50,8 @@ public class MainMenuUI extends BasicUI {
 		
 		addActor(back);
 		
+		table.debug();
+		
 		table.setFillParent(true);
 		table.add(title).expandY();
 		
