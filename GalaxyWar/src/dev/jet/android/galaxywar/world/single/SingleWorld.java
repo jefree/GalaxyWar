@@ -21,17 +21,14 @@ public class SingleWorld extends BaseWorld {
 		addStates();
 		
 		setFocusActor(ship);
-		
-		shield.setState(getState("shieldI"));
-		asteroids.setState(getState("astI"));
-		missiles.setState(getState("mInitial"));
 	}
 	
 	@Override
 	public void run() {
-		super.run();
 		
-		createLevelUpActions();
+		reset();
+		
+		super.run();
 		
 		addAction(new Action() {
 			
@@ -57,6 +54,29 @@ public class SingleWorld extends BaseWorld {
 		}
 		
 		super.act(delta);
+	}
+	
+	public void reset() {
+
+		score = 0;
+		
+		shield.setState(getState("shieldI"));
+		asteroids.setState(getState("astI"));
+		missiles.setState(getState("mInitial"));
+		
+		ship.reset();
+		shield.reset();
+		asteroids.reset();
+		missiles.reset();
+		shipExplosion.reset();
+		
+		clearActions();
+		createLevelUpActions();
+		
+		addActor(ship);
+		addActor(shield);
+		
+		music.stop();
 	}
 	
 	private void createShipExplosion() {

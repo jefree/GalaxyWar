@@ -17,6 +17,8 @@ public abstract class Entity extends Actor {
 	static ShapeRenderer debugRenderer;
 	static boolean debug;
 	
+	int deltaCollision = 14;
+	
 	public static void debug(boolean debug) {
 		Entity.debug = debug;
 		
@@ -62,10 +64,10 @@ public abstract class Entity extends Actor {
 	
 	public Rectangle getRectangle() {
 		
-		rectangle.setX(getX() - getWidth()/2);
-		rectangle.setY(getY() - getHeight()/2);
-		rectangle.setWidth(getWidth() - 10);
-		rectangle.setHeight(getHeight() - 10);
+		rectangle.setX(getX() - getWidth()/2 +deltaCollision/2);
+		rectangle.setY(getY() - getHeight()/2 +deltaCollision/2);
+		rectangle.setWidth(getWidth() - deltaCollision);
+		rectangle.setHeight(getHeight() -deltaCollision);
 		
 		return rectangle;
 	}
@@ -167,8 +169,9 @@ public abstract class Entity extends Actor {
 			
 			debugRenderer.begin(ShapeType.Line);
 			
-			debugRenderer.rect(getScreenX() - getWidth()/2, getScreenY()-getHeight()/2,
-				getWidth(), getHeight());
+			debugRenderer.rect(getScreenX() - getWidth()/2 +deltaCollision/2, 
+					getScreenY() - getHeight()/2 +deltaCollision/2,
+				getWidth() -deltaCollision, getHeight() -deltaCollision);
 			
 			debugRenderer.end();
 			

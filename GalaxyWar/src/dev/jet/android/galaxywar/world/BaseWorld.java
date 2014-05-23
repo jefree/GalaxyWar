@@ -83,6 +83,7 @@ public abstract class BaseWorld extends Group {
 		addActor(missiles);
 		addActor(explosions);
 		
+		//Entity.debug(true);
 	}
 	
 	@Override
@@ -116,22 +117,6 @@ public abstract class BaseWorld extends Group {
 		
 		missile.moveBy(position.x, position.y);
 		missile.setDirection(direction);
-	}
-	
-	public void reset() {
-		
-		ship.reset();
-		shield.reset();
-		asteroids.reset();
-		missiles.reset();
-		shipExplosion.reset();
-		
-		addActor(ship);
-		addActor(shield);
-		
-		music.stop();
-		
-		run();
 	}
 	
 	public void genAstExplosion(Vector2 pos) {

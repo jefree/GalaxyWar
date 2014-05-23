@@ -12,7 +12,7 @@ import dev.jet.android.galaxywar.world.single.SingleWorld;
 
 public class GameScreen extends AbstractScreen {
 	
-	BaseWorld world;
+	SingleWorld world;
 	
 	GameUI gui;
 	PauseUI pui;
@@ -35,7 +35,7 @@ public class GameScreen extends AbstractScreen {
 		stage.addActor(world);
 		stage.addActor(gui);
 		
-		world.reset();
+		world.run();
 	}
 	
 	public void backToMain() {
