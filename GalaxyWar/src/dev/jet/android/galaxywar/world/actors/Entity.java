@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
@@ -16,8 +16,6 @@ public abstract class Entity extends Actor {
 	
 	static ShapeRenderer debugRenderer;
 	static boolean debug;
-	
-	int deltaCollision = 14;
 	
 	public static void debug(boolean debug) {
 		Entity.debug = debug;
@@ -34,7 +32,7 @@ public abstract class Entity extends Actor {
 	protected BaseWorld world;
 	
 	protected TextureRegion image;
-	private Rectangle rectangle;
+	private Circle circle;
 	
 	private Vector2 direction;
 	
@@ -50,7 +48,8 @@ public abstract class Entity extends Actor {
 		
 		this.world = world;
 		enable = true;
-		rectangle = new Rectangle();
+		
+		circle = new Circle();
 		
 		direction = new Vector2();
 	}
@@ -62,18 +61,18 @@ public abstract class Entity extends Actor {
 		moveBy(direction.x * speed * delta, direction.y * speed * delta);
 	}
 	
-	public Rectangle getRectangle() {
+	public Circle getCircle() {
 		
-		rectangle.setX(getX() - getWidth()/2 +deltaCollision/2);
-		rectangle.setY(getY() - getHeight()/2 +deltaCollision/2);
-		rectangle.setWidth(getWidth() - deltaCollision);
-		rectangle.setHeight(getHeight() -deltaCollision);
+		circle.setX(getX());
+		circle.setY(getY());
 		
-		return rectangle;
+		circle.setRadius(image.getRegionWidth()/2);
+		
+		return circle;
 	}
 	
 	public Vector2 getCenter() {
-		return getRectangle().getCenter(new Vector2());
+		return new Vector2(circle.x, circle.y);
 	}
 	
 	public void setDirection(Vector2 direction) {
@@ -137,12 +136,7 @@ public abstract class Entity extends Actor {
 	}
 	
 	public boolean collide (Entity e) {
-		
-		Rectangle own = getRectangle();
-		Rectangle other = e.getRectangle();
-		
-		return own.overlaps(other);
-		
+		return e.getCircle().overlaps(this.getCircle());
 	}
 	
 	public void reset() {
@@ -169,9 +163,8 @@ public abstract class Entity extends Actor {
 			
 			debugRenderer.begin(ShapeType.Line);
 			
-			debugRenderer.rect(getScreenX() - getWidth()/2 +deltaCollision/2, 
-					getScreenY() - getHeight()/2 +deltaCollision/2,
-				getWidth() -deltaCollision, getHeight() -deltaCollision);
+			debugRenderer.arc(getScreenX(), getScreenY(), 
+					circle.radius, 0, 360);
 			
 			debugRenderer.end();
 			

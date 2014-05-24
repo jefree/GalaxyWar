@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.DelayAction;
 
 import dev.jet.android.galaxywar.media.Media;
 import dev.jet.android.galaxywar.world.BaseWorld;
+import dev.jet.android.galaxywar.world.actors.Entity;
 import dev.jet.android.galaxywar.world.single.state.AsteroidSingleGroupState;
 import dev.jet.android.galaxywar.world.single.state.MissileSingleState;
 import dev.jet.android.galaxywar.world.single.state.ShipShieldState;
@@ -21,6 +22,8 @@ public class SingleWorld extends BaseWorld {
 		addStates();
 		
 		setFocusActor(ship);
+		
+		//Entity.debug(true);
 	}
 	
 	@Override
