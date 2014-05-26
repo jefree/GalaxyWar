@@ -17,6 +17,9 @@ public class AbstractScreen implements Screen, InputProcessor {
 	protected Stage stage;
 	protected GalaxyWar game;
 	protected Media media;
+
+	private float actTime = 0.015625f;
+	private float time;
 	
 	public AbstractScreen (GalaxyWar game) {
 		this.game = game;
@@ -31,10 +34,18 @@ public class AbstractScreen implements Screen, InputProcessor {
 
 	@Override
 	public void render(float delta) {
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        stage.act(Gdx.graphics.getDeltaTime());
 		
-        stage.draw();
+		time += delta;
+		
+		if (time >= actTime) {
+			
+			stage.act(delta);
+	        time = 0;
+		}
+		
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		
+		stage.draw();
         Table.drawDebug(stage);
 		
 	}

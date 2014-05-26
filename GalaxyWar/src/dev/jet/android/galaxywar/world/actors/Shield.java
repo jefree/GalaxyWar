@@ -43,10 +43,8 @@ public abstract class Shield extends Entity {
 			
 			if (ast.collide(this)) {
 				
-				receiveDamage(ast.getDamage());
-				
+				receiveDamage(ast.damage);
 				world.genAstExplosion(GeomUtil.midPoint(this.getCenter(),ast.getCenter()));
-				
 				ast.destroy();
 			}
 		}

@@ -10,13 +10,12 @@ public class AsteroidSingle extends Asteroid {
 	private int maxDistanceShip; 
 	protected SingleWorld world;
 	
-	
 	@Override
 	public void create(BaseWorld world) {
 		super.create(world);
 		
 		this.world = (SingleWorld) world;
-		maxDistanceShip = (int)(world.getWidth()*1.5);
+		maxDistanceShip = (int)(world.getWidth()*2);
 	}
 
 	@Override

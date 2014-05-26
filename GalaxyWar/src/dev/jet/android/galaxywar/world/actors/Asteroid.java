@@ -1,55 +1,68 @@
 package dev.jet.android.galaxywar.world.actors;
 
-import dev.jet.android.galaxywar.utils.GeomUtil;
+import com.badlogic.gdx.math.Vector2;
 
 public abstract class Asteroid extends Entity {
 	
-	float speedRotation;
-	private float damage;
+	public enum AsteroidType { SMALL, BIG };
+	
+	public AsteroidType type;
+	public float damage;
+	public float speedRotation;
 	
 	protected abstract boolean shouldBeDestroy(float delta); 
 	protected abstract void onAstCollision(float delta);
 	
 	@Override
 	public void act(float delta) {
-		
-		if ( shouldBeDestroy(delta) ) 
-		{	
-			remove();
-		}
-		
 		super.act(delta);
 		
 		rotateBy(speedRotation);
 		
-		doAstCollision(delta);
+		if (shouldBeDestroy(delta)) {	
+			destroy();
+			return;
+		}
+		
+		detectAstCollision(delta);
+		
+		if (life == 0) {
+			
+			System.out.println(ID + " destroy for life");
+			
+			destroy();
+			world.genAstExplosion(new Vector2(getX(), getY()));
+		}
 	}
 	
-	private void doAstCollision(float delta) {
+	private void detectAstCollision(float delta) {
 		
 		for (Asteroid ast : world.getAsteroids()) {
 			
 			if (ast != this & ast.collide(this) ) {
 				
-				ast.destroy();
-				destroy();
+				if (this.type == AsteroidType.SMALL) {
+					
+					life -=1;
+					
+					if (ast.type == AsteroidType.SMALL) {
+						ast.life -=1;
+					}
+					
+				} 
 				
-				world.genAstExplosion(GeomUtil.midPoint(this.getCenter(), ast.getCenter()));
+				if (ast.type == AsteroidType.BIG) {
+					life = 0;
+					
+					if (this.type == AsteroidType.BIG) {
+						ast.life = 0;
+					}
+				}
 				
-				onAstCollision(delta);
+				System.out.println(this + " collide with "+ ast);
 			}
+			
+			onAstCollision(delta);
 		}
-	}
-	
-	public void setDamage(float damage) {
-		this.damage = damage;
-	}
-	
-	public float getDamage() {
-		return damage;
-	}
-
-	public void setSpeedRotation(float speedRotation) {
-		this.speedRotation = speedRotation;
 	}
 }

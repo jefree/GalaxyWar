@@ -29,7 +29,7 @@ public abstract class GroupController <T extends Entity> extends Group {
 		T entity = null;
 		
 		for (T e : entities) {
-			if ( !e.isEnable() ) {
+			if ( !e.enable ) {
 				entity = e;
 			}
 		}
@@ -56,7 +56,7 @@ public abstract class GroupController <T extends Entity> extends Group {
 		ArrayList<T> result = new ArrayList<T>();
 		
 		for (T e : entities) {
-			if(e.isEnable()) {
+			if(e.enable) {
 				result.add(e);
 			}
 		}

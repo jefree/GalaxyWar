@@ -17,6 +17,8 @@ public abstract class Entity extends Actor {
 	static ShapeRenderer debugRenderer;
 	static boolean debug;
 	
+	private static long nextID = 0;
+	
 	public static void debug(boolean debug) {
 		Entity.debug = debug;
 		
@@ -25,18 +27,25 @@ public abstract class Entity extends Actor {
 		}
 	}
 	
-	protected int speed;
-	protected float life;
-	protected boolean enable;
+	public float speed;
+	public float life;
+	public boolean enable;
 	
-	protected BaseWorld world;
+	public Vector2 direction;
 	
+	public BaseWorld world;
+	
+	public final long ID;
 	protected TextureRegion image;
 	private Circle circle;
 	
-	private Vector2 direction;
-	
 	public abstract void setState(EntityState state);
+	
+	public Entity() {
+		
+		this.ID = nextID;
+		nextID += 1;
+	}
 	
 	public void create(BaseWorld world, TextureRegion image) {
 		
@@ -75,42 +84,12 @@ public abstract class Entity extends Actor {
 		return new Vector2(circle.x, circle.y);
 	}
 	
-	public void setDirection(Vector2 direction) {
-		this.direction = direction;
-	}
-	
 	public void setDirection(float degrees) {
 		this.direction = GeomUtil.getVector2(1, degrees);
 	}
 	
-	public Vector2 getDirection() {
-		return direction;
-	}
-	
 	public float getDirAngle(){
-		
 		return GeomUtil.getAngle(0, 0,direction.x, direction.y);
-		
-	}
-	
-	public int getSpeed() {
-		return speed;
-	}
-
-	public void setSpeed(int speed) {
-		this.speed = speed;
-	}
-	
-	public float getLife() {
-		return life;
-	}
-
-	public void setLife(float life) {
-		this.life = life;
-	}
-	
-	public boolean isEnable() {
-		return enable;
 	}
 	
 	public float getScreenX() {
@@ -146,6 +125,11 @@ public abstract class Entity extends Actor {
 	public void destroy() {
 		enable = false;
 		remove();
+	}
+	
+	@Override
+	public String toString() {
+		return "Entity: " + ID;
 	}
 	
 	@Override

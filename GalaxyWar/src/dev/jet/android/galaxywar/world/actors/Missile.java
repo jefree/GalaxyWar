@@ -1,7 +1,5 @@
 package dev.jet.android.galaxywar.world.actors;
 
-import dev.jet.android.galaxywar.utils.GeomUtil;
-
 public abstract class Missile extends SoundEntity {
 	
 	public abstract void onAstCollision(float delta);
@@ -30,13 +28,10 @@ public abstract class Missile extends SoundEntity {
 		for (Asteroid ast :  world.getAsteroids()) {
 			
 			if (this.collide(ast)) {	
-				ast.destroy();
+				ast.life -= 1;
 				destroy();
 
 				onAstCollision(delta);
-				
-				world.genAstExplosion( GeomUtil.midPoint( this.getCenter(), ast.getCenter()) );
-				
 			}
 		}	
 	}

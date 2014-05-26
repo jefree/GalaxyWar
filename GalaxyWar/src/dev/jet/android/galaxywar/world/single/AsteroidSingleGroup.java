@@ -9,6 +9,8 @@ import dev.jet.android.galaxywar.utils.MathUtil;
 import dev.jet.android.galaxywar.world.EntityState;
 import dev.jet.android.galaxywar.world.GroupController;
 import dev.jet.android.galaxywar.world.BaseWorld;
+import dev.jet.android.galaxywar.world.actors.Asteroid.AsteroidType;
+import dev.jet.android.galaxywar.world.actors.Entity;
 import dev.jet.android.galaxywar.world.single.state.AsteroidSingleGroupState;
 
 public class AsteroidSingleGroup extends GroupController<AsteroidSingle> {
@@ -21,10 +23,8 @@ public class AsteroidSingleGroup extends GroupController<AsteroidSingle> {
 	
 	private static final float INIT_GEN_TIME_LIMIT = 3.0f;
 	
-	private int GEN_RADIUS = 0;
-	private int DISP_RADIUS = 0;	
-	
-	private TextureRegion image;
+	private TextureRegion smallAstImage;
+	private TextureRegion bigAstImage;
 	
 	private float genTime;
 	private float deltaTime;
@@ -38,10 +38,10 @@ public class AsteroidSingleGroup extends GroupController<AsteroidSingle> {
 		
 		deltaTime = 0;
 		
-		image = media.getTextureRegion("asteroid");
+		smallAstImage = media.getTextureRegion("smallAsteroid");
+		bigAstImage = media.getTextureRegion("bigAsteroid");
 		
-		GEN_RADIUS = (int)(world.getWidth()/2 + media.getTextureRegion("asteroid").getRegionWidth()/2);
-		DISP_RADIUS = (int)(GEN_RADIUS*0.3f); 
+		//Entity.debug(true);
 	}
 	
 	@Override
@@ -59,40 +59,72 @@ public class AsteroidSingleGroup extends GroupController<AsteroidSingle> {
 			deltaTime = 0;
 			create();
 		}
-		
 	}
 
 	@Override
 	protected void init(AsteroidSingle ast) {
 		
-		int astX, astY, shipX, shipY;
+		float astX, astY, shipX, shipY;
+		float genRadius, dispRadius;
 		
 		Vector2 delta;
-		float borderAngle;
+		float regionBorderAngle;
 		float disp;
 		
-		ast.setSpeedRotation(MathUtil.getRandom(MIN_ASTEROIDS_ROTATTION_SPEED, MAX_ASTEROIDS_ROTATTION_SPEED));
+		TextureRegion image = null;
+		AsteroidType type = null;
+		float damage = 0;
+		float life = 0; 
+		float speed = 0;
 		
-		shipX = (int)world.getShip().getX();
-		shipY = (int)world.getShip().getY();
+		/* determinate the asteroid type */
 		
-		delta = GeomUtil.getVector2(GEN_RADIUS, world.getShip().getRotation());
-		borderAngle = world.getShip().getRotation() + 90; 
+		if (Math.random() < 0.1){
+			
+			type = AsteroidType.BIG;
+			image = bigAstImage;
+			damage = state.damage * 2;
+			speed = MAX_ASTEROID_SPEED * 1.5f;
+			life = 2;
+			
+		
+		} else {
+			
+			type = AsteroidType.SMALL;
+			image = smallAstImage;
+			damage = state.damage;
+			speed = MathUtil.getRandom(MIN_ASTEROID_SPEED, MAX_ASTEROID_SPEED);
+			life = 1;
+		}
+		
+		ast.setImage(image);
+		ast.damage = damage;
+		ast.life = life;
+		ast.type = type;
+		
+		genRadius = world.getWidth()/2 + ast.getWidth()/2;
+		dispRadius = genRadius*0.3f; 
+		
+		ast.speedRotation = MathUtil.getRandom(MIN_ASTEROIDS_ROTATTION_SPEED, MAX_ASTEROIDS_ROTATTION_SPEED);
+		
+		shipX = world.getShip().getX();
+		shipY = world.getShip().getY();
+		
+		delta = GeomUtil.getVector2(genRadius, world.getShip().getRotation());
+		regionBorderAngle = world.getShip().getRotation() + 90; 
 		
 		astX = shipX + (int)delta.x;
 		astY = shipY + (int)delta.y;
 		
-		disp = MathUtil.getRandSign() * DISP_RADIUS;
-		delta = GeomUtil.getVector2(disp, borderAngle);
+		disp = MathUtil.getRandSign() * dispRadius;
+		delta = GeomUtil.getVector2(disp, regionBorderAngle);
 		
-		astX += (int)delta.x;
-		astY += (int)delta.y;
-		
-		ast.setDamage(state.damage);
+		astX += delta.x;
+		astY += delta.y;
 		
 		ast.setPosition(astX, astY);
-		ast.setDirection((float) GeomUtil.getAngle(astX, astY, shipX, shipY));
-		ast.setSpeed((int)MathUtil.getRandom(MIN_ASTEROID_SPEED, MAX_ASTEROID_SPEED));
+		ast.setDirection(GeomUtil.getAngle(astX, astY, shipX, shipY));
+		ast.speed = speed;
 	}
 	
 	public void setState(EntityState state) {
@@ -105,7 +137,7 @@ public class AsteroidSingleGroup extends GroupController<AsteroidSingle> {
 	protected AsteroidSingle createNew() {
 		
 		AsteroidSingle ast = new AsteroidSingle();
-		ast.create(world, image);
+		ast.create(world);
 		
 		return ast;
 	}

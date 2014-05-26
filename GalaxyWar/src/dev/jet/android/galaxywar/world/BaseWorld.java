@@ -116,7 +116,7 @@ public abstract class BaseWorld extends Group {
 		Missile missile = missiles.create();
 		
 		missile.moveBy(position.x, position.y);
-		missile.setDirection(direction);
+		missile.direction = direction;
 	}
 	
 	public void genAstExplosion(Vector2 pos) {

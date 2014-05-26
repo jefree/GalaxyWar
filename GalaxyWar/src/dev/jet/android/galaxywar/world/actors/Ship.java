@@ -17,12 +17,12 @@ public class Ship extends Entity {
 	
 	public void shoot() {
 		
-		if (isEnable() && missilesN > 0) {
+		if (enable && missilesN > 0) {
 			
 			missilesN -= 1;
 			
 			Vector2 pos = new Vector2(getX(), getY());
-			world.genMissile(pos, getDirection());
+			world.genMissile(pos, direction);
 		}
 	}
 	

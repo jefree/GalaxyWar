@@ -2,8 +2,10 @@
 	texture: [
 		
 		"ship.png",	
-		"missile.png",	
-		"asteroid.png",
+		"missile.png",
+			
+		"smallAsteroid.png",
+		"bigAsteroid.png",
 		
 		"bArrowUp.png",
 		"bArrowDown.png",

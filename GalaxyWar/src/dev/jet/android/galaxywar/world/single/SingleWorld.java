@@ -5,7 +5,6 @@ import com.badlogic.gdx.scenes.scene2d.actions.DelayAction;
 
 import dev.jet.android.galaxywar.media.Media;
 import dev.jet.android.galaxywar.world.BaseWorld;
-import dev.jet.android.galaxywar.world.actors.Entity;
 import dev.jet.android.galaxywar.world.single.state.AsteroidSingleGroupState;
 import dev.jet.android.galaxywar.world.single.state.MissileSingleState;
 import dev.jet.android.galaxywar.world.single.state.ShipShieldState;
@@ -22,8 +21,6 @@ public class SingleWorld extends BaseWorld {
 		addStates();
 		
 		setFocusActor(ship);
-		
-		//Entity.debug(true);
 	}
 	
 	@Override
@@ -38,7 +35,7 @@ public class SingleWorld extends BaseWorld {
 			@Override
 			public boolean act(float arg0) {
 				
-				if(ship.getLife() <= 0) {
+				if(ship.life <= 0) {
 					
 					createShipExplosion();
 					return true;
@@ -153,9 +150,9 @@ public class SingleWorld extends BaseWorld {
 	
 	public void addStates() {
 		
-		AsteroidSingleGroupState astInitial = new AsteroidSingleGroupState(20, 1.2f);
-		AsteroidSingleGroupState astMedium = new AsteroidSingleGroupState(30, 0.8f);
-		AsteroidSingleGroupState astHard = new AsteroidSingleGroupState(45, 0.6f);
+		AsteroidSingleGroupState astInitial = new AsteroidSingleGroupState(20, 1.2f, 1, 2);
+		AsteroidSingleGroupState astMedium = new AsteroidSingleGroupState(30, 0.8f, 1, 2);
+		AsteroidSingleGroupState astHard = new AsteroidSingleGroupState(45, 0.6f, 1, 2);
 		
 		ScoreBonus mBInitial = new ScoreBonus(this, 10, 10, 50, 0, 0);
 		ScoreBonus mBMedium = new ScoreBonus(this, 15, 15, 75, 0, 0);
