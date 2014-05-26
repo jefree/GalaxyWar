@@ -1,5 +1,7 @@
 package dev.jet.android.galaxywar.ui.game;
 
+import java.io.ObjectInputStream.GetField;
+
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -36,7 +38,6 @@ public class GameUI extends BasicUI {
 	GameScreen screen;
 	
 	public GameUI(BaseWorld world, Media media, GameScreen screen) {
-		
 		super(media);
 		
 		this.world = (SingleWorld) world;
@@ -44,6 +45,8 @@ public class GameUI extends BasicUI {
 		
 		score.setFontScale(1.5f);
 		score.setAlignment(Align.center);
+		
+		mBar.setMaxScore(world.getShip().maxMissiles);
 	}
 	
 	@Override
@@ -104,10 +107,6 @@ public class GameUI extends BasicUI {
 		int mShip = (int) world.getShip().getMissiles();
 		int sShip = (int) world.getShield().life;
 		
-		if (mShip <= 3) {
-			mShip *= -1;
-		}
-		
 		mBar.setScore(mShip);
 		sBar.setScore(sShip);
 		
@@ -147,10 +146,17 @@ public class GameUI extends BasicUI {
 	 */
 	class MissileBar extends Widget {
 		
+		final int MISSILE_BAR_WIDTH = 103;
+		
+		float missileWidth;
+		float missilePad;
+		
 		Texture edge;
 		Texture normal;
 		Texture warning;
 		
+		int warnScore;
+		int maxScore;
 		int score;
 		
 		public MissileBar (Media media) {
@@ -160,10 +166,21 @@ public class GameUI extends BasicUI {
 			warning = media.getTextureRegion("missilesbar/warning").getTexture();
 		}
 		
-		public void setScore(int _score) {
-			score = _score;
+		public void setMaxScore(int score) {
+			
+			maxScore = score;
+			warnScore = (int) (score * 0.5);
+			
+			missilePad = MISSILE_BAR_WIDTH / (7.5f * maxScore);
+			missileWidth = missilePad * 6.5f;
+			
+			System.out.println(missileWidth + " " + missilePad);
+			
 		}
 		
+		public void setScore(int score) {
+			this.score = score >= 0 ? score : 0;
+		}
 
 		@Override
 		public float getPrefWidth() {
@@ -180,12 +197,22 @@ public class GameUI extends BasicUI {
 			
 			super.draw(batch, parentAlpha);
 			
-			Texture state = (score > 0) ? normal : warning;
+			Texture state = (score > warnScore) ? normal : warning;
 
 			batch.draw(edge, getX(), getY());
 			
-			for(int i=0; i < Math.abs(score); i++){
-				batch.draw(state, getX() + i*(state.getWidth()+2) + 8, getY() + 8.1f);
+			float deltaX = getX() + missilePad/2 + 8;
+			float deltaY = getY() + 8.1f;
+			
+			for(int i=0; i < score; i++){
+				batch.draw(state, deltaX + i*(missileWidth+missilePad), deltaY, //set x and y
+						getOriginX(), getOriginY(),
+						missileWidth, normal.getHeight(), // set scale on x
+						getScaleX(), getScaleY(),
+						getRotation(), 
+						0, 0,	//draw from image begin
+						normal.getWidth(), normal.getHeight(), //draw all image
+						false, false);
 			}
 			
 		}

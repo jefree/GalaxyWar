@@ -7,7 +7,8 @@ import dev.jet.android.galaxywar.world.EntityState;
 public class Ship extends Entity {
 	
 	private final float MAX_ROTATION_SPEED = (float)120.0;
-	private final int MAX_MISSILES_NUMBER = 7;
+	
+	public int maxMissiles = 10;
 	
 	public int rOrientation;
 	float rDelta;
@@ -33,7 +34,7 @@ public class Ship extends Entity {
 		
 		if (timeNewMissile > 1.5) {
 			
-			if (missilesN < MAX_MISSILES_NUMBER) {
+			if (missilesN < maxMissiles) {
 				missilesN += 1;
 			}
 			
@@ -62,7 +63,7 @@ public class Ship extends Entity {
 		
 		life = 1;
 		speed = 80;
-		missilesN = MAX_MISSILES_NUMBER;
+		missilesN = maxMissiles;
 	}
 	
 	public int getMissiles() {
