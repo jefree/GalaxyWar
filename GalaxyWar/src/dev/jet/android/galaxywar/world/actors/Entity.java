@@ -12,7 +12,7 @@ import dev.jet.android.galaxywar.utils.GeomUtil;
 import dev.jet.android.galaxywar.world.BaseWorld;
 import dev.jet.android.galaxywar.world.EntityState;
 
-public abstract class Entity extends Actor {
+public class Entity extends Actor {
 	
 	static ShapeRenderer debugRenderer;
 	static boolean debug;
@@ -39,11 +39,10 @@ public abstract class Entity extends Actor {
 	protected TextureRegion image;
 	private Circle circle;
 	
-	public abstract void setState(EntityState state);
-	
 	public Entity() {
+		super();
 		
-		this.ID = nextID;
+		ID = nextID;
 		nextID += 1;
 	}
 	
@@ -78,6 +77,10 @@ public abstract class Entity extends Actor {
 		circle.setRadius(image.getRegionWidth()/2);
 		
 		return circle;
+	}
+	
+	public void setState(EntityState state){
+		
 	}
 	
 	public Vector2 getCenter() {

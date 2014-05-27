@@ -13,21 +13,23 @@ public class SingleWorld extends BaseWorld {
 	
 	protected int score;
 	
+	protected TargetGenerator targets;
+	
 	public SingleWorld(Media media) {
 		super(media);
 		
 		status = WorldState.STOP;
+		targets = new TargetGenerator(this, media);
 		
 		addStates();
 		
 		setFocusActor(ship);
+		
+		addActorBefore(asteroids, targets);
 	}
 	
 	@Override
 	public void run() {
-		
-		reset();
-		
 		super.run();
 		
 		addAction(new Action() {
@@ -36,6 +38,12 @@ public class SingleWorld extends BaseWorld {
 			public boolean act(float arg0) {
 				
 				if(ship.life <= 0) {
+
+					createShipExplosion();
+					return true;
+				}
+				
+				if (targets.isComplete()) {
 					
 					createShipExplosion();
 					return true;
@@ -69,8 +77,11 @@ public class SingleWorld extends BaseWorld {
 		asteroids.reset();
 		missiles.reset();
 		shipExplosion.reset();
+		targets.reset();
 		
 		clearActions();
+		
+		targets.generate(2);
 		createLevelUpActions();
 		
 		addActor(ship);
@@ -86,13 +97,13 @@ public class SingleWorld extends BaseWorld {
 		shipExplosion.setPosition(ship.getX(), ship.getY());
 		addActor(shipExplosion);
 		
+		ship.enable = false;
 		ship.remove();
 		shield.remove();
 		
 		music.setVolume(0.1f);
 		shipExplosion.playSound();
 
-		
 		addAction(new Action() {
 			
 			@Override

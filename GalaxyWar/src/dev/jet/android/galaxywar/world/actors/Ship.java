@@ -18,7 +18,7 @@ public class Ship extends Entity {
 	
 	public void shoot() {
 		
-		if (life >= 0 && missilesN > 0) {
+		if (enable && missilesN > 0) {
 			
 			missilesN -= 1;
 			
