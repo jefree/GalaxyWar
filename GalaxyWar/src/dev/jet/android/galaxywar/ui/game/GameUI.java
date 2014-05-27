@@ -1,17 +1,19 @@
 package dev.jet.android.galaxywar.ui.game;
 
-import java.io.ObjectInputStream.GetField;
-
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Widget;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import dev.jet.android.galaxywar.main.screens.GameScreen;
 import dev.jet.android.galaxywar.media.Media;
@@ -25,14 +27,12 @@ public class GameUI extends BasicUI {
 	ImageButton bRight;
 	ImageButton bLeft;
 	
-	ImageButton bMissile1;
-	ImageButton bMissile2;
+	ImageButton bMissile;
 	
 	MissileBar mBar;
 	ShieldBar sBar;
 	
 	Label score;
-	Label message;
 	
 	SingleWorld world;
 	GameScreen screen;
@@ -47,6 +47,34 @@ public class GameUI extends BasicUI {
 		score.setAlignment(Align.center);
 		
 		mBar.setMaxScore(world.getShip().maxMissiles);
+		
+		createInitMessage();
+	}
+	
+	private void createInitMessage() {
+		
+		final Table message = new Table();
+		Label label = new Label("Collect All Targets", new LabelStyle(media.getFont("fonts/Comic Sans MS"), Color.WHITE));
+		Image icon = new Image(media.getTextureRegion("target"));
+		
+		label.setFontScale(1.5f);
+		
+		message.setFillParent(true);
+		
+		message.add(label);
+		message.add(icon).padLeft(15);
+		message.pack();
+		
+		message.addCaptureListener(new ClickListener(){
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				message.clearActions();
+				message.remove();
+			}
+		});
+		
+		addActor(message);
+		addAction(Actions.sequence(Actions.delay(5), Actions.removeActor(message)));
 	}
 	
 	@Override
@@ -55,17 +83,23 @@ public class GameUI extends BasicUI {
 		bRight = BasicUI.createButton(media, "bArrow");
 		bLeft = BasicUI.createButton(media, "bArrow");
 		
-		bMissile1 = BasicUI.createButton(media, "bMissile");
-		bMissile2 = BasicUI.createButton(media, "bMissile");
+		bMissile = BasicUI.createButton(media, "bMissile");
+		
+		bMissile.addCaptureListener(new InputListener() {
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+				
+				world.getShip().shoot();
+				
+				return false;
+			}
+		});
 		
 		mBar = new MissileBar(media);
 		sBar = new ShieldBar(media);
 		
 		score = new Label("0", new LabelStyle(media.getFont("fonts/AmazDoom"),
-				new Color(1,1,1,1)));
-		
-		message = new Label("Eve One - Beta", new LabelStyle(media.getFont("fonts/Comic Sans MS"), 
-				new Color(0,0,0,1)));
+				Color.WHITE));
 		
 		Table wrapper = new Table();
 		wrapper.add(bLeft);
@@ -89,11 +123,12 @@ public class GameUI extends BasicUI {
 		
 		table.add(wrapper).right().padRight(10);
 		table.add(bRight).left();
-		table.add(bMissile1).right().colspan(2);
+		table.add(bMissile).right().colspan(2);
 	}
 	
 	@Override
 	public void act(float delta) {
+		super.act(delta);
 		
 		if (world.getState() == WorldState.PAUSE) {
 			return;
@@ -119,22 +154,6 @@ public class GameUI extends BasicUI {
 		if (bLeft.isPressed()) {
 			world.getShip().setRotParameter(1);
 		}
-	}
-	
-	
-	@Override
-	public void onTouchDown(float x, float y) {
-		
-		Actor a = hit(x, y, true);
-		
-		if (a == bMissile1 || a == bMissile2) {
-			world.getShip().shoot();
-		}
-		
-	}
-
-	@Override
-	public void onTouchUp(float x, float y) {
 	}
 	
 	/**

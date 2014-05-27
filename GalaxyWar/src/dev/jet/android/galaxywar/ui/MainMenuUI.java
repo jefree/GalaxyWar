@@ -2,12 +2,14 @@ package dev.jet.android.galaxywar.ui;
 
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import dev.jet.android.galaxywar.main.screens.MainScreen;
 import dev.jet.android.galaxywar.media.Media;
@@ -48,6 +50,14 @@ public class MainMenuUI extends BasicUI {
 		multi = BasicUI.createButton(media, "buttons/blue", "Multiplayer", "fonts/AmazDoom");
 		options = BasicUI.createButton(media, "buttons/black", "Options", "fonts/AmazDoom");
 		
+		single.addCaptureListener(new ClickListener(){
+			
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				main.launchSingleGame();
+			}
+		});
+			
 		addActor(back);
 		
 		//table.debug();
@@ -63,21 +73,5 @@ public class MainMenuUI extends BasicUI {
 		
 		table.row();
 		table.add(options).right();
-	}
-
-	@Override
-	public void onTouchDown(float x, float y) {
-		
-	}
-
-	@Override
-	public void onTouchUp(float x, float y) {
-		
-		Actor a = hit(x, y , true);
-		
-		if (a == single) {
-			main.launchSingleGame();
-		}
-		
 	}
 }

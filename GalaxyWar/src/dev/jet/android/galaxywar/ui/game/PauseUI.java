@@ -1,7 +1,9 @@
 package dev.jet.android.galaxywar.ui.game;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import dev.jet.android.galaxywar.main.screens.GameScreen;
 import dev.jet.android.galaxywar.media.Media;
@@ -25,6 +27,14 @@ public class PauseUI extends EndUI {
 		
 		run = BasicUI.createButton(media, "buttons/blue", "Volver al Juego", "fonts/Comic Sans MS");
 		
+		run.addCaptureListener(new ClickListener(){
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				world.resume();
+				screen.showGame();
+			}
+		});
+		
 		table.clear();
 		
 		table.add(title).padBottom(50);
@@ -38,20 +48,4 @@ public class PauseUI extends EndUI {
 		table.row();
 		table.add(exit);
 	}
-	
-	@Override
-	public void onTouchUp(float x, float y) {
-		super.onTouchUp(x, y);
-		
-		Actor a = hit(x, y, true);
-		
-		System.out.println(a);
-		
-		if (a == run){
-			world.resume();
-			screen.showGame();
-		} 
-		
-	}
-	
 }

@@ -1,5 +1,6 @@
 package dev.jet.android.galaxywar.world.single;
 
+
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.DelayAction;
 
@@ -20,7 +21,7 @@ public class SingleWorld extends BaseWorld {
 		
 		status = WorldState.STOP;
 		targets = new TargetGenerator(this, media);
-		
+
 		addStates();
 		
 		setFocusActor(ship);

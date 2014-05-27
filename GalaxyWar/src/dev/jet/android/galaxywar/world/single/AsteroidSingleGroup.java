@@ -10,7 +10,6 @@ import dev.jet.android.galaxywar.world.EntityState;
 import dev.jet.android.galaxywar.world.GroupController;
 import dev.jet.android.galaxywar.world.BaseWorld;
 import dev.jet.android.galaxywar.world.actors.Asteroid.AsteroidType;
-import dev.jet.android.galaxywar.world.actors.Entity;
 import dev.jet.android.galaxywar.world.single.state.AsteroidSingleGroupState;
 
 public class AsteroidSingleGroup extends GroupController<AsteroidSingle> {

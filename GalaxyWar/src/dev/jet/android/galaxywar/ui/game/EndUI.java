@@ -2,11 +2,13 @@ package dev.jet.android.galaxywar.ui.game;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import dev.jet.android.galaxywar.main.screens.GameScreen;
 import dev.jet.android.galaxywar.media.Media;
@@ -54,6 +56,23 @@ public class EndUI extends BasicUI {
 		title = new Label("GAME OVER", new LabelStyle(media.getFont("fonts/AmazDoom"), new Color(1,1,1,1)));
 		score = new Label("", new LabelStyle(media.getFont("fonts/AmazDoom"), new Color (0,0,0,1)));
 		
+		again.addCaptureListener(new ClickListener(){
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				world.reset();
+				world.run();
+				
+				screen.showGame();
+			}
+		});
+		
+		exit.addCaptureListener(new ClickListener(){
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				screen.backToMain();
+			}
+		});
+		
 		addActor(back);
 		
 		table.setFillParent(true);
@@ -67,25 +86,5 @@ public class EndUI extends BasicUI {
 		
 		table.row();
 		table.add(exit);
-	}
-
-	@Override
-	public void onTouchUp(float x, float y) {
-		
-		Actor a = hit(x, y, true);
-		
-		if (a == again) {
-			world.reset();
-			world.run();
-			
-			screen.showGame();
-		} else if (a == exit) {
-			screen.backToMain();
-		}
-	}
-	
-	@Override
-	public void onTouchDown(float x, float y) {
-	
 	}
 }

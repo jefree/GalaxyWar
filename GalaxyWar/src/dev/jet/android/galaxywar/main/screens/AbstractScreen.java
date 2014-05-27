@@ -24,7 +24,6 @@ public class AbstractScreen implements Screen, InputProcessor {
 	public AbstractScreen (GalaxyWar game) {
 		this.game = game;
 		this.media = game.getMedia();
-		
 	}
 	
 	@Override

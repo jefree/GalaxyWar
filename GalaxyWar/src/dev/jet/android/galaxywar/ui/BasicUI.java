@@ -1,8 +1,6 @@
 package dev.jet.android.galaxywar.ui;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
@@ -29,27 +27,8 @@ public abstract class BasicUI extends Group {
 		init(this.table);
 		
 		this.addActor(table);
-		
-		addListener(new InputListener(){
-			@Override
-			public boolean touchDown(InputEvent event, float x, float y,
-					int pointer, int button) {
-				onTouchDown(x, y);
-				
-				return true;
-			}
-			
-			@Override
-			public void touchUp(InputEvent event, float x, float y, int pointer,
-					int button) {
-				// TODO Auto-generated method stub
-				onTouchUp(x, y);
-			}
-		});
 	}
 	
-	public abstract void onTouchDown(float x, float y);
-	public abstract void onTouchUp(float x, float y);
 	protected abstract void init(Table table);
 	
 	public static ImageButton createButton(Media media, String name) {
