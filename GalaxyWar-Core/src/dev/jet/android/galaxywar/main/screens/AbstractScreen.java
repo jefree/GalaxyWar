@@ -1,8 +1,6 @@
 package dev.jet.android.galaxywar.main.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -12,7 +10,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import dev.jet.android.galaxywar.main.GalaxyWar;
 import dev.jet.android.galaxywar.media.Media;
 
-public class AbstractScreen implements Screen, InputProcessor {
+public class AbstractScreen implements Screen {
 	
 	protected Stage stage;
 	protected GalaxyWar game;
@@ -62,9 +60,7 @@ public class AbstractScreen implements Screen, InputProcessor {
 		
 		stage = new Stage(viewport);
 		
-		InputMultiplexer mux = new InputMultiplexer(this, stage);
-		
-		Gdx.input.setInputProcessor(mux);
+		Gdx.input.setInputProcessor(stage);
 		
 	}
 	
@@ -83,54 +79,5 @@ public class AbstractScreen implements Screen, InputProcessor {
 	public void hide() {
 		dispose();
 		
-	}
-	
-	@Override
-	public boolean keyDown(int arg0) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean keyTyped(char arg0) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean keyUp(int arg0) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean mouseMoved(int arg0, int arg1) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean scrolled(int arg0) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean touchDown(int arg0, int arg1, int arg2, int arg3) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean touchDragged(int arg0, int arg1, int arg2) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean touchUp(int arg0, int arg1, int arg2, int arg3) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
+	}	
 }

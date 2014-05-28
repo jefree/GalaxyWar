@@ -1,12 +1,9 @@
 package dev.jet.android.galaxywar.main.screens;
 
-import com.badlogic.gdx.Input.Keys;
-
 import dev.jet.android.galaxywar.main.GalaxyWar;
 import dev.jet.android.galaxywar.ui.game.EndUI;
 import dev.jet.android.galaxywar.ui.game.GameUI;
 import dev.jet.android.galaxywar.ui.game.PauseUI;
-import dev.jet.android.galaxywar.world.BaseWorld.WorldState;
 import dev.jet.android.galaxywar.world.single.SingleWorld;
 
 public class GameScreen extends AbstractScreen {
@@ -31,8 +28,7 @@ public class GameScreen extends AbstractScreen {
 		gui = new GameUI(world, media, this);
 		pui = new PauseUI(world, media, this);
 		
-		stage.addActor(world);
-		stage.addActor(gui);
+		showGame();
 		
 		world.reset();
 		world.run();
@@ -44,6 +40,7 @@ public class GameScreen extends AbstractScreen {
 	
 	public void showPause() {
 		stage.addActor(pui);
+		stage.setKeyboardFocus(pui);
 	}
 	
 	public void showEnd() {
@@ -52,6 +49,8 @@ public class GameScreen extends AbstractScreen {
 		
 		gui.remove();
 		stage.addActor(eui);
+		
+		stage.setKeyboardFocus(eui);
 	}
 	
 	public void showGame() {
@@ -60,23 +59,7 @@ public class GameScreen extends AbstractScreen {
 		
 		stage.addActor(world);
 		stage.addActor(gui);
-	}
-	
-	@Override
-	public boolean keyDown(int key) {
 		
-		if (key == Keys.BACK) {
-			
-			if (world.getState() == WorldState.RUN){
-				world.pause();
-				showPause();
-			
-			} else if (world.getState() == WorldState.PAUSE) {
-				world.resume();
-				showGame();
-			}
-		}
-		
-		return true;
+		stage.setKeyboardFocus(gui);
 	}
 }

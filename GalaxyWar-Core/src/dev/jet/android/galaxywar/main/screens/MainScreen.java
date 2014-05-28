@@ -1,7 +1,5 @@
 package dev.jet.android.galaxywar.main.screens;
 
-import com.badlogic.gdx.Input.Keys;
-
 import dev.jet.android.galaxywar.main.GalaxyWar;
 import dev.jet.android.galaxywar.ui.MainMenuUI;
 
@@ -21,20 +19,11 @@ public class MainScreen extends AbstractScreen {
 		menu = new MainMenuUI(media, this);
 		
 		stage.addActor(menu);
+		stage.setKeyboardFocus(menu);
 	}
 	
 	public void launchSingleGame() {
 		game.setScreen(new GameScreen(game));
-	}
-	
-	@Override
-	public boolean keyDown(int key) {
-	
-		if (key == Keys.BACK) {
-			System.exit(0);
-		}
-		
-		return true;
 	}
 	
 }

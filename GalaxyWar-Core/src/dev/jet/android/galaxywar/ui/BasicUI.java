@@ -1,6 +1,8 @@
 package dev.jet.android.galaxywar.ui;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
@@ -16,6 +18,9 @@ public abstract class BasicUI extends Group {
 	protected Media media;
 	private Table table;
 	
+	protected abstract void onKeyDown(int keycode);
+	protected abstract void onKeyUp(int keycode);
+	
 	public BasicUI(Media media) {
 		
 		this.media = media;
@@ -27,6 +32,26 @@ public abstract class BasicUI extends Group {
 		init(this.table);
 		
 		this.addActor(table);
+		
+		addListener(new InputListener() {
+			
+			@Override
+			public boolean keyDown(InputEvent event, int keycode) {
+				
+				onKeyDown(keycode);
+				
+				return false;
+			}
+			
+			@Override
+			public boolean keyUp(InputEvent event, int keycode) {
+				
+				onKeyUp(keycode);
+				
+				return false;
+			}
+			
+		});
 	}
 	
 	protected abstract void init(Table table);

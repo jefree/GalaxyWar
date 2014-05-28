@@ -1,8 +1,10 @@
 package dev.jet.android.galaxywar.ui;
 
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -72,5 +74,16 @@ public class MainMenuUI extends BasicUI {
 		
 		table.row();
 		table.add(options).right();
+	}
+
+	@Override
+	protected void onKeyDown(int keycode) {
+	}
+
+	@Override
+	protected void onKeyUp(int keycode) {	
+		if (keycode == Keys.BACK || keycode == Keys.ESCAPE) {
+			System.exit(0);
+		}
 	}
 }

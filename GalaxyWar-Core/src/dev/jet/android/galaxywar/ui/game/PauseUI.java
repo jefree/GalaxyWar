@@ -1,5 +1,6 @@
 package dev.jet.android.galaxywar.ui.game;
 
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -9,6 +10,7 @@ import dev.jet.android.galaxywar.main.screens.GameScreen;
 import dev.jet.android.galaxywar.media.Media;
 import dev.jet.android.galaxywar.ui.BasicUI;
 import dev.jet.android.galaxywar.world.BaseWorld;
+import dev.jet.android.galaxywar.world.BaseWorld.WorldState;
 
 public class PauseUI extends EndUI {
 	
@@ -47,5 +49,16 @@ public class PauseUI extends EndUI {
 		
 		table.row();
 		table.add(exit);
+	}
+	
+	@Override
+	protected void onKeyDown(int keycode) {
+		
+		if (keycode == Keys.BACK || keycode == Keys.ESCAPE) {
+			if (world.getState() == WorldState.PAUSE) {
+				world.resume();
+				screen.showGame();
+			}
+		}
 	}
 }

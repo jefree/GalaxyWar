@@ -1,5 +1,6 @@
 package dev.jet.android.galaxywar.ui.game;
 
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -36,6 +37,8 @@ public class GameUI extends BasicUI {
 	
 	SingleWorld world;
 	GameScreen screen;
+	
+	boolean right, left, shoot;
 	
 	public GameUI(BaseWorld world, Media media, GameScreen screen) {
 		super(media);
@@ -88,9 +91,7 @@ public class GameUI extends BasicUI {
 		bMissile.addCaptureListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				
-				world.getShip().shoot();
-				
+				shoot = true;
 				return false;
 			}
 		});
@@ -147,13 +148,56 @@ public class GameUI extends BasicUI {
 		
 		score.setText( Integer.toString(world.getScore()) );
 		
-		if (bRight.isPressed()) {
+		if (bRight.isPressed() | right) {
 			world.getShip().setRotParameter(-1);
 		}
 		
-		if (bLeft.isPressed()) {
+		if (bLeft.isPressed() | left) {
 			world.getShip().setRotParameter(1);
 		}
+		
+		if (shoot) {
+			world.getShip().shoot();
+			shoot = false;
+		}
+	}
+	
+	@Override
+	protected void onKeyDown(int keycode) {
+
+		if (keycode == Keys.BACK || keycode == Keys.ESCAPE) {
+			
+			if (world.getState() == WorldState.RUN){
+				world.pause();
+				screen.showPause();
+			
+			}
+		}
+		
+		if (keycode == Keys.RIGHT) {
+			right = true;
+		}
+		
+		if (keycode == Keys.LEFT) {
+			left = true;
+		}
+		
+		if (keycode == Keys.SPACE) {
+			shoot = true;
+		}
+	}
+
+	@Override
+	protected void onKeyUp(int keycode) {
+		
+		if (keycode == Keys.RIGHT) {
+			right = false;
+		}
+		
+		if (keycode == Keys.LEFT) {
+			left = false;
+		}
+		
 	}
 	
 	/**

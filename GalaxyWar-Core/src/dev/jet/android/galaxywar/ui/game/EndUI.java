@@ -87,4 +87,16 @@ public class EndUI extends BasicUI {
 		table.row();
 		table.add(exit);
 	}
+
+	@Override
+	protected void onKeyDown(int keycode) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void onKeyUp(int keycode) {
+		// TODO Auto-generated method stub
+		
+	}
 }
