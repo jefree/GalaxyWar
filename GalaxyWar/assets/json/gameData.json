@@ -54,6 +54,7 @@
 		"sounds/shot.mp3",
 		"sounds/explosionAst.mp3",
 		"sounds/explosionShip.mp3",
+		"sounds/target.mp3",
 	],
 	
 	music: [

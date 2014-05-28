@@ -1,22 +1,25 @@
 package dev.jet.android.galaxywar.world.single;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import dev.jet.android.galaxywar.media.Media;
 import dev.jet.android.galaxywar.world.BaseWorld;
 import dev.jet.android.galaxywar.world.EntityState;
 import dev.jet.android.galaxywar.world.GroupController;
-import dev.jet.android.galaxywar.world.actors.Entity;
+import dev.jet.android.galaxywar.world.actors.SoundEntity;
 import dev.jet.android.galaxywar.world.single.TargetGenerator.Target;
 
 public class TargetGenerator extends GroupController<Target> {
 	
 	TextureRegion image;
+	Sound sound;
 	
 	public TargetGenerator(BaseWorld world, Media media) {
 		super(world);
 		
 		image = media.getTextureRegion("target");
+		sound = media.getSound("sounds/target");
 	}
 
 	public void generate(int n) {
@@ -45,7 +48,7 @@ public class TargetGenerator extends GroupController<Target> {
 	protected Target createNew() {
 		
 		Target t = new Target();
-		t.create(world, image);
+		t.create(world, image, sound);
 		
 		return t;
 	}
@@ -58,13 +61,15 @@ public class TargetGenerator extends GroupController<Target> {
 	public void setState(EntityState state) {
 	}
 	
-	class Target extends Entity {
+	class Target extends SoundEntity {
 		
 		@Override
 		public void act(float delta) {
 			super.act(delta);
 			
 			if (collide(world.getShip())) {
+				
+				playSound(0.3f);
 				destroy();
 			}
 		}
